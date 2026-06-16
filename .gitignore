@@ -1,2 +1,14 @@
-test-complex.json5
+# Dependencies
 node_modules/
+
+# Backup files
+*.bak
+
+# Vendor (if not needed)
+vendor/
+
+# OS files
+.DS_Store
+
+# Test fixtures
+test-complex.json5

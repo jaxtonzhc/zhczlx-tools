@@ -17,8 +17,8 @@
 <meta name="google-adsense-account" content="ca-pub-8130430107774403">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Tools — Hyrule Toolbox</title>
-  <link rel="stylesheet" href="css/tools.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
+  <link rel="stylesheet" href="src/css/tools.css">
+  <link rel="icon" href="logo-code.svg">
   <style>
     .tool-card:nth-child(1) { animation-delay: 0.05s; }
     .tool-card:nth-child(2) { animation-delay: 0.10s; }
@@ -26,89 +26,8 @@
     .tool-card:nth-child(4) { animation-delay: 0.20s; }
     .tool-card:nth-child(5) { animation-delay: 0.25s; }
     .tool-card:nth-child(6) { animation-delay: 0.30s; }
-
-    .hero-tags {
-      display: flex; align-items: center; justify-content: center;
-      gap: 12px; flex-wrap: wrap; margin-top: 16px;
-    }
-    .hero-tags span {
-      font-size: 15px; color: var(--text-primary); font-weight: 700;
-      padding: 8px 16px; border-radius: var(--radius-full);
-      background: var(--bg-tertiary); border: var(--border-thick) solid var(--border-color);
-      box-shadow: var(--shadow-sm); text-transform: uppercase; letter-spacing: 0.03em;
-    }
-
-    .tool-card .tag.hot { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
-    .tool-card .tag.new { color: #10b981; background: rgba(16, 185, 129, 0.1); }
-
-    .featured-json { margin-bottom: 32px; }
-    .featured-json-card {
-      display: block;
-      background: var(--accent-light);
-      border: var(--border-thick) solid var(--border-color);
-      border-radius: var(--radius-xl);
-      padding: 32px 32px 24px; text-decoration: none; color: var(--text-primary);
-      transition: all 120ms steps(4); position: relative; overflow: hidden;
-      box-shadow: var(--shadow-xl);
-    }
-    .featured-json-card::before {
-      content: '{ }'; position: absolute; right: -20px; bottom: -30px;
-      font-size: 140px; font-weight: 900; font-family: var(--font-display);
-      opacity: 0.06; color: var(--accent); pointer-events: none; line-height: 1;
-    }
-    .featured-json-card:hover {
-      transform: translate(-6px, -6px);
-      box-shadow: 14px 14px 0px var(--border-color);
-      border-color: var(--accent);
-    }
-    .featured-json-badge {
-      display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
-      padding: 6px 16px; border-radius: var(--radius-full);
-      background: var(--accent); color: white; margin-bottom: 14px;
-      border: 2px solid var(--border-color); box-shadow: var(--shadow-sm);
-      text-transform: uppercase;
-    }
-    .featured-json-content { display: flex; align-items: flex-start; gap: 24px; }
-    .featured-json-icon {
-      font-size: 52px; font-weight: 900; font-family: var(--font-display);
-      color: var(--accent); flex-shrink: 0; line-height: 1; margin-top: 2px;
-    }
-    .featured-json-content h2 {
-      font-size: 16px; font-weight: 400; letter-spacing: 0.04em; margin-bottom: 8px;
-      font-family: var(--font-display); text-transform: uppercase;
-    }
-    .featured-json-content p { font-size: 18px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; font-weight: 600; }
-    .featured-json-content p strong { color: var(--accent); font-weight: 800; }
-    .featured-json-features { display: flex; flex-wrap: wrap; gap: 8px; }
-    .featured-json-features span {
-      font-size: 13px; padding: 6px 12px; border-radius: var(--radius-full); font-weight: 700;
-      background: var(--accent-light); border: 2px solid var(--border-color); white-space: nowrap;
-      box-shadow: 2px 2px 0px var(--border-color); text-transform: uppercase;
-    }
-    .featured-json-cta {
-      margin-top: 16px; font-size: 16px; font-weight: 800; color: var(--accent);
-      transition: gap 100ms steps(3); display: flex; align-items: center; gap: 6px;
-      text-transform: uppercase; letter-spacing: 0.04em;
-    }
-    .featured-json-card:hover .featured-json-cta { gap: 12px; }
-
-    @media (max-width: 768px) {
-      .hero-tags span { font-size: 11px; padding: 3px 10px; }
-    }
-    @media (max-width: 600px) {
-      .featured-json-content { flex-direction: column; gap: 12px; }
-      .featured-json-icon { font-size: 32px; }
-      .featured-json-card { padding: 20px; }
-      .featured-json-features span { white-space: normal; }
-    }
-    @media (max-width: 480px) {
-      .page-hero { padding: 40px 0 24px; }
-      .tool-grid { padding-bottom: 40px; }
-    }
-    @media (prefers-color-scheme: dark) {
-      .tool-card .tag.hot { background: rgba(239, 68, 68, 0.15); }
-      .tool-card .tag.new { background: rgba(16, 185, 129, 0.15); }
-    }
+    .tool-card:nth-child(7) { animation-delay: 0.35s; }
+    .tool-card:nth-child(8) { animation-delay: 0.40s; }
   </style>
 <script type="application/ld+json">
 {
@@ -124,8 +43,8 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="header-logo">
-      <span class="logo-icon">T</span>
+    <a href="index.html" class="header-logo">
+      <img src="logo-code.svg" alt="Hyrule Toolbox" class="logo-icon" width="24" height="24">
       <span data-i18n="header.logo">Hyrule Toolbox</span>
     </a>
     <nav class="header-nav">
@@ -246,7 +165,7 @@
   <div class="footer-inner">
     <span>&copy; 2026 <a href="https://zhczlx.com">Hyrule Toolbox</a></span>
     <nav>
-      <a href="/" data-i18n="footer.home">Home</a>
+      <a href="index.html" data-i18n="footer.home">Home</a>
       <a href="https://zhczlx.com/about" data-i18n="footer.about">About</a>
       <a href="mailto:hi@zhczlx.com" data-i18n="footer.contact">Contact</a>
     </nav>
@@ -461,9 +380,9 @@ window.__pageTranslations = {
   }
 };
 </script>
-<script src="js/theme.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/common.js"></script>
+<script src="src/js/theme.js"></script>
+<script src="src/js/i18n.js"></script>
+<script src="src/js/common.js"></script>
 
 </body>
 </html>

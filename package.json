@@ -1,6 +1,7 @@
 {
   "name": "zhczlx-tools",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "description": "Hyrule Toolbox — Free online developer tools",
   "scripts": {

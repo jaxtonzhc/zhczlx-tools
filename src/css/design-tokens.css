@@ -1,0 +1,311 @@
+/* ─────────────────────────────────────────────────────────────────────
+   Open Design — Notion Warm Style Design Tokens
+   适用于中文开发者工具网站
+   ───────────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ── Background ─────────────────────────────────────────────────── */
+  --bg: #FFFFF5;
+  --bg-alt: #FFFFFF;
+  --surface: #FFFFFF;
+  --canvas: #F7F6F3;
+  --hover: rgba(55, 53, 47, 0.04);
+
+  /* ── Text ───────────────────────────────────────────────────────── */
+  --fg: #37352F;
+  --fg-2: #787774;
+  --muted: #9B9A97;
+  --meta: #B4B4B0;
+  --text-inverse: #FFFFFF;
+
+  /* ── Accent (Notion blue) ───────────────────────────────────────── */
+  --accent: #2EAADC;
+  --accent-hover: #2496C4;
+  --accent-light: rgba(46, 170, 220, 0.08);
+  --accent-ring: rgba(46, 170, 220, 0.35);
+
+  /* ── Semantic states ────────────────────────────────────────────── */
+  --success: #0F7B6C;
+  --success-bg: #DBEDDB;
+  --warn: #D9730D;
+  --warn-bg: #FDECC8;
+  --danger: #E03E3E;
+  --danger-bg: #FFE2DD;
+  --info: #2EAADC;
+  --info-bg: #D3E5EF;
+
+  /* ── Notion accent colors ───────────────────────────────────────── */
+  --notion-purple: #9A6DD7;
+  --notion-purple-bg: #E8DEEE;
+  --notion-blue: #2EAADC;
+  --notion-blue-bg: #D3E5EF;
+  --notion-green: #0F7B6C;
+  --notion-green-bg: #DBEDDB;
+  --notion-yellow: #DFAB01;
+  --notion-yellow-bg: #FDECC8;
+  --notion-orange: #D9730D;
+  --notion-orange-bg: #FADABC;
+  --notion-red: #E03E3E;
+  --notion-red-bg: #FFE2DD;
+  --notion-pink: #AD1A72;
+  --notion-pink-bg: #F5E0E9;
+
+  /* ── Border ─────────────────────────────────────────────────────── */
+  --border: rgba(55, 53, 47, 0.08);
+  --border-strong: rgba(55, 53, 47, 0.16);
+  --border-accent: rgba(46, 170, 220, 0.4);
+
+  /* ── Shadow ─────────────────────────────────────────────────────── */
+  --shadow-xs: 0 1px 2px rgba(55, 53, 47, 0.04);
+  --shadow-sm: 0 1px 3px rgba(55, 53, 47, 0.06);
+  --shadow-md: 0 4px 12px rgba(55, 53, 47, 0.06);
+  --shadow-lg: 0 8px 24px rgba(55, 53, 47, 0.08);
+  --shadow-ring: 0 0 0 3px var(--accent-ring);
+
+  /* ── Typography ─────────────────────────────────────────────────── */
+  --font-body: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+  --text-4xl: 40px;
+
+  --leading-tight: 1.2;
+  --leading-body: 1.6;
+  --leading-relaxed: 1.7;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+
+  /* ── Spacing ────────────────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Radius ─────────────────────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 9999px;
+
+  /* ── Motion ─────────────────────────────────────────────────────── */
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-slow: 300ms;
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Layout ─────────────────────────────────────────────────────── */
+  --header-height: 52px;
+  --max-width: 960px;
+  --border-thick: 1px;
+
+  /* ── Legacy bridge tokens ───────────────────────────────────────── */
+  --bg-primary: var(--bg);
+  --bg-secondary: var(--surface);
+  --bg-tertiary: var(--canvas);
+  --bg-card: var(--surface);
+  --bg-input: var(--surface);
+  --bg-hover: var(--hover);
+  --bg-toolbar: var(--surface);
+
+  --text-primary: var(--fg);
+  --text-secondary: var(--fg-2);
+  --text-tertiary: var(--muted);
+  --text-placeholder: var(--meta);
+
+  --border-color: var(--border);
+  --border-color-strong: var(--border-strong);
+
+  --accent-ring: var(--accent);
+
+  --radius-full: var(--radius-pill);
+  --font-sans: var(--font-body);
+
+  --shadow-xl: var(--shadow-lg);
+  --shadow-inset: inset 0 1px 2px rgba(55, 53, 47, 0.06);
+
+  --transition-fast: var(--motion-fast) var(--ease-standard);
+  --transition-normal: var(--motion-base) var(--ease-standard);
+  --transition-slow: var(--motion-slow) var(--ease-standard);
+
+  --warning: var(--warn);
+  --error: var(--danger);
+}
+
+/* ── Dark theme ─────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #191919;
+    --bg-alt: #202020;
+    --surface: #252525;
+    --canvas: #202020;
+    --hover: rgba(255, 255, 255, 0.04);
+
+    --fg: rgba(255, 255, 255, 0.84);
+    --fg-2: rgba(255, 255, 255, 0.56);
+    --muted: rgba(255, 255, 255, 0.36);
+    --meta: rgba(255, 255, 255, 0.24);
+    --text-inverse: #191919;
+
+    --accent: #529CCA;
+    --accent-hover: #6BAFDB;
+    --accent-light: rgba(82, 156, 202, 0.12);
+    --accent-ring: rgba(82, 156, 202, 0.3);
+
+    --success: #4DAB9A;
+    --success-bg: rgba(77, 171, 154, 0.15);
+    --warn: #E8940D;
+    --warn-bg: rgba(232, 148, 13, 0.15);
+    --danger: #FF7369;
+    --danger-bg: rgba(255, 115, 105, 0.15);
+
+    --notion-purple: #9A6DD7;
+    --notion-purple-bg: rgba(154, 109, 215, 0.15);
+    --notion-blue: #529CCA;
+    --notion-blue-bg: rgba(82, 156, 202, 0.15);
+    --notion-green: #4DAB9A;
+    --notion-green-bg: rgba(77, 171, 154, 0.15);
+    --notion-yellow: #CB912F;
+    --notion-yellow-bg: rgba(203, 145, 47, 0.15);
+    --notion-orange: #E8940D;
+    --notion-orange-bg: rgba(232, 148, 13, 0.15);
+    --notion-red: #FF7369;
+    --notion-red-bg: rgba(255, 115, 105, 0.15);
+    --notion-pink: #E255A1;
+    --notion-pink-bg: rgba(226, 85, 161, 0.15);
+
+    --border: rgba(255, 255, 255, 0.06);
+    --border-strong: rgba(255, 255, 255, 0.12);
+    --border-accent: rgba(82, 156, 202, 0.4);
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.24);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.28);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.32);
+    --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.24);
+
+    --bg-primary: var(--bg);
+    --bg-secondary: var(--surface);
+    --bg-tertiary: var(--canvas);
+    --bg-card: var(--surface);
+    --bg-input: var(--canvas);
+    --bg-hover: var(--hover);
+    --bg-toolbar: var(--surface);
+
+    --text-primary: var(--fg);
+    --text-secondary: var(--fg-2);
+    --text-tertiary: var(--muted);
+    --text-placeholder: var(--meta);
+
+    --border-color: var(--border);
+    --border-color-strong: var(--border-strong);
+    --accent-ring: var(--accent);
+    --warning: var(--warn);
+    --error: var(--danger);
+    --info: var(--accent);
+    --shadow-xl: var(--shadow-lg);
+  }
+}
+
+/* ── Manual theme: dark ─────────────────────────────────────────── */
+html[data-theme="dark"] {
+  --bg: #191919;
+  --bg-alt: #202020;
+  --surface: #252525;
+  --canvas: #202020;
+  --hover: rgba(255, 255, 255, 0.04);
+
+  --fg: rgba(255, 255, 255, 0.84);
+  --fg-2: rgba(255, 255, 255, 0.56);
+  --muted: rgba(255, 255, 255, 0.36);
+  --meta: rgba(255, 255, 255, 0.24);
+  --text-inverse: #191919;
+
+  --accent: #529CCA;
+  --accent-hover: #6BAFDB;
+  --accent-light: rgba(82, 156, 202, 0.12);
+  --accent-ring: rgba(82, 156, 202, 0.3);
+
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
+
+  --bg-primary: var(--bg);
+  --bg-secondary: var(--surface);
+  --bg-tertiary: var(--canvas);
+  --bg-card: var(--surface);
+  --bg-input: var(--canvas);
+  --bg-hover: var(--hover);
+  --bg-toolbar: var(--surface);
+
+  --text-primary: var(--fg);
+  --text-secondary: var(--fg-2);
+  --text-tertiary: var(--muted);
+  --text-placeholder: var(--meta);
+
+  --border-color: var(--border);
+  --border-color-strong: var(--border-strong);
+  --accent-ring: var(--accent);
+  --warning: var(--warn);
+  --error: var(--danger);
+  --info: var(--accent);
+}
+
+/* ── Manual theme: light ────────────────────────────────────────── */
+html[data-theme="light"] {
+  --bg: #FFFFF5;
+  --bg-alt: #FFFFFF;
+  --surface: #FFFFFF;
+  --canvas: #F7F6F3;
+  --hover: rgba(55, 53, 47, 0.04);
+
+  --fg: #37352F;
+  --fg-2: #787774;
+  --muted: #9B9A97;
+  --meta: #B4B4B0;
+  --text-inverse: #FFFFFF;
+
+  --accent: #2EAADC;
+  --accent-hover: #2496C4;
+  --accent-light: rgba(46, 170, 220, 0.08);
+  --accent-ring: rgba(46, 170, 220, 0.35);
+
+  --border: rgba(55, 53, 47, 0.08);
+  --border-strong: rgba(55, 53, 47, 0.16);
+
+  --bg-primary: var(--bg);
+  --bg-secondary: var(--surface);
+  --bg-tertiary: var(--canvas);
+  --bg-card: var(--surface);
+  --bg-input: var(--surface);
+  --bg-hover: var(--hover);
+  --bg-toolbar: var(--surface);
+
+  --text-primary: var(--fg);
+  --text-secondary: var(--fg-2);
+  --text-tertiary: var(--muted);
+  --text-placeholder: var(--meta);
+
+  --border-color: var(--border);
+  --border-color-strong: var(--border-strong);
+  --accent-ring: var(--accent);
+  --warning: var(--warn);
+  --error: var(--danger);
+  --info: var(--accent);
+}
