@@ -1204,3 +1204,112 @@ input[type="range"]::-moz-range-thumb {
 .footer-inner a:hover {
   color: var(--accent);
 }
+
+.footer-inner nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ===== HEADER CONTROLS (lang + theme group) ===== */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+/* ===== LANGUAGE SWITCHER ===== */
+.lang-switcher {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-switcher select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 4px 24px 4px 10px;
+  font-size: 13px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  outline: none;
+  font-family: var(--font-sans);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.lang-switcher select:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.lang-switcher select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+.lang-switcher::after {
+  content: '\u25BE';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+/* ===== GENERATE BUTTON (shared by password & uuid) ===== */
+.btn-generate {
+  width: 100%;
+  padding: 14px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+  color: white;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: -0.2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-generate:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 4px 12px rgba(59,130,246,0.35);
+}
+
+.btn-generate:active {
+  transform: scale(0.98);
+}
+
+.btn-generate.generating {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.btn-generate .generate-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.btn-generate.generating .generate-icon {
+  animation: spin-gen 0.6s ease-in-out;
+}
+
+@keyframes spin-gen {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.15); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}

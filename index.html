@@ -16,12 +16,10 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8130430107774403" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-8130430107774403">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page.title">Online Tools — zhczlx.com/tools</title>
+  <title>Online Tools — Hyrule Toolbox</title>
   <link rel="stylesheet" href="css/tools.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
-  <meta name="description" content="Free online tools: password generator, unit converter, text counter, case converter, UUID generator, color converter." data-i18n-att-description="page.description">
   <style>
-    /* ===== ANIMATION STAGGER ===== */
     .tool-card:nth-child(1) { animation-delay: 0.05s; }
     .tool-card:nth-child(2) { animation-delay: 0.10s; }
     .tool-card:nth-child(3) { animation-delay: 0.15s; }
@@ -29,122 +27,31 @@
     .tool-card:nth-child(5) { animation-delay: 0.25s; }
     .tool-card:nth-child(6) { animation-delay: 0.30s; }
 
-    /* ===== HERO SUBTITLE WITH ICONS ===== */
     .hero-tags {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 8px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap; margin-top: 8px;
     }
     .hero-tags span {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-color);
+      font-size: 13px; color: var(--text-tertiary);
+      padding: 4px 12px; border-radius: var(--radius-full);
+      background: var(--bg-tertiary); border: 1px solid var(--border-color);
     }
 
-    /* ===== LANGUAGE SWITCHER ===== */
-.lang-switcher {
-  position: relative;
-  display: inline-block;
-  margin-left: auto;
-}
-    .lang-switcher select {
-      appearance: none;
-      -webkit-appearance: none;
-      padding: 4px 24px 4px 10px;
-      font-size: 13px;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md, 6px);
-      background: var(--bg-tertiary, #18181b);
-      color: var(--text-secondary, #a1a1aa);
-      cursor: pointer;
-      outline: none;
-      font-family: inherit;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .lang-switcher select:hover {
-      border-color: var(--accent, #3b82f6);
-      color: var(--text-primary, #fafafa);
-    }
-    .lang-switcher::after {
-      content: '▾';
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 10px;
-      color: var(--text-tertiary, #71717a);
-      pointer-events: none;
-    }
-    .lang-switcher select:focus {
-      border-color: var(--accent, #3b82f6);
-      box-shadow: 0 0 0 2px var(--accent-light, rgba(59, 130, 246, 0.15));
-    }
+    .tool-card .tag.hot { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+    .tool-card .tag.new { color: #10b981; background: rgba(16, 185, 129, 0.1); }
 
-    /* ===== RESPONSIVE NAV ===== */
-    @media (max-width: 768px) {
-      .header-nav a span {
-        display: none;
-      }
-      .hero-tags span {
-        font-size: 11px;
-        padding: 3px 10px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .header-inner {
-        padding: 0 16px;
-      }
-      .page-hero {
-        padding: 40px 0 24px;
-      }
-      .tool-grid {
-        padding-bottom: 40px;
-      }
-    }
-
-    /* ===== TAG VARIANTS ===== */
-    .tool-card .tag.hot {
-      color: #ef4444;
-      background: rgba(239, 68, 68, 0.1);
-    }
-    .tool-card .tag.new {
-      color: #10b981;
-      background: rgba(16, 185, 129, 0.1);
-    }
-
-    /* ===== FEATURED JSON SECTION ===== */
     .featured-json { margin-bottom: 32px; }
     .featured-json-card {
       display: block;
       background: linear-gradient(135deg, var(--accent-light) 0%, rgba(139,92,246,0.08) 100%);
-      border: 2px solid var(--accent);
-      border-radius: var(--radius-xl);
-      padding: 28px 28px 20px;
-      text-decoration: none;
-      color: var(--text-primary);
-      transition: all var(--transition-normal);
-      position: relative;
-      overflow: hidden;
+      border: 2px solid var(--accent); border-radius: var(--radius-xl);
+      padding: 28px 28px 20px; text-decoration: none; color: var(--text-primary);
+      transition: all var(--transition-normal); position: relative; overflow: hidden;
     }
     .featured-json-card::before {
-      content: '{ }';
-      position: absolute;
-      right: -20px;
-      bottom: -30px;
-      font-size: 120px;
-      font-weight: 900;
-      font-family: var(--font-mono);
-      opacity: 0.04;
-      color: var(--accent);
-      pointer-events: none;
-      line-height: 1;
+      content: '{ }'; position: absolute; right: -20px; bottom: -30px;
+      font-size: 120px; font-weight: 900; font-family: var(--font-mono);
+      opacity: 0.04; color: var(--accent); pointer-events: none; line-height: 1;
     }
     .featured-json-card:hover {
       transform: translateY(-3px);
@@ -152,86 +59,45 @@
       border-color: var(--accent-hover);
     }
     .featured-json-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 3px 12px;
-      border-radius: var(--radius-full);
-      background: var(--accent);
-      color: white;
-      margin-bottom: 12px;
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      padding: 3px 12px; border-radius: var(--radius-full);
+      background: var(--accent); color: white; margin-bottom: 12px;
     }
-    .featured-json-content {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-    }
+    .featured-json-content { display: flex; align-items: flex-start; gap: 20px; }
     .featured-json-icon {
-      font-size: 42px;
-      font-weight: 900;
-      font-family: var(--font-mono);
-      color: var(--accent);
-      flex-shrink: 0;
-      line-height: 1;
-      margin-top: 2px;
+      font-size: 42px; font-weight: 900; font-family: var(--font-mono);
+      color: var(--accent); flex-shrink: 0; line-height: 1; margin-top: 2px;
     }
-    .featured-json-content h2 {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.4px;
-      margin-bottom: 6px;
-    }
-    .featured-json-content p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
-    .featured-json-content p strong {
-      color: var(--accent);
-    }
-    .featured-json-features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .featured-json-content h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 6px; }
+    .featured-json-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; }
+    .featured-json-content p strong { color: var(--accent); }
+    .featured-json-features { display: flex; flex-wrap: wrap; gap: 6px; }
     .featured-json-features span {
-      font-size: 12px;
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-      background: rgba(59,130,246,0.08);
-      border: 1px solid rgba(59,130,246,0.12);
-      white-space: nowrap;
+      font-size: 12px; padding: 3px 10px; border-radius: var(--radius-full);
+      background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.12); white-space: nowrap;
     }
     .featured-json-cta {
-      margin-top: 14px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent);
-      transition: gap var(--transition-fast);
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--accent);
+      transition: gap var(--transition-fast); display: flex; align-items: center; gap: 4px;
     }
-    .featured-json-card:hover .featured-json-cta {
-      gap: 8px;
-    }
+    .featured-json-card:hover .featured-json-cta { gap: 8px; }
 
+    @media (max-width: 768px) {
+      .hero-tags span { font-size: 11px; padding: 3px 10px; }
+    }
     @media (max-width: 600px) {
       .featured-json-content { flex-direction: column; gap: 12px; }
       .featured-json-icon { font-size: 32px; }
       .featured-json-card { padding: 20px; }
       .featured-json-features span { white-space: normal; }
     }
-
+    @media (max-width: 480px) {
+      .page-hero { padding: 40px 0 24px; }
+      .tool-grid { padding-bottom: 40px; }
+    }
     @media (prefers-color-scheme: dark) {
-      .tool-card .tag.hot {
-        background: rgba(239, 68, 68, 0.15);
-      }
-      .tool-card .tag.new {
-        background: rgba(16, 185, 129, 0.15);
-      }
+      .tool-card .tag.hot { background: rgba(239, 68, 68, 0.15); }
+      .tool-card .tag.new { background: rgba(16, 185, 129, 0.15); }
     }
   </style>
 <script type="application/ld+json">
@@ -246,40 +112,40 @@
 </head>
 <body>
 
-<!-- ===== STICKY HEADER ===== -->
 <header class="site-header">
   <div class="header-inner">
     <a href="/" class="header-logo">
       <span class="logo-icon">T</span>
-      <span data-i18n="header.logo">Tools</span>
+      <span data-i18n="header.logo">Hyrule Toolbox</span>
     </a>
     <nav class="header-nav">
-      <a href="password-generator.html" title="🔑 Password Generator">🔑</a>
-      <a href="unit-converter.html" title="📐 Unit Converter">📐</a>
-      <a href="text-counter.html" title="📊 Text Counter">📊</a>
-      <a href="text-case.html" title="🔤 Case Converter">🔤</a>
-      <a href="uuid-generator.html" title="🆔 UUID Generator">🆔</a>
-      <a href="color-converter.html" title="🎨 Color Converter">🎨</a>
-      <a href="json-formatter.html" title="{ } JSON Formatter">{ }</a>
+      <a href="password-generator.html" data-i18n-title="nav.password" title="Password Generator">🔑</a>
+      <a href="unit-converter.html" data-i18n-title="nav.unit" title="Unit Converter">📐</a>
+      <a href="text-counter.html" data-i18n-title="nav.counter" title="Text Counter">📊</a>
+      <a href="text-case.html" data-i18n-title="nav.case" title="Case Converter">🔤</a>
+      <a href="uuid-generator.html" data-i18n-title="nav.uuid" title="UUID Generator">🆔</a>
+      <a href="color-converter.html" data-i18n-title="nav.color" title="Color Converter">🎨</a>
+      <a href="json-formatter.html" data-i18n-title="nav.json" title="JSON Formatter">{ }</a>
+      <a href="qr-generator.html" data-i18n-title="nav.qr" title="QR Code Generator">📱</a>
     </nav>
-    <div class="lang-switcher">
-      <select id="langSwitcher" aria-label="Select language">
-        <option value="en">EN</option>
-        <option value="zh-CN">中文</option>
-        <option value="ja">日本語</option>
-        <option value="ko">한국어</option>
-        <option value="fr">Français</option>
-        <option value="de">Deutsch</option>
-      </select>
+    <div class="header-controls">
+      <div class="lang-switcher">
+        <select id="langSelect" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
     </div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
   </div>
 </header>
 
-<!-- ===== MAIN CONTENT ===== -->
 <main>
   <div class="container">
-    <!-- ===== HERO ===== -->
     <section class="page-hero">
       <h1><span class="gradient" data-i18n="hero.title">🔧 Online Tools</span></h1>
       <p data-i18n="hero.subtitle">Free, efficient, ready-to-use developer tools that run entirely in your browser — no data ever uploaded to any server.</p>
@@ -291,7 +157,6 @@
       </div>
     </section>
 
-    <!-- ===== FEATURED: JSON FORMATTER ===== -->
     <section class="featured-json">
       <a href="json-formatter.html" class="featured-json-card">
         <div class="featured-json-badge" data-i18n="json.badge">⭐ FEATURED</div>
@@ -299,7 +164,7 @@
           <div class="featured-json-icon">{ }</div>
           <div>
             <h2 data-i18n="json.title">JSON Formatter &amp; Viewer</h2>
-            <p data-i18n="json.desc">The most powerful JSON tool you'll ever need. Supports <strong>JSON5</strong> — comments, trailing commas, single quotes. Auto-fix broken JSON. Visual tree view with fold, expand, and copy subtree. <strong>No other online tool does this.</strong></p>
+            <p data-i18n-html="json.desc">The most powerful JSON tool you'll ever need. Supports <strong>JSON5</strong> — comments, trailing commas, single quotes. Auto-fix broken JSON. Visual tree view with fold, expand, and copy subtree. <strong>No other online tool does this.</strong></p>
             <div class="featured-json-features">
               <span data-i18n="json.f1">✅ JSON5 (comments + trailing commas)</span>
               <span data-i18n="json.f2">🔄 Auto-fix malformed JSON</span>
@@ -314,667 +179,281 @@
       </a>
     </section>
 
-    <!-- ===== TOOL GRID ===== -->
     <div class="tool-grid">
-
-      <!-- Password Generator -->
       <a href="password-generator.html" class="tool-card animate-in">
         <div class="tool-card-icon">🔑</div>
         <h3 data-i18n="card.password.title">Password Generator</h3>
         <p data-i18n="card.password.desc">Generate strong random passwords with uppercase, lowercase, numbers, and symbols. Real-time strength rating.</p>
         <span class="tag hot" data-i18n="card.password.tag">🔥 Popular</span>
       </a>
-
-      <!-- Unit Converter -->
       <a href="unit-converter.html" class="tool-card animate-in">
         <div class="tool-card-icon">📐</div>
         <h3 data-i18n="card.unit.title">Unit Converter</h3>
         <p data-i18n="card.unit.desc">Instant conversion between length, mass, temperature, volume, area, speed, and more.</p>
         <span class="tag" data-i18n="card.unit.tag">Tool</span>
       </a>
-
-      <!-- Text Counter -->
       <a href="text-counter.html" class="tool-card animate-in">
         <div class="tool-card-icon">📊</div>
         <h3 data-i18n="card.counter.title">Text Counter</h3>
         <p data-i18n="card.counter.desc">Real-time character, word, line, and paragraph count. Supports mixed Chinese/English text analysis.</p>
         <span class="tag hot" data-i18n="card.counter.tag">🔥 Popular</span>
       </a>
-
-      <!-- Text Case -->
       <a href="text-case.html" class="tool-card animate-in">
         <div class="tool-card-icon">🔤</div>
         <h3 data-i18n="card.case.title">Case Converter</h3>
         <p data-i18n="card.case.desc">One-click conversion to UPPER, lower, Title Case, camelCase, snake_case, PascalCase, and more.</p>
         <span class="tag new" data-i18n="card.case.tag">✨ New</span>
       </a>
-
-      <!-- UUID Generator -->
       <a href="uuid-generator.html" class="tool-card animate-in">
         <div class="tool-card-icon">🆔</div>
         <h3 data-i18n="card.uuid.title">UUID Generator</h3>
         <p data-i18n="card.uuid.desc">Generate UUID v4 random identifiers with batch mode, one-click copy, and case toggle.</p>
         <span class="tag" data-i18n="card.uuid.tag">Tool</span>
       </a>
-
-      <!-- Color Converter -->
       <a href="color-converter.html" class="tool-card animate-in">
         <div class="tool-card-icon">🎨</div>
         <h3 data-i18n="card.color.title">Color Converter</h3>
         <p data-i18n="card.color.desc">Convert between HEX, RGB, HSL, and HSV formats with a color picker, history, and live preview.</p>
         <span class="tag new" data-i18n="card.color.tag">✨ New</span>
       </a>
-
-      <!-- JSON Formatter (end of grid) -->
       <a href="json-formatter.html" class="tool-card animate-in">
         <div class="tool-card-icon">{ }</div>
         <h3 data-i18n="card.json.title">JSON Formatter</h3>
         <p data-i18n="card.json.desc">JSON5 parser with comments, trailing commas, auto-fix. Tree view with fold, expand, and copy subtree.</p>
         <span class="tag" data-i18n="card.json.tag">Tool</span>
       </a>
-
+      <a href="qr-generator.html" class="tool-card animate-in">
+        <div class="tool-card-icon">📱</div>
+        <h3 data-i18n="qr.title">QR Code Generator</h3>
+        <p data-i18n-html="qr.desc">Generate QR codes from any text or URL. Customize size, colors, and error correction level. Download as PNG. <strong>100% client-side.</strong></p>
+        <span class="tag new" data-i18n="card.qr.tag">✨ New</span>
+      </a>
     </div>
   </div>
 </main>
 
-<!-- ===== FOOTER ===== -->
 <footer class="site-footer">
   <div class="footer-inner">
-    <span>&copy; 2026 <a href="https://zhczlx.com">zhczlx.com</a></span>
-    <nav style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="https://zhczlx.com" data-i18n="footer.home">Home</a>
+    <span>&copy; 2026 <a href="https://zhczlx.com">Hyrule Toolbox</a></span>
+    <nav>
+      <a href="/" data-i18n="footer.home">Home</a>
       <a href="https://zhczlx.com/about" data-i18n="footer.about">About</a>
       <a href="mailto:hi@zhczlx.com" data-i18n="footer.contact">Contact</a>
     </nav>
   </div>
 </footer>
 
-<!-- ===== TOAST ===== -->
-<div class="toast" id="toast" data-i18n="toast.copied">✅ Copied to clipboard</div>
+<div class="toast" id="toast">✅ Copied to clipboard</div>
 
-<!-- ===== JAVASCRIPT ===== -->
 <script>
-(function () {
-  'use strict';
-
-  // ----- i18n Dictionary -----
-  var LANG_STORAGE_KEY = 'zhczlx-lang';
-
-  var translations = {
-    'en': {
-      'page.title': 'Online Tools — zhczlx.com/tools',
-      'page.description': 'Free online tools: password generator, unit converter, text counter, case converter, UUID generator, color converter.',
-      'header.logo': 'Tools',
-      'nav.password': 'Password Generator',
-      'nav.unit': 'Unit Converter',
-      'nav.counter': 'Text Counter',
-      'nav.case': 'Case Converter',
-      'nav.uuid': 'UUID Generator',
-      'nav.color': 'Color Converter',
-      'nav.json': 'JSON',
-      'json.badge': '⭐ FEATURED',
-      'json.title': 'JSON Formatter & Viewer',
-      'json.desc': "The most powerful JSON tool you'll ever need. Supports <strong>JSON5</strong> — comments, trailing commas, single quotes. Auto-fix broken JSON. Visual tree view with fold, expand, and copy subtree. <strong>No other online tool does this.</strong>",
-      'json.f1': '✅ JSON5 (comments + trailing commas)',
-      'json.f2': '🔄 Auto-fix malformed JSON',
-      'json.f3': '🌳 Tree view with fold/expand',
-      'json.f4': '📋 Copy any subtree',
-      'json.f5': '⛶ Fullscreen mode',
-      'json.f6': '📄 Paste auto-format',
-      'json.cta': 'Try JSON Formatter →',
-      'card.json.title': 'JSON Formatter',
-      'card.json.desc': 'JSON5 parser with comments, trailing commas, auto-fix. Tree view with fold, expand, and copy subtree.',
-      'card.json.tag': 'Tool',
-      'hero.title': '🔧 Online Tools',
-      'hero.subtitle': 'Free, efficient, ready-to-use developer tools that run entirely in your browser — no data ever uploaded to any server.',
-      'hero.tag.client': '⚡ Client-Side',
-      'hero.tag.privacy': '🔒 Privacy Safe',
-      'hero.tag.mobile': '📱 Mobile Ready',
-      'hero.tag.dark': '🌙 Dark Mode',
-      'card.password.title': 'Password Generator',
-      'card.password.desc': 'Generate strong random passwords with uppercase, lowercase, numbers, and symbols. Real-time strength rating.',
-      'card.password.tag': '🔥 Popular',
-      'card.unit.title': 'Unit Converter',
-      'card.unit.desc': 'Instant conversion between length, mass, temperature, volume, area, speed, and more.',
-      'card.unit.tag': 'Tool',
-      'card.counter.title': 'Text Counter',
-      'card.counter.desc': 'Real-time character, word, line, and paragraph count. Supports mixed Chinese/English text analysis.',
-      'card.counter.tag': '🔥 Popular',
-      'card.case.title': 'Case Converter',
-      'card.case.desc': 'One-click conversion to UPPER, lower, Title Case, camelCase, snake_case, PascalCase, and more.',
-      'card.case.tag': '✨ New',
-      'card.uuid.title': 'UUID Generator',
-      'card.uuid.desc': 'Generate UUID v4 random identifiers with batch mode, one-click copy, and case toggle.',
-      'card.uuid.tag': 'Tool',
-      'card.color.title': 'Color Converter',
-      'card.color.desc': 'Convert between HEX, RGB, HSL, and HSV formats with a color picker, history, and live preview.',
-      'card.color.tag': '✨ New',
-      'footer.home': 'Home',
-      'footer.about': 'About',
-      'footer.contact': 'Contact',
-      'toast.copied': '✅ Copied to clipboard',
-      'toast.failed': '❌ Copy failed, please copy manually'
-    },
-    'zh-CN': {
-      'page.title': '在线工具集 — zhczlx.com/tools',
-      'page.description': '免费在线工具集：密码生成器、单位换算、文本统计、大小写转换、UUID生成器、颜色转换器。',
-      'header.logo': 'Tools',
-      'nav.password': '密码生成器',
-      'nav.unit': '单位换算',
-      'nav.counter': '文本统计',
-      'nav.case': '大小写转换',
-      'nav.uuid': 'UUID生成',
-      'nav.color': '颜色转换',
-      'nav.json': 'JSON',
-      'json.badge': '⭐ 主打推荐',
-      'json.title': 'JSON 格式化与查看器',
-      'json.desc': '最强 JSON 工具，没有之一！支持 <strong>JSON5</strong>（注释、尾逗号、单引号），自动修复格式错误。可视化树形视图，可折叠展开、复制子节点。<strong>其他在线工具做不到这些。</strong>',
-      'json.f1': '✅ JSON5（注释 + 尾逗号）',
-      'json.f2': '🔄 自动修复格式错误',
-      'json.f3': '🌳 树形视图可折叠展开',
-      'json.f4': '📋 复制任意子节点',
-      'json.f5': '⛶ 全屏模式',
-      'json.f6': '📄 粘贴自动格式化',
-      'json.cta': '试试 JSON 格式化 →',
-      'card.json.title': 'JSON 格式化',
-      'card.json.desc': '支持 JSON5 注释、尾逗号、自动修复。树形视图可折叠展开、复制子节点。',
-      'card.json.tag': '工具',
-      'hero.title': '🔧 在线工具集',
-      'hero.subtitle': '免费、高效、开箱即用的开发工具，全部在浏览器端运行，无需上传任何数据到服务器。',
-      'hero.tag.client': '⚡ 纯客户端',
-      'hero.tag.privacy': '🔒 隐私安全',
-      'hero.tag.mobile': '📱 移动适配',
-      'hero.tag.dark': '🌙 深色模式',
-      'card.password.title': '密码生成器',
-      'card.password.desc': '生成高强度随机密码，支持大小写、数字、符号组合，实时显示密码强度评级。',
-      'card.password.tag': '热门',
-      'card.unit.title': '单位换算',
-      'card.unit.desc': '支持长度、质量、温度、体积、面积、速度等多种单位之间的即时换算。',
-      'card.unit.tag': '工具',
-      'card.counter.title': '文本统计',
-      'card.counter.desc': '实时统计字符数、单词数、行数、段落数，支持中文/英文混合文本分析。',
-      'card.counter.tag': '热门',
-      'card.case.title': '大小写转换',
-      'card.case.desc': '一键转换大写、小写、首字母大写、驼峰式、蛇形式、帕斯卡式等多种格式。',
-      'card.case.tag': '新',
-      'card.uuid.title': 'UUID 生成器',
-      'card.uuid.desc': '生成 UUID v4 随机标识符，支持批量生成、一键复制、大写/小写格式切换。',
-      'card.uuid.tag': '工具',
-      'card.color.title': '颜色转换器',
-      'card.color.desc': '在 HEX、RGB、HSL、HSV 格式之间互转，带取色器、历史记录与实时预览。',
-      'card.color.tag': '新',
-      'footer.home': '首页',
-      'footer.about': '关于',
-      'footer.contact': '联系',
-      'toast.copied': '✅ 已复制到剪贴板',
-      'toast.failed': '❌ 复制失败，请手动复制'
-    },
-    'ja': {
-      'page.title': 'オンラインツール — zhczlx.com/tools',
-      'page.description': '無料オンラインツール：パスワード生成、単位変換、テキストカウンター、大文字小文字変換、UUID生成、カラー変換。',
-      'header.logo': 'Tools',
-      'nav.password': 'パスワード生成',
-      'nav.unit': '単位変換',
-      'nav.counter': 'テキスト統計',
-      'nav.case': '大文字小文字変換',
-      'nav.uuid': 'UUID生成',
-      'nav.color': 'カラー変換',
-      'hero.title': '🔧 オンラインツール',
-      'nav.json': 'JSON',
-      'json.badge': '⭐ 注目',
-      'json.title': 'JSON フォーマッター & Viewer',
-      'json.desc': '最高のJSONツール！<strong>JSON5</strong>（コメント・末尾カンマ・シングルクォート）対応。壊れたJSONを自動修正。折りたたみ可能なツリービューでサブツリーのコピーも可能。<strong>これができる他ツールはありません。</strong>',
-      'json.f1': '✅ JSON5（コメント + 末尾カンマ）',
-      'json.f2': '🔄 壊れたJSONを自動修正',
-      'json.f3': '🌳 折りたたみ可能なツリービュー',
-      'json.f4': '📋 任意のサブツリーをコピー',
-      'json.f5': '⛶ 全画面モード',
-      'json.f6': '📄 貼り付け自動フォーマット',
-      'json.cta': 'JSONフォーマッターを試す →',
-      'card.json.title': 'JSON フォーマッター',
-      'card.json.desc': 'JSON5対応、コメント・末尾カンマ・自動修正。ツリービューで折りたたみ・サブツリーコピー。',
-      'card.json.tag': 'ツール',
-      'hero.subtitle': '無料で効率的な開発ツール、すべてブラウザ上で動作し、サーバーにデータをアップロードする必要はありません。',
-      'hero.tag.client': '⚡ クライアント側',
-      'hero.tag.privacy': '🔒 プライバシー安全',
-      'hero.tag.mobile': '📱 モバイル対応',
-      'hero.tag.dark': '🌙 ダークモード',
-      'card.password.title': 'パスワード生成器',
-      'card.password.desc': '大文字、小文字、数字、記号を組み合わせた強力なランダムパスワードを生成。リアルタイム強度評価。',
-      'card.password.tag': '🔥 人気',
-      'card.unit.title': '単位変換',
-      'card.unit.desc': '長さ、質量、温度、体積、面積、速度など、多様な単位間の即時変換。',
-      'card.unit.tag': 'ツール',
-      'card.counter.title': 'テキストカウンター',
-      'card.counter.desc': '文字数、単語数、行数、段落数をリアルタイムにカウント。中日英混合テキスト対応。',
-      'card.counter.tag': '🔥 人気',
-      'card.case.title': '大文字小文字変換',
-      'card.case.desc': 'ワンクリックで大文字、小文字、先頭大文字、キャメルケース、スネークケース、パスカルケースなどに変換。',
-      'card.case.tag': '✨ 新着',
-      'card.uuid.title': 'UUID 生成器',
-      'card.uuid.desc': 'UUID v4 ランダム識別子を生成。一括生成、ワンクリックコピー、大文字/小文字切替対応。',
-      'card.uuid.tag': 'ツール',
-      'card.color.title': 'カラー変換器',
-      'card.color.desc': 'HEX、RGB、HSL、HSV 形式間の変換。カラーピッカー、履歴、リアルタイムプレビュー付き。',
-      'card.color.tag': '✨ 新着',
-      'footer.home': 'ホーム',
-      'footer.about': '概要',
-      'footer.contact': 'お問い合わせ',
-      'toast.copied': '✅ クリップボードにコピーしました',
-      'toast.failed': '❌ コピーに失敗しました。手動でコピーしてください'
-    },
-    'ko': {
-      'page.title': '온라인 도구 — zhczlx.com/tools',
-      'page.description': '무료 온라인 도구: 비밀번호 생성기, 단위 변환기, 텍스트 카운터, 대소문자 변환기, UUID 생성기, 색상 변환기.',
-      'header.logo': 'Tools',
-      'nav.password': '비밀번호 생성기',
-      'nav.unit': '단위 변환',
-      'nav.counter': '텍스트 통계',
-      'nav.case': '대소문자 변환',
-      'nav.uuid': 'UUID 생성',
-      'nav.color': '색상 변환',
-      'hero.title': '🔧 온라인 도구',
-      'nav.json': 'JSON',
-      'json.badge': '⭐ 추천',
-      'json.title': 'JSON 포맷터 & Viewer',
-      'json.desc': '최고의 JSON 도구! <strong>JSON5</strong>(주석·후행 쉼표·작은따옴표) 지원. 깨진 JSON 자동 수정. 접기/펼치기 트리 뷰와 서브트리 복사.<strong>다른 온라인 도구는 이걸 못 합니다.</strong>',
-      'json.f1': '✅ JSON5 (주석 + 후행 쉼표)',
-      'json.f2': '🔄 깨진 JSON 자동 수정',
-      'json.f3': '🌳 접기/펼치기 트리 뷰',
-      'json.f4': '📋 서브트리 복사',
-      'json.f5': '⛶ 전체 화면 모드',
-      'json.f6': '📄 붙여넣기 자동 포맷',
-      'json.cta': 'JSON 포맷터 사용해보기 →',
-      'card.json.title': 'JSON 포맷터',
-      'card.json.desc': 'JSON5 지원, 주석·후행 쉼표·자동 수정. 트리 뷰 접기/펼치기·서브트리 복사.',
-      'card.json.tag': '도구',
-      'hero.subtitle': '무료로 효율적인 개발 도구, 모두 브라우저에서 실행되며 서버에 데이터를 업로드할 필요가 없습니다.',
-      'hero.tag.client': '⚡ 클라이언트 측',
-      'hero.tag.privacy': '🔒 개인정보 보호',
-      'hero.tag.mobile': '📱 모바일 지원',
-      'hero.tag.dark': '🌙 다크 모드',
-      'card.password.title': '비밀번호 생성기',
-      'card.password.desc': '대문자, 소문자, 숫자, 기호를 조합한 강력한 무작위 비밀번호 생성. 실시간 강도 평가.',
-      'card.password.tag': '🔥 인기',
-      'card.unit.title': '단위 변환기',
-      'card.unit.desc': '길이, 질량, 온도, 부피, 면적, 속도 등 다양한 단위 간 즉시 변환.',
-      'card.unit.tag': '도구',
-      'card.counter.title': '텍스트 카운터',
-      'card.counter.desc': '문자 수, 단어 수, 줄 수, 문단 수를 실시간으로 계산. 한중영 혼합 텍스트 지원.',
-      'card.counter.tag': '🔥 인기',
-      'card.case.title': '대소문자 변환기',
-      'card.case.desc': 'UPPER, lower, Title Case, camelCase, snake_case, PascalCase 등 원클릭 변환.',
-      'card.case.tag': '✨ 신규',
-      'card.uuid.title': 'UUID 생성기',
-      'card.uuid.desc': 'UUID v4 무작위 식별자 생성. 일괄 생성, 원클릭 복사, 대소문자 전환 지원.',
-      'card.uuid.tag': '도구',
-      'card.color.title': '색상 변환기',
-      'card.color.desc': 'HEX, RGB, HSL, HSV 형식 간 변환. 색상 선택기, 기록, 실시간 미리보기 포함.',
-      'card.color.tag': '✨ 신규',
-      'footer.home': '홈',
-      'footer.about': '소개',
-      'footer.contact': '문의',
-      'toast.copied': '✅ 클립보드에 복사되었습니다',
-      'toast.failed': '❌ 복사 실패, 수동으로 복사해주세요'
-    },
-    'fr': {
-      'page.title': 'Outils en ligne — zhczlx.com/tools',
-      'page.description': 'Outils en ligne gratuits : générateur de mots de passe, convertisseur d\'unités, compteur de texte, convertisseur de casse, générateur UUID, convertisseur de couleurs.',
-      'header.logo': 'Tools',
-      'nav.password': 'Générateur de mots de passe',
-      'nav.unit': 'Convertisseur d\'unités',
-      'nav.counter': 'Compteur de texte',
-      'nav.case': 'Convertisseur de casse',
-      'nav.uuid': 'Générateur UUID',
-      'nav.color': 'Convertisseur de couleurs',
-      'hero.title': '🔧 Outils en ligne',
-      'nav.json': 'JSON',
-      'json.badge': '⭐ RECOMMANDÉ',
-      'json.title': 'Formateur JSON & Viewer',
-      'json.desc': 'Le meilleur outil JSON jamais créé ! Prend en charge le <strong>JSON5</strong> — commentaires, virgules finales, guillemets simples. Correction automatique du JSON malformé. Arborescence pliable avec copie de sous-arbre.<strong>Aucun autre outil en ligne ne fait cela.</strong>',
-      'json.f1': '✅ JSON5 (commentaires + virgules finales)',
-      'json.f2': '🔄 Correction automatique du JSON',
-      'json.f3': '🌳 Arborescence pliable',
-      'json.f4': '📋 Copier n\'importe quel sous-arbre',
-      'json.f5': '⛶ Mode plein écran',
-      'json.f6': '📄 Formatage automatique au collage',
-      'json.cta': 'Essayer le formateur JSON →',
-      'card.json.title': 'Formateur JSON',
-      'card.json.desc': 'Support JSON5, commentaires, virgules finales, correction auto. Arborescence pliable, copie de sous-arbre.',
-      'card.json.tag': 'Outil',
-      'hero.subtitle': 'Des outils de développement gratuits, efficaces et prêts à l\'emploi, entièrement exécutés dans votre navigateur — aucune donnée envoyée à un serveur.',
-      'hero.tag.client': '⚡ Côté client',
-      'hero.tag.privacy': '🔒 Confidentialité',
-      'hero.tag.mobile': '📱 Adapté mobile',
-      'hero.tag.dark': '🌙 Mode sombre',
-      'card.password.title': 'Générateur de mots de passe',
-      'card.password.desc': 'Générez des mots de passe forts avec majuscules, minuscules, chiffres et symboles. Évaluation de force en temps réel.',
-      'card.password.tag': '🔥 Populaire',
-      'card.unit.title': 'Convertisseur d\'unités',
-      'card.unit.desc': 'Conversion instantanée entre longueur, masse, température, volume, surface, vitesse et plus.',
-      'card.unit.tag': 'Outil',
-      'card.counter.title': 'Compteur de texte',
-      'card.counter.desc': 'Comptage en temps réel des caractères, mots, lignes et paragraphes. Analyse de texte mixte chinois/anglais.',
-      'card.counter.tag': '🔥 Populaire',
-      'card.case.title': 'Convertisseur de casse',
-      'card.case.desc': 'Conversion en un clic en MAJUSCULES, minuscules, Première lettre, camelCase, snake_case, PascalCase, etc.',
-      'card.case.tag': '✨ Nouveau',
-      'card.uuid.title': 'Générateur UUID',
-      'card.uuid.desc': 'Générez des identifiants UUID v4 aléatoires avec mode batch, copie en un clic et basculement de casse.',
-      'card.uuid.tag': 'Outil',
-      'card.color.title': 'Convertisseur de couleurs',
-      'card.color.desc': 'Convertissez entre les formats HEX, RGB, HSL et HSV avec un sélecteur de couleurs, historique et aperçu en direct.',
-      'card.color.tag': '✨ Nouveau',
-      'footer.home': 'Accueil',
-      'footer.about': 'À propos',
-      'footer.contact': 'Contact',
-      'toast.copied': '✅ Copié dans le presse-papiers',
-      'toast.failed': '❌ Échec de la copie, veuillez copier manuellement'
-    },
-    'de': {
-      'page.title': 'Online-Tools — zhczlx.com/tools',
-      'page.description': 'Kostenlose Online-Tools: Passwortgenerator, Einheitenumrechner, Textzähler, Fallumwandler, UUID-Generator, Farbkonverter.',
-      'header.logo': 'Tools',
-      'nav.password': 'Passwortgenerator',
-      'nav.unit': 'Einheitenumrechner',
-      'nav.counter': 'Textzähler',
-      'nav.case': 'Fallumwandler',
-      'nav.uuid': 'UUID-Generator',
-      'nav.color': 'Farbkonverter',
-      'hero.title': '🔧 Online-Tools',
-      'nav.json': 'JSON',
-      'json.badge': '⭐ EMPFOHLEN',
-      'json.title': 'JSON-Formatierer & Viewer',
-      'json.desc': 'Das leistungsstärkste JSON-Tool, das Sie je brauchen werden. Unterstützt <strong>JSON5</strong> — Kommentare, nachgestellte Kommas, einfache Anführungszeichen. Automatische Korrektur von fehlerhaftem JSON. Einklappbare Baumansicht mit Kopieren von Teilbäumen.<strong>Kein anderes Online-Tool kann das.</strong>',
-      'json.f1': '✅ JSON5 (Kommentare + nachgestellte Kommas)',
-      'json.f2': '🔄 Automatische JSON-Korrektur',
-      'json.f3': '🌳 Einklappbare Baumansicht',
-      'json.f4': '📋 Beliebiges Unterelement kopieren',
-      'json.f5': '⛶ Vollbildmodus',
-      'json.f6': '📄 Auto-Format beim Einfügen',
-      'json.cta': 'JSON-Formatierer ausprobieren →',
-      'card.json.title': 'JSON-Formatierer',
-      'card.json.desc': 'JSON5-Unterstützung, Kommentare, Kommas, Auto-Korrektur. Baumansicht mit Klapp-/Kopierfunktion.',
-      'card.json.tag': 'Werkzeug',
-      'hero.subtitle': 'Kostenlose, effiziente Entwickler-Tools, die vollständig im Browser laufen — keine Daten werden an Server gesendet.',
-      'hero.tag.client': '⚡ Clientseitig',
-      'hero.tag.privacy': '🔒 Datenschutz',
-      'hero.tag.mobile': '📱 Mobil geeignet',
-      'hero.tag.dark': '🌙 Dunkelmodus',
-      'card.password.title': 'Passwortgenerator',
-      'card.password.desc': 'Erstellen Sie starke Zufallspasswörter mit Großbuchstaben, Kleinbuchstaben, Zahlen und Symbolen. Echtzeit-Stärkebewertung.',
-      'card.password.tag': '🔥 Beliebt',
-      'card.unit.title': 'Einheitenumrechner',
-      'card.unit.desc': 'Sofortige Umrechnung zwischen Länge, Masse, Temperatur, Volumen, Fläche, Geschwindigkeit und mehr.',
-      'card.unit.tag': 'Werkzeug',
-      'card.counter.title': 'Textzähler',
-      'card.counter.desc': 'Echtzeit-Zählung von Zeichen, Wörtern, Zeilen und Absätzen. Unterstützt gemischte chinesische/englische Textanalyse.',
-      'card.counter.tag': '🔥 Beliebt',
-      'card.case.title': 'Fallumwandler',
-      'card.case.desc': 'Ein-Klick-Umwandlung in GROSS, klein, Titel, camelCase, snake_case, PascalCase und mehr.',
-      'card.case.tag': '✨ Neu',
-      'card.uuid.title': 'UUID-Generator',
-      'card.uuid.desc': 'Generieren Sie UUID v4-Zufallsidentifikatoren mit Batch-Modus, Ein-Klick-Kopie und Groß-/Kleinschreibungswechsel.',
-      'card.uuid.tag': 'Werkzeug',
-      'card.color.title': 'Farbkonverter',
-      'card.color.desc': 'Konvertieren Sie zwischen HEX-, RGB-, HSL- und HSV-Formaten mit Farbwähler, Verlauf und Live-Vorschau.',
-      'card.color.tag': '✨ Neu',
-      'footer.home': 'Startseite',
-      'footer.about': 'Über uns',
-      'footer.contact': 'Kontakt',
-      'toast.copied': '✅ In die Zwischenablage kopiert',
-      'toast.failed': '❌ Kopieren fehlgeschlagen, bitte manuell kopieren'
-    }
-  };
-
-  // ----- i18n Engine -----
-  function getStoredLang() {
-    try { return localStorage.getItem(LANG_STORAGE_KEY); } catch (e) { return null; }
+window.__pageTranslations = {
+  'en': {
+    'page.title': 'Online Tools — Hyrule Toolbox',
+    'page.description': 'Free online tools: password generator, unit converter, text counter, case converter, UUID generator, color converter.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Password Generator', 'nav.unit': 'Unit Converter', 'nav.counter': 'Text Counter',
+    'nav.case': 'Case Converter', 'nav.uuid': 'UUID Generator', 'nav.color': 'Color Converter', 'nav.json': 'JSON Formatter', 'nav.qr': 'QR Code Generator',
+    'qr.title': 'QR Code Generator', 'qr.desc': 'Generate QR codes from any text or URL. Customize size, colors, and error correction level. Download as PNG. <strong>100% client-side.</strong>',
+    'json.badge': '⭐ FEATURED',
+    'json.title': 'JSON Formatter & Viewer',
+    'json.desc': "The most powerful JSON tool you'll ever need. Supports <strong>JSON5</strong> — comments, trailing commas, single quotes. Auto-fix broken JSON. Visual tree view with fold, expand, and copy subtree. <strong>No other online tool does this.</strong>",
+    'json.f1': '✅ JSON5 (comments + trailing commas)', 'json.f2': '🔄 Auto-fix malformed JSON',
+    'json.f3': '🌳 Tree view with fold/expand', 'json.f4': '📋 Copy any subtree',
+    'json.f5': '⛶ Fullscreen mode', 'json.f6': '📄 Paste auto-format',
+    'json.cta': 'Try JSON Formatter →',
+    'card.json.title': 'JSON Formatter',
+    'card.json.desc': 'JSON5 parser with comments, trailing commas, auto-fix. Tree view with fold, expand, and copy subtree.',
+    'card.json.tag': 'Tool',
+    'card.qr.tag': '✨ New',
+    'hero.title': '🔧 Online Tools',
+    'hero.subtitle': 'Free, efficient, ready-to-use developer tools that run entirely in your browser — no data ever uploaded to any server.',
+    'hero.tag.client': '⚡ Client-Side', 'hero.tag.privacy': '🔒 Privacy Safe',
+    'hero.tag.mobile': '📱 Mobile Ready', 'hero.tag.dark': '🌙 Dark Mode',
+    'card.password.title': 'Password Generator',
+    'card.password.desc': 'Generate strong random passwords with uppercase, lowercase, numbers, and symbols. Real-time strength rating.',
+    'card.password.tag': '🔥 Popular',
+    'card.unit.title': 'Unit Converter',
+    'card.unit.desc': 'Instant conversion between length, mass, temperature, volume, area, speed, and more.',
+    'card.unit.tag': 'Tool',
+    'card.counter.title': 'Text Counter',
+    'card.counter.desc': 'Real-time character, word, line, and paragraph count. Supports mixed Chinese/English text analysis.',
+    'card.counter.tag': '🔥 Popular',
+    'card.case.title': 'Case Converter',
+    'card.case.desc': 'One-click conversion to UPPER, lower, Title Case, camelCase, snake_case, PascalCase, and more.',
+    'card.case.tag': '✨ New',
+    'card.uuid.title': 'UUID Generator',
+    'card.uuid.desc': 'Generate UUID v4 random identifiers with batch mode, one-click copy, and case toggle.',
+    'card.uuid.tag': 'Tool',
+    'card.color.title': 'Color Converter',
+    'card.color.desc': 'Convert between HEX, RGB, HSL, and HSV formats with a color picker, history, and live preview.',
+    'card.color.tag': '✨ New',
+    'footer.home': 'Home', 'footer.about': 'About', 'footer.contact': 'Contact',
+    'toast.copied': '✅ Copied to clipboard', 'toast.failed': '❌ Copy failed, please copy manually'
+  },
+  'zh': {
+    'page.title': '在线工具集 — Hyrule Toolbox',
+    'page.description': '免费在线工具集：密码生成器、单位换算、文本统计、大小写转换、UUID生成器、颜色转换器。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '密码生成器', 'nav.unit': '单位换算', 'nav.counter': '文本统计',
+    'nav.case': '大小写转换', 'nav.uuid': 'UUID生成', 'nav.color': '颜色转换', 'nav.json': 'JSON格式化', 'nav.qr': '二维码生成',
+    'qr.title': '二维码生成器', 'qr.desc': '将任意文本或 URL 生成二维码图片，支持自定义大小、颜色和容错级别。一键下载 PNG。<strong>纯客户端处理。</strong>',
+    'json.badge': '⭐ 主打推荐',
+    'json.title': 'JSON 格式化与查看器',
+    'json.desc': '最强 JSON 工具，没有之一！支持 <strong>JSON5</strong>（注释、尾逗号、单引号），自动修复格式错误。可视化树形视图，可折叠展开、复制子节点。<strong>其他在线工具做不到这些。</strong>',
+    'json.f1': '✅ JSON5（注释 + 尾逗号）', 'json.f2': '🔄 自动修复格式错误',
+    'json.f3': '🌳 树形视图可折叠展开', 'json.f4': '📋 复制任意子节点',
+    'json.f5': '⛶ 全屏模式', 'json.f6': '📄 粘贴自动格式化',
+    'json.cta': '试试 JSON 格式化 →',
+    'card.json.title': 'JSON 格式化',
+    'card.json.desc': '支持 JSON5 注释、尾逗号、自动修复。树形视图可折叠展开、复制子节点。',
+    'card.json.tag': '工具',
+    'card.qr.tag': '✨ 新功能',
+    'hero.title': '🔧 在线工具集',
+    'hero.subtitle': '免费、高效、开箱即用的开发工具，全部在浏览器端运行，无需上传任何数据到服务器。',
+    'hero.tag.client': '⚡ 纯客户端', 'hero.tag.privacy': '🔒 隐私安全',
+    'hero.tag.mobile': '📱 移动适配', 'hero.tag.dark': '🌙 深色模式',
+    'card.password.title': '密码生成器',
+    'card.password.desc': '生成高强度随机密码，支持大小写、数字、符号组合，实时显示密码强度评级。',
+    'card.password.tag': '热门',
+    'card.unit.title': '单位换算',
+    'card.unit.desc': '支持长度、质量、温度、体积、面积、速度等多种单位之间的即时换算。',
+    'card.unit.tag': '工具',
+    'card.counter.title': '文本统计',
+    'card.counter.desc': '实时统计字符数、单词数、行数、段落数，支持中文/英文混合文本分析。',
+    'card.counter.tag': '热门',
+    'card.case.title': '大小写转换',
+    'card.case.desc': '一键转换大写、小写、首字母大写、驼峰式、蛇形式、帕斯卡式等多种格式。',
+    'card.case.tag': '新',
+    'card.uuid.title': 'UUID 生成器',
+    'card.uuid.desc': '生成 UUID v4 随机标识符，支持批量生成、一键复制、大写/小写格式切换。',
+    'card.uuid.tag': '工具',
+    'card.color.title': '颜色转换器',
+    'card.color.desc': '在 HEX、RGB、HSL、HSV 格式之间互转，带取色器、历史记录与实时预览。',
+    'card.color.tag': '新',
+    'footer.home': '首页', 'footer.about': '关于', 'footer.contact': '联系',
+    'toast.copied': '✅ 已复制到剪贴板', 'toast.failed': '❌ 复制失败，请手动复制'
+  },
+  'ja': {
+    'page.title': 'オンラインツール — Hyrule Toolbox',
+    'page.description': '無料オンラインツール：パスワード生成、単位変換、テキストカウンター、大文字小文字変換、UUID生成、カラー変換。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'パスワード生成', 'nav.unit': '単位変換', 'nav.counter': 'テキスト統計',
+    'nav.case': '大文字小文字変換', 'nav.uuid': 'UUID生成', 'nav.color': 'カラー変換', 'nav.json': 'JSONフォーマッター', 'nav.qr': 'QRコード生成',
+    'qr.title': 'QRコード生成器', 'qr.desc': 'テキストやURLからQRコードを生成。サイズ・色・誤り訂正レベルのカスタマイズ対応。PNGダウンロード可能。<strong>すべてクライアント側で処理。</strong>',
+    'json.badge': '⭐ 注目', 'json.title': 'JSON フォーマッター & Viewer',
+    'json.desc': '最高のJSONツール！<strong>JSON5</strong>（コメント・末尾カンマ・シングルクォート）対応。壊れたJSONを自動修正。折りたたみ可能なツリービューでサブツリーのコピーも可能。<strong>これができる他ツールはありません。</strong>',
+    'json.f1': '✅ JSON5（コメント + 末尾カンマ）', 'json.f2': '🔄 壊れたJSONを自動修正',
+    'json.f3': '🌳 折りたたみ可能なツリービュー', 'json.f4': '📋 任意のサブツリーをコピー',
+    'json.f5': '⛶ 全画面モード', 'json.f6': '📄 貼り付け自動フォーマット',
+    'json.cta': 'JSONフォーマッターを試す →',
+    'card.json.title': 'JSON フォーマッター',
+    'card.json.desc': 'JSON5対応、コメント・末尾カンマ・自動修正。ツリービューで折りたたみ・サブツリーコピー。',
+    'card.json.tag': 'ツール',
+    'card.qr.tag': '✨ New',
+    'hero.title': '🔧 オンラインツール',
+    'hero.subtitle': '無料で効率的な開発ツール、すべてブラウザ上で動作し、サーバーにデータをアップロードする必要はありません。',
+    'hero.tag.client': '⚡ クライアント側', 'hero.tag.privacy': '🔒 プライバシー安全',
+    'hero.tag.mobile': '📱 モバイル対応', 'hero.tag.dark': '🌙 ダークモード',
+    'card.password.title': 'パスワード生成器',
+    'card.password.desc': '大文字、小文字、数字、記号を組み合わせた強力なランダムパスワードを生成。リアルタイム強度評価。',
+    'card.password.tag': '🔥 人気',
+    'card.unit.title': '単位変換', 'card.unit.desc': '長さ、質量、温度、体積、面積、速度など、多様な単位間の即時変換。', 'card.unit.tag': 'ツール',
+    'card.counter.title': 'テキストカウンター', 'card.counter.desc': '文字数、単語数、行数、段落数をリアルタイムにカウント。中日英混合テキスト対応。', 'card.counter.tag': '🔥 人気',
+    'card.case.title': '大文字小文字変換', 'card.case.desc': 'ワンクリックで大文字、小文字、先頭大文字、キャメルケース、スネークケース、パスカルケースなどに変換。', 'card.case.tag': '✨ 新着',
+    'card.uuid.title': 'UUID 生成器', 'card.uuid.desc': 'UUID v4 ランダム識別子を生成。一括生成、ワンクリックコピー、大文字/小文字切替対応。', 'card.uuid.tag': 'ツール',
+    'card.color.title': 'カラー変換器', 'card.color.desc': 'HEX、RGB、HSL、HSV 形式間の変換。カラーピッカー、履歴、リアルタイムプレビュー付き。', 'card.color.tag': '✨ 新着',
+    'footer.home': 'ホーム', 'footer.about': '概要', 'footer.contact': 'お問い合わせ',
+    'toast.copied': '✅ クリップボードにコピーしました', 'toast.failed': '❌ コピーに失敗しました。手動でコピーしてください'
+  },
+  'ko': {
+    'page.title': '온라인 도구 — Hyrule Toolbox',
+    'page.description': '무료 온라인 도구: 비밀번호 생성기, 단위 변환기, 텍스트 카운터, 대소문자 변환기, UUID 생성기, 색상 변환기.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '비밀번호 생성기', 'nav.unit': '단위 변환', 'nav.counter': '텍스트 통계',
+    'nav.case': '대소문자 변환', 'nav.uuid': 'UUID 생성', 'nav.color': '색상 변환', 'nav.json': 'JSON 포맷터', 'nav.qr': 'QR코드 생성',
+    'qr.title': 'QR코드 생성기', 'qr.desc': '텍스트나 URL로 QR코드를 생성합니다. 크기, 색상, 오류 정정 레벨 커스터마이즈 가능. PNG 다운로드. <strong>100% 클라이언트 처리.</strong>',
+    'json.badge': '⭐ 추천', 'json.title': 'JSON 포맷터 & Viewer',
+    'json.desc': '최고의 JSON 도구! <strong>JSON5</strong>(주석·후행 쉼표·작은따옴표) 지원. 깨진 JSON 자동 수정. 접기/펼치기 트리 뷰와 서브트리 복사.<strong>다른 온라인 도구는 이걸 못 합니다.</strong>',
+    'json.f1': '✅ JSON5 (주석 + 후행 쉼표)', 'json.f2': '🔄 깨진 JSON 자동 수정',
+    'json.f3': '🌳 접기/펼치기 트리 뷰', 'json.f4': '📋 서브트리 복사',
+    'json.f5': '⛶ 전체 화면 모드', 'json.f6': '📄 붙여넣기 자동 포맷',
+    'json.cta': 'JSON 포맷터 사용해보기 →',
+    'card.json.title': 'JSON 포맷터', 'card.json.desc': 'JSON5 지원, 주석·후행 쉼표·자동 수정. 트리 뷰 접기/펼치기·서브트리 복사.', 'card.json.tag': '도구',
+    'card.qr.tag': '✨ 새 기능',
+    'hero.title': '🔧 온라인 도구',
+    'hero.subtitle': '무료로 효율적인 개발 도구, 모두 브라우저에서 실행되며 서버에 데이터를 업로드할 필요가 없습니다.',
+    'hero.tag.client': '⚡ 클라이언트 측', 'hero.tag.privacy': '🔒 개인정보 보호',
+    'hero.tag.mobile': '📱 모바일 지원', 'hero.tag.dark': '🌙 다크 모드',
+    'card.password.title': '비밀번호 생성기', 'card.password.desc': '대문자, 소문자, 숫자, 기호를 조합한 강력한 무작위 비밀번호 생성. 실시간 강도 평가.', 'card.password.tag': '🔥 인기',
+    'card.unit.title': '단위 변환기', 'card.unit.desc': '길이, 질량, 온도, 부피, 면적, 속도 등 다양한 단위 간 즉시 변환.', 'card.unit.tag': '도구',
+    'card.counter.title': '텍스트 카운터', 'card.counter.desc': '문자 수, 단어 수, 줄 수, 문단 수를 실시간으로 계산. 한중영 혼합 텍스트 지원.', 'card.counter.tag': '🔥 인기',
+    'card.case.title': '대소문자 변환기', 'card.case.desc': 'UPPER, lower, Title Case, camelCase, snake_case, PascalCase 등 원클릭 변환.', 'card.case.tag': '✨ 신규',
+    'card.uuid.title': 'UUID 생성기', 'card.uuid.desc': 'UUID v4 무작위 식별자 생성. 일괄 생성, 원클릭 복사, 대소문자 전환 지원.', 'card.uuid.tag': '도구',
+    'card.color.title': '색상 변환기', 'card.color.desc': 'HEX, RGB, HSL, HSV 형식 간 변환. 색상 선택기, 기록, 실시간 미리보기 포함.', 'card.color.tag': '✨ 신규',
+    'footer.home': '홈', 'footer.about': '소개', 'footer.contact': '문의',
+    'toast.copied': '✅ 클립보드에 복사되었습니다', 'toast.failed': '❌ 복사 실패, 수동으로 복사해주세요'
+  },
+  'fr': {
+    'page.title': 'Outils en ligne — Hyrule Toolbox',
+    'page.description': "Outils en ligne gratuits : générateur de mots de passe, convertisseur d'unités, compteur de texte, convertisseur de casse, générateur UUID, convertisseur de couleurs.",
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Générateur de mots de passe', 'nav.unit': "Convertisseur d'unités", 'nav.counter': 'Compteur de texte',
+    'nav.case': 'Convertisseur de casse', 'nav.uuid': 'Générateur UUID', 'nav.color': 'Convertisseur de couleurs', 'nav.json': 'Formateur JSON', 'nav.qr': 'Générateur de QR Code',
+    'qr.title': 'Générateur de QR Code', 'qr.desc': "Générez des QR codes à partir de texte ou d'URL. Taille, couleurs et correction d'erreur personnalisables. Téléchargement PNG. <strong>100 % côté client.</strong>",
+    'json.badge': '⭐ RECOMMANDÉ', 'json.title': 'Formateur JSON & Viewer',
+    'json.desc': "Le meilleur outil JSON jamais créé ! Prend en charge le <strong>JSON5</strong> — commentaires, virgules finales, guillemets simples. Correction automatique du JSON malformé. Arborescence pliable avec copie de sous-arbre.<strong>Aucun autre outil en ligne ne fait cela.</strong>",
+    'json.f1': '✅ JSON5 (commentaires + virgules finales)', 'json.f2': '🔄 Correction automatique du JSON',
+    'json.f3': '🌳 Arborescence pliable', 'json.f4': "📋 Copier n'importe quel sous-arbre",
+    'json.f5': '⛶ Mode plein écran', 'json.f6': '📄 Formatage automatique au collage',
+    'json.cta': 'Essayer le formateur JSON →',
+    'card.json.title': 'Formateur JSON', 'card.json.desc': 'Support JSON5, commentaires, virgules finales, correction auto. Arborescence pliable, copie de sous-arbre.', 'card.json.tag': 'Outil',
+    'card.qr.tag': '✨ Nouveau',
+    'hero.title': '🔧 Outils en ligne',
+    'hero.subtitle': "Des outils de développement gratuits, efficaces et prêts à l'emploi, entièrement exécutés dans votre navigateur — aucune donnée envoyée à un serveur.",
+    'hero.tag.client': '⚡ Côté client', 'hero.tag.privacy': '🔒 Confidentialité',
+    'hero.tag.mobile': '📱 Adapté mobile', 'hero.tag.dark': '🌙 Mode sombre',
+    'card.password.title': 'Générateur de mots de passe', 'card.password.desc': 'Générez des mots de passe forts avec majuscules, minuscules, chiffres et symboles. Évaluation de force en temps réel.', 'card.password.tag': '🔥 Populaire',
+    'card.unit.title': "Convertisseur d'unités", 'card.unit.desc': 'Conversion instantanée entre longueur, masse, température, volume, surface, vitesse et plus.', 'card.unit.tag': 'Outil',
+    'card.counter.title': 'Compteur de texte', 'card.counter.desc': 'Comptage en temps réel des caractères, mots, lignes et paragraphes. Analyse de texte mixte chinois/anglais.', 'card.counter.tag': '🔥 Populaire',
+    'card.case.title': 'Convertisseur de casse', 'card.case.desc': 'Conversion en un clic en MAJUSCULES, minuscules, Première lettre, camelCase, snake_case, PascalCase, etc.', 'card.case.tag': '✨ Nouveau',
+    'card.uuid.title': 'Générateur UUID', 'card.uuid.desc': 'Générez des identifiants UUID v4 aléatoires avec mode batch, copie en un clic et basculement de casse.', 'card.uuid.tag': 'Outil',
+    'card.color.title': 'Convertisseur de couleurs', 'card.color.desc': 'Convertissez entre les formats HEX, RGB, HSL et HSV avec un sélecteur de couleurs, historique et aperçu en direct.', 'card.color.tag': '✨ Nouveau',
+    'footer.home': 'Accueil', 'footer.about': 'À propos', 'footer.contact': 'Contact',
+    'toast.copied': '✅ Copié dans le presse-papiers', 'toast.failed': '❌ Échec de la copie, veuillez copier manuellement'
+  },
+  'de': {
+    'page.title': 'Online-Tools — Hyrule Toolbox',
+    'page.description': 'Kostenlose Online-Tools: Passwortgenerator, Einheitenumrechner, Textzähler, Fallumwandler, UUID-Generator, Farbkonverter.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Passwortgenerator', 'nav.unit': 'Einheitenumrechner', 'nav.counter': 'Textzähler',
+    'nav.case': 'Fallumwandler', 'nav.uuid': 'UUID-Generator', 'nav.color': 'Farbkonverter', 'nav.json': 'JSON-Formatierer', 'nav.qr': 'QR-Code-Generator',
+    'qr.title': 'QR-Code-Generator', 'qr.desc': 'QR-Codes aus Text oder URL generieren. Größe, Farben und Fehlerkorrektur anpassbar. PNG-Download. <strong>100 % clientseitig.</strong>',
+    'json.badge': '⭐ EMPFOHLEN', 'json.title': 'JSON-Formatierer & Viewer',
+    'json.desc': 'Das leistungsstärkste JSON-Tool, das Sie je brauchen werden. Unterstützt <strong>JSON5</strong> — Kommentare, nachgestellte Kommas, einfache Anführungszeichen. Automatische Korrektur von fehlerhaftem JSON. Einklappbare Baumansicht mit Kopieren von Teilbäumen.<strong>Kein anderes Online-Tool kann das.</strong>',
+    'json.f1': '✅ JSON5 (Kommentare + nachgestellte Kommas)', 'json.f2': '🔄 Automatische JSON-Korrektur',
+    'json.f3': '🌳 Einklappbare Baumansicht', 'json.f4': '📋 Beliebiges Unterelement kopieren',
+    'json.f5': '⛶ Vollbildmodus', 'json.f6': '📄 Auto-Format beim Einfügen',
+    'json.cta': 'JSON-Formatierer ausprobieren →',
+    'card.json.title': 'JSON-Formatierer', 'card.json.desc': 'JSON5-Unterstützung, Kommentare, Kommas, Auto-Korrektur. Baumansicht mit Klapp-/Kopierfunktion.', 'card.json.tag': 'Werkzeug',
+    'card.qr.tag': '✨ Neu',
+    'hero.title': '🔧 Online-Tools',
+    'hero.subtitle': 'Kostenlose, effiziente Entwickler-Tools, die vollständig im Browser laufen — keine Daten werden an Server gesendet.',
+    'hero.tag.client': '⚡ Clientseitig', 'hero.tag.privacy': '🔒 Datenschutz',
+    'hero.tag.mobile': '📱 Mobil geeignet', 'hero.tag.dark': '🌙 Dunkelmodus',
+    'card.password.title': 'Passwortgenerator', 'card.password.desc': 'Erstellen Sie starke Zufallspasswörter mit Großbuchstaben, Kleinbuchstaben, Zahlen und Symbolen. Echtzeit-Stärkebewertung.', 'card.password.tag': '🔥 Beliebt',
+    'card.unit.title': 'Einheitenumrechner', 'card.unit.desc': 'Sofortige Umrechnung zwischen Länge, Masse, Temperatur, Volumen, Fläche, Geschwindigkeit und mehr.', 'card.unit.tag': 'Werkzeug',
+    'card.counter.title': 'Textzähler', 'card.counter.desc': 'Echtzeit-Zählung von Zeichen, Wörtern, Zeilen und Absätzen. Unterstützt gemischte chinesische/englische Textanalyse.', 'card.counter.tag': '🔥 Beliebt',
+    'card.case.title': 'Fallumwandler', 'card.case.desc': 'Ein-Klick-Umwandlung in GROSS, klein, Titel, camelCase, snake_case, PascalCase und mehr.', 'card.case.tag': '✨ Neu',
+    'card.uuid.title': 'UUID-Generator', 'card.uuid.desc': 'Generieren Sie UUID v4-Zufallsidentifikatoren mit Batch-Modus, Ein-Klick-Kopie und Groß-/Kleinschreibungswechsel.', 'card.uuid.tag': 'Werkzeug',
+    'card.color.title': 'Farbkonverter', 'card.color.desc': 'Konvertieren Sie zwischen HEX-, RGB-, HSL- und HSV-Formaten mit Farbwähler, Verlauf und Live-Vorschau.', 'card.color.tag': '✨ Neu',
+    'footer.home': 'Startseite', 'footer.about': 'Über uns', 'footer.contact': 'Kontakt',
+    'toast.copied': '✅ In die Zwischenablage kopiert', 'toast.failed': '❌ Kopieren fehlgeschlagen, bitte manuell kopieren'
   }
-
-  function setStoredLang(lang) {
-    try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (e) { /* noop */ }
-  }
-
-  function getDefaultLang() {
-    // Check localStorage first, then browser preference, default to 'en'
-    var stored = getStoredLang();
-    if (stored && translations[stored]) return stored;
-    var browserLang = (navigator.language || navigator.userLanguage || '').split('-')[0];
-    if (browserLang === 'zh') return 'zh-CN';
-    if (browserLang === 'ja') return 'ja';
-    if (browserLang === 'ko') return 'ko';
-    if (browserLang === 'fr') return 'fr';
-    if (browserLang === 'de') return 'de';
-    return 'en';
-  }
-
-  function applyLanguage(lang) {
-    if (!translations[lang]) lang = 'en';
-    var t = translations[lang];
-    var langSelect = document.getElementById('langSwitcher');
-    if (langSelect) langSelect.value = lang;
-
-    // Update <title>
-    if (t['page.title']) {
-      document.title = t['page.title'];
-    }
-
-    // Update meta description
-    var metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc && t['page.description']) {
-      metaDesc.setAttribute('content', t['page.description']);
-    }
-
-    // Update all data-i18n elements (text content)
-    var elements = document.querySelectorAll('[data-i18n]');
-    for (var i = 0; i < elements.length; i++) {
-      var key = elements[i].getAttribute('data-i18n');
-      if (t[key] !== undefined) {
-        elements[i].innerHTML = t[key];
-      }
-    }
-
-    // Update all data-i18n-att-* elements (attribute content)
-    var attrElements = document.querySelectorAll('[data-i18n-att-description]');
-    for (var i = 0; i < attrElements.length; i++) {
-      var key = attrElements[i].getAttribute('data-i18n-att-description');
-      if (key && t[key] !== undefined) {
-        attrElements[i].setAttribute('content', t[key]);
-      }
-    }
-
-    // Update toast default and copy fallback messages
-    window.__toastI18n = {
-      copied: t['toast.copied'] || '✅ Copied to clipboard',
-      failed: t['toast.failed'] || '❌ Copy failed, please copy manually'
-    };
-
-    // Update the toast element itself if it has data-i18n
-    var toastEl = document.getElementById('toast');
-    if (toastEl && t['toast.copied']) {
-      // Only update if not currently showing a custom message
-      if (!toastEl.classList.contains('show')) {
-        toastEl.textContent = t['toast.copied'];
-      }
-    }
-
-    setStoredLang(lang);
-  }
-
-  // ----- Initialize language -----
-  var currentLang = getDefaultLang();
-  applyLanguage(currentLang);
-
-  // ----- Language switcher event -----
-  var langSelect = document.getElementById('langSwitcher');
-  if (langSelect) {
-    langSelect.addEventListener('change', function () {
-      applyLanguage(this.value);
-    });
-  }
-
-  // ----- Theme Toggle -----
-  const themeToggle = document.getElementById('themeToggle');
-  const htmlEl = document.documentElement;
-  const THEME_STORAGE_KEY = 'zhczlx-theme';
-
-  function getPreferredTheme() {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  function getStoredTheme() {
-    try { return localStorage.getItem(THEME_STORAGE_KEY); } catch (e) { return null; }
-  }
-
-  function setStoredTheme(theme) {
-    try { localStorage.setItem(THEME_STORAGE_KEY, theme); } catch (e) { /* noop */ }
-  }
-
-  function applyTheme(theme) {
-    if (theme === 'dark') {
-      htmlEl.style.colorScheme = 'dark';
-      htmlEl.setAttribute('data-theme', 'dark');
-      themeToggle.textContent = '☀️';
-    } else {
-      htmlEl.style.colorScheme = 'light';
-      htmlEl.setAttribute('data-theme', 'light');
-      themeToggle.textContent = '🌓';
-    }
-  }
-
-  // Initialize theme
-  const stored = getStoredTheme();
-  const initialTheme = stored || getPreferredTheme();
-  applyTheme(initialTheme);
-
-  themeToggle.addEventListener('click', function () {
-    const current = htmlEl.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-    const next = current === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-    setStoredTheme(next);
-  });
-
-  // Listen for system preference changes (if no stored theme)
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-    if (!getStoredTheme()) {
-      applyTheme(e.matches ? 'dark' : 'light');
-    }
-  });
-
-  // ----- Force dark mode CSS variables -----
-  const darkOverrideStyle = document.createElement('style');
-  darkOverrideStyle.textContent = `
-    html[data-theme="dark"] {
-      --bg-primary: #0a0a0b !important;
-      --bg-secondary: #111113 !important;
-      --bg-tertiary: #18181b !important;
-      --bg-card: #111113 !important;
-      --bg-input: #18181b !important;
-      --bg-hover: #27272a !important;
-      --bg-toolbar: #18181b !important;
-      --text-primary: #fafafa !important;
-      --text-secondary: #a1a1aa !important;
-      --text-tertiary: #71717a !important;
-      --text-placeholder: #52525b !important;
-      --text-inverse: #0a0a0b !important;
-      --border-color: rgba(255, 255, 255, 0.08) !important;
-      --border-color-strong: rgba(255, 255, 255, 0.12) !important;
-      --shadow-sm: 0px 0px 0px 1px rgba(255,255,255,0.06), 0px 1px 2px rgba(0,0,0,0.2) !important;
-      --shadow-md: 0px 0px 0px 1px rgba(255,255,255,0.06), 0px 2px 4px rgba(0,0,0,0.2), 0px 8px 16px -8px rgba(0,0,0,0.3) !important;
-      --shadow-lg: 0px 0px 0px 1px rgba(255,255,255,0.06), 0px 4px 8px rgba(0,0,0,0.2), 0px 16px 24px -8px rgba(0,0,0,0.4) !important;
-      --accent: #3b82f6 !important;
-      --accent-hover: #60a5fa !important;
-      --accent-light: rgba(59, 130, 246, 0.1) !important;
-    }
-  `;
-  document.head.appendChild(darkOverrideStyle);
-
-  // Apply dark if stored or preferred
-  if (initialTheme === 'dark') {
-    htmlEl.setAttribute('data-theme', 'dark');
-    htmlEl.style.colorScheme = 'dark';
-    themeToggle.textContent = '☀️';
-  }
-
-  // ----- Toast Notification System -----
-  const toastEl = document.getElementById('toast');
-  let toastTimeout = null;
-
-  window.__toastI18n = {
-    copied: translations[currentLang]['toast.copied'] || '✅ Copied to clipboard',
-    failed: translations[currentLang]['toast.failed'] || '❌ Copy failed, please copy manually'
-  };
-
-  window.showToast = function (message) {
-    if (!toastEl) return;
-    toastEl.textContent = message || window.__toastI18n.copied;
-    toastEl.classList.add('show');
-    clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(function () {
-      toastEl.classList.remove('show');
-    }, 2000);
-  };
-
-  // ----- Copy-to-clipboard helper (for use on tool pages) -----
-  window.copyToClipboard = function (text, successMsg) {
-    if (!text && text !== '') return;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () {
-        window.showToast(successMsg || window.__toastI18n.copied);
-      }).catch(function () {
-        fallbackCopy(text, successMsg);
-      });
-    } else {
-      fallbackCopy(text, successMsg);
-    }
-  };
-
-  function fallbackCopy(text, successMsg) {
-    var textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    textarea.style.left = '-9999px';
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-      document.execCommand('copy');
-      window.showToast(successMsg || window.__toastI18n.copied);
-    } catch (e) {
-      window.showToast(window.__toastI18n.failed);
-    }
-    document.body.removeChild(textarea);
-  }
-
-  // ----- Animate cards on intersection (progressive enhancement) -----
-  if ('IntersectionObserver' in window) {
-    var cards = document.querySelectorAll('.tool-card.animate-in');
-    if (cards.length) {
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = 'running';
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      cards.forEach(function (card) {
-        // Pause animation initially so observer can start it
-        card.style.animationPlayState = 'paused';
-        observer.observe(card);
-      });
-      // Fallback: if observer doesn't trigger within 2s, start all
-      setTimeout(function () {
-        cards.forEach(function (card) {
-          card.style.animationPlayState = 'running';
-        });
-      }, 2000);
-    }
-  }
-
-})();
+};
 </script>
+<script src="js/theme.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
 
 </body>
 </html>
