@@ -52,9 +52,9 @@ describe('HTML consistency across all pages', () => {
     htmlFiles.forEach(file => {
       it(`${file} should include all 3 shared JS files`, () => {
         const html = readPage(file);
-        expect(html).toContain('src="js/theme.js"');
-        expect(html).toContain('src="js/i18n.js"');
-        expect(html).toContain('src="js/common.js"');
+        expect(html).toContain('src="src/js/theme.js"');
+        expect(html).toContain('src="src/js/i18n.js"');
+        expect(html).toContain('src="src/js/common.js"');
       });
     });
   });
