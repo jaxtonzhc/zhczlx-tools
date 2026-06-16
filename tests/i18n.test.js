@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 
-const i18nScript = fs.readFileSync(path.resolve(__dirname, '../js/i18n.js'), 'utf-8');
+const i18nScript = fs.readFileSync(path.resolve(__dirname, '../src/js/i18n.js'), 'utf-8');
 
 function setupDOM(opts = {}) {
   document.documentElement.removeAttribute('lang');

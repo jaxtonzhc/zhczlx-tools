@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 
-const commonScript = fs.readFileSync(path.resolve(__dirname, '../js/common.js'), 'utf-8');
+const commonScript = fs.readFileSync(path.resolve(__dirname, '../src/js/common.js'), 'utf-8');
 
 function setupDOM() {
   document.body.innerHTML = '<div class="toast" id="toast"></div>';

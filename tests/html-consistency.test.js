@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 
-const pagesDir = path.resolve(__dirname, '..');
+const pagesDir = path.resolve(__dirname, '../src/pages');
 const htmlFiles = [
   'index.html',
   'password-generator.html',

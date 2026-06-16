@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 
-const themeScript = fs.readFileSync(path.resolve(__dirname, '../js/theme.js'), 'utf-8');
+const themeScript = fs.readFileSync(path.resolve(__dirname, '../src/js/theme.js'), 'utf-8');
 
 function mockMatchMedia(prefersDark = false) {
   const listeners = [];
