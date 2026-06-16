@@ -14,18 +14,9 @@
 <meta name="twitter:site" content="@zhczlx">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unit Converter — Hyrule Toolbox</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
 <link rel="stylesheet" href="css/tools.css">
 <style>
-/* ===== LANGUAGE SWITCHER ===== */
-.lang-switcher { position:relative; margin-left:auto; }
-.lang-btn { background:none; border:1px solid var(--border-color-strong); padding:6px 12px; border-radius:var(--radius-md); color:var(--text-secondary); font-size:13px; font-weight:500; cursor:pointer; display:flex; align-items:center; gap:4px; transition:all var(--transition-fast); font-family:var(--font-sans); }
-.lang-btn:hover { color:var(--text-primary); background:var(--bg-hover); }
-.lang-dropdown { position:absolute; top:100%; right:0; margin-top:4px; background:var(--bg-card); border:1px solid var(--border-color-strong); border-radius:var(--radius-md); box-shadow:var(--shadow-md); min-width:160px; z-index:200; display:none; overflow:hidden; }
-.lang-dropdown.open { display:block; }
-.lang-dropdown button { display:block; width:100%; padding:10px 16px; border:none; background:transparent; color:var(--text-primary); font-size:14px; text-align:left; cursor:pointer; transition:background var(--transition-fast); font-family:var(--font-sans); }
-.lang-dropdown button:hover { background:var(--bg-hover); }
-.lang-dropdown button.active { background:var(--accent-light); color:var(--accent); font-weight:600; }
-
 .converter-tabs { display:flex; gap:4px; margin-bottom:20px; padding:4px; background:var(--bg-secondary); border-radius:var(--radius-md); flex-wrap:wrap; }
 .converter-tab { padding:8px 16px; border:none; background:transparent; color:var(--text-secondary); font-family:var(--font-sans); font-size:13px; font-weight:500; cursor:pointer; border-radius:var(--radius-sm); transition:all var(--transition-fast); }
 .converter-tab:hover { color:var(--text-primary); }
@@ -70,57 +61,197 @@
 <div class="toast" id="toast"></div>
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="header-logo"><span class="logo-icon">🔧</span><span>Hyrule Toolbox</span></a>
-    <nav class="header-nav"><a href="/">Home</a><a href="unit-converter.html" class="active">Unit Converter</a></nav>
-    <div class="lang-switcher">
-      <button class="lang-btn" id="langBtn">🌐 EN</button>
-      <div class="lang-dropdown" id="langDropdown">
-        <button data-lang="en" class="active">🇬🇧 English</button>
-        <button data-lang="zh">🇨🇳 中文</button>
-        <button data-lang="ja">🇯🇵 日本語</button>
-        <button data-lang="ko">🇰🇷 한국어</button>
-        <button data-lang="fr">🇫🇷 Français</button>
-        <button data-lang="de">🇩🇪 Deutsch</button>
+    <a href="/" class="header-logo">
+      <span class="logo-icon">T</span>
+      <span data-i18n="header.logo">Hyrule Toolbox</span>
+    </a>
+    <nav class="header-nav">
+      <a href="password-generator.html" data-i18n-title="nav.password" title="Password Generator">🔑</a>
+      <a href="unit-converter.html" class="active" data-i18n-title="nav.unit" title="Unit Converter">📐</a>
+      <a href="text-counter.html" data-i18n-title="nav.counter" title="Text Counter">📊</a>
+      <a href="text-case.html" data-i18n-title="nav.case" title="Case Converter">🔤</a>
+      <a href="uuid-generator.html" data-i18n-title="nav.uuid" title="UUID Generator">🆔</a>
+      <a href="color-converter.html" data-i18n-title="nav.color" title="Color Converter">🎨</a>
+      <a href="json-formatter.html" data-i18n-title="nav.json" title="JSON Formatter">{ }</a>
+      <a href="qr-generator.html" data-i18n-title="nav.qr" title="QR Code Generator">📱</a>
+    </nav>
+    <div class="header-controls">
+      <div class="lang-switcher">
+        <select id="langSelect" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
       </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
     </div>
-    <button class="theme-toggle" id="themeToggle">🌙</button>
   </div>
 </header>
 <main>
   <div class="container">
     <div class="tool-section">
       <div class="tool-header">
-        <div class="breadcrumb"><a href="/">Home</a><span>›</span><span>Unit Converter</span></div>
-        <h1>📏 Unit Converter</h1>
-        <p>Length, Weight, Temperature, Area, Volume — real-time conversion.</p>
+        <div class="breadcrumb"><a href="/" data-i18n="footer.home">Home</a><span>›</span><span data-i18n="page.breadcrumb">Unit Converter</span></div>
+        <h1 data-i18n="page.heading">📏 Unit Converter</h1>
+        <p data-i18n="page.desc">Length, Weight, Temperature, Area, Volume — real-time conversion.</p>
       </div>
       <div class="tool-card-container">
         <div class="tool-body" id="toolBody">
           <div class="converter-tabs" id="tabs"></div>
           <div id="panels"></div>
         </div>
-        <div class="tool-footer"><span class="hint">💡 Click result to copy</span></div>
+        <div class="tool-footer"><span class="hint" data-i18n="page.hint">💡 Click result to copy</span></div>
       </div>
     </div>
   </div>
 </main>
 <footer class="site-footer">
-  <div class="footer-inner"><span>© 2026 Hyrule Toolbox</span><span><a href="/">Home</a> · Unit Converter</span></div>
+  <div class="footer-inner">
+    <span>&copy; 2026 <a href="https://zhczlx.com">Hyrule Toolbox</a></span>
+    <nav>
+      <a href="/" data-i18n="footer.home">Home</a>
+      <a href="https://zhczlx.com/about" data-i18n="footer.about">About</a>
+      <a href="mailto:hi@zhczlx.com" data-i18n="footer.contact">Contact</a>
+    </nav>
+  </div>
 </footer>
+<script>
+window.__pageTranslations = {
+  en: {
+    'page.title': 'Unit Converter — Hyrule Toolbox',
+    'page.description': 'Real-time unit conversion across length, weight, temperature, area, and volume. Fully client-side, no data upload.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Password Generator', 'nav.unit': 'Unit Converter', 'nav.counter': 'Text Counter',
+    'nav.case': 'Case Converter', 'nav.uuid': 'UUID Generator', 'nav.color': 'Color Converter', 'nav.json': 'JSON Formatter', 'nav.qr': 'QR Code Generator',
+    'footer.home': 'Home', 'footer.about': 'About', 'footer.contact': 'Contact',
+    'toast.copied': '✅ Copied!', 'toast.failed': '❌ Copy failed, please copy manually',
+    'page.breadcrumb': 'Unit Converter',
+    'page.heading': '📏 Unit Converter',
+    'page.desc': 'Length, Weight, Temperature, Area, Volume — real-time conversion.',
+    'page.hint': '💡 Click result to copy',
+    'cat.length': '📏 Length', 'cat.mass': '⚖️ Weight', 'cat.temperature': '🌡️ Temperature',
+    'cat.area': '📐 Area', 'cat.volume': '🧪 Volume',
+    'converter.from': 'From', 'converter.to': 'To', 'converter.placeholder': 'Enter value',
+    'converter.formula': 'Enter a value to convert', 'converter.swap': 'Swap'
+  },
+  zh: {
+    'page.title': '单位换算 — Hyrule Toolbox',
+    'page.description': '长度、重量、温度、面积、体积实时换算，纯客户端运行，不上传任何数据。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '密码生成器', 'nav.unit': '单位换算', 'nav.counter': '文本统计',
+    'nav.case': '大小写转换', 'nav.uuid': 'UUID生成', 'nav.color': '颜色转换', 'nav.json': 'JSON格式化', 'nav.qr': '二维码生成',
+    'footer.home': '首页', 'footer.about': '关于', 'footer.contact': '联系',
+    'toast.copied': '✅ 已复制!', 'toast.failed': '❌ 复制失败，请手动复制',
+    'page.breadcrumb': '单位换算',
+    'page.heading': '📏 单位换算',
+    'page.desc': '长度、重量、温度、面积、体积 — 实时换算。',
+    'page.hint': '💡 点击结果复制',
+    'cat.length': '📏 长度', 'cat.mass': '⚖️ 重量', 'cat.temperature': '🌡️ 温度',
+    'cat.area': '📐 面积', 'cat.volume': '🧪 体积',
+    'converter.from': '从', 'converter.to': '到', 'converter.placeholder': '输入数值',
+    'converter.formula': '输入数值开始换算', 'converter.swap': '交换'
+  },
+  ja: {
+    'page.title': '単位変換 — Hyrule Toolbox',
+    'page.description': '長さ、重さ、温度、面積、体積のリアルタイム単位変換。完全クライアント側、データアップロードなし。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'パスワード生成', 'nav.unit': '単位変換', 'nav.counter': 'テキスト統計',
+    'nav.case': '大文字小文字変換', 'nav.uuid': 'UUID生成', 'nav.color': 'カラー変換', 'nav.json': 'JSONフォーマッター', 'nav.qr': 'QRコード生成',
+    'footer.home': 'ホーム', 'footer.about': '概要', 'footer.contact': 'お問い合わせ',
+    'toast.copied': '✅ コピーしました!', 'toast.failed': '❌ コピーに失敗しました。手動でコピーしてください',
+    'page.breadcrumb': '単位変換',
+    'page.heading': '📏 単位変換',
+    'page.desc': '長さ、重さ、温度、面積、体積 — リアルタイム変換。',
+    'page.hint': '💡 結果をクリックしてコピー',
+    'cat.length': '📏 長さ', 'cat.mass': '⚖️ 重さ', 'cat.temperature': '🌡️ 温度',
+    'cat.area': '📐 面積', 'cat.volume': '🧪 体積',
+    'converter.from': '元の単位', 'converter.to': '変換先', 'converter.placeholder': '値を入力',
+    'converter.formula': '値を入力して変換', 'converter.swap': '交換'
+  },
+  ko: {
+    'page.title': '단위 변환 — Hyrule Toolbox',
+    'page.description': '길이, 무게, 온도, 면적, 부피 실시간 단위 변환. 완전 클라이언트 측, 데이터 업로드 없음.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '비밀번호 생성', 'nav.unit': '단위 변환', 'nav.counter': '텍스트 통계',
+    'nav.case': '대소문자 변환', 'nav.uuid': 'UUID 생성', 'nav.color': '색상 변환', 'nav.json': 'JSON 포맷터', 'nav.qr': 'QR코드 생성',
+    'footer.home': '홈', 'footer.about': '소개', 'footer.contact': '문의',
+    'toast.copied': '✅ 복사됨!', 'toast.failed': '❌ 복사 실패, 수동으로 복사해 주세요',
+    'page.breadcrumb': '단위 변환',
+    'page.heading': '📏 단위 변환',
+    'page.desc': '길이, 무게, 온도, 면적, 부피 — 실시간 변환.',
+    'page.hint': '💡 결과를 클릭하여 복사',
+    'cat.length': '📏 길이', 'cat.mass': '⚖️ 무게', 'cat.temperature': '🌡️ 온도',
+    'cat.area': '📐 면적', 'cat.volume': '🧪 부피',
+    'converter.from': '시작', 'converter.to': '도착', 'converter.placeholder': '값 입력',
+    'converter.formula': '값을 입력하여 변환', 'converter.swap': '교환'
+  },
+  fr: {
+    'page.title': 'Convertisseur d\'unités — Hyrule Toolbox',
+    'page.description': 'Conversion d\'unités en temps réel : longueur, poids, température, surface et volume. Entièrement côté client.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Générateur de mots de passe', 'nav.unit': 'Convertisseur d\'unités', 'nav.counter': 'Compteur de texte',
+    'nav.case': 'Convertisseur de casse', 'nav.uuid': 'Générateur UUID', 'nav.color': 'Convertisseur de couleurs', 'nav.json': 'Formateur JSON', 'nav.qr': 'Générateur de QR Code',
+    'footer.home': 'Accueil', 'footer.about': 'À propos', 'footer.contact': 'Contact',
+    'toast.copied': '✅ Copié!', 'toast.failed': '❌ Échec de la copie, veuillez copier manuellement',
+    'page.breadcrumb': 'Convertisseur',
+    'page.heading': '📏 Convertisseur',
+    'page.desc': 'Longueur, Poids, Température, Surface, Volume — conversion en temps réel.',
+    'page.hint': '💡 Cliquez pour copier',
+    'cat.length': '📏 Longueur', 'cat.mass': '⚖️ Poids', 'cat.temperature': '🌡️ Température',
+    'cat.area': '📐 Surface', 'cat.volume': '🧪 Volume',
+    'converter.from': 'De', 'converter.to': 'À', 'converter.placeholder': 'Entrez la valeur',
+    'converter.formula': 'Entrez une valeur', 'converter.swap': 'Échanger'
+  },
+  de: {
+    'page.title': 'Einheitenumrechner — Hyrule Toolbox',
+    'page.description': 'Echtzeit-Einheitenumrechnung für Länge, Gewicht, Temperatur, Fläche und Volumen. Vollständig clientseitig.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Passwortgenerator', 'nav.unit': 'Einheitenumrechner', 'nav.counter': 'Textzähler',
+    'nav.case': 'Fallumwandler', 'nav.uuid': 'UUID-Generator', 'nav.color': 'Farbkonverter', 'nav.json': 'JSON-Formatierer', 'nav.qr': 'QR-Code-Generator',
+    'footer.home': 'Startseite', 'footer.about': 'Über uns', 'footer.contact': 'Kontakt',
+    'toast.copied': '✅ Kopiert!', 'toast.failed': '❌ Kopieren fehlgeschlagen, bitte manuell kopieren',
+    'page.breadcrumb': 'Umrechner',
+    'page.heading': '📏 Umrechner',
+    'page.desc': 'Länge, Gewicht, Temperatur, Fläche, Volumen — Echtzeit-Umrechnung.',
+    'page.hint': '💡 Klicken zum Kopieren',
+    'cat.length': '📏 Länge', 'cat.mass': '⚖️ Gewicht', 'cat.temperature': '🌡️ Temperatur',
+    'cat.area': '📐 Fläche', 'cat.volume': '🧪 Volumen',
+    'converter.from': 'Von', 'converter.to': 'Nach', 'converter.placeholder': 'Wert eingeben',
+    'converter.formula': 'Wert eingeben', 'converter.swap': 'Tauschen'
+  }
+};
+</script>
+<script src="js/theme.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
 <script>
 (function() {
   'use strict';
   var $ = function(id) { return document.getElementById(id); };
-  var toast = $('toast');
   var tabsEl = $('tabs');
   var panelsEl = $('panels');
 
+  function t(key) {
+    return window.HyruleI18n ? window.HyruleI18n.t(key) : key;
+  }
+
   var CATS = {
-    length: { label: '📏 Length', units: ['mm','cm','m','km','inch','foot','yard','mile'] },
-    mass: { label: '⚖️ Weight', units: ['mg','g','kg','ton','lb','oz'] },
-    temperature: { label: '🌡️ Temperature', units: ['celsius','fahrenheit','kelvin'] },
-    area: { label: '📐 Area', units: ['mm2','cm2','m2','km2','ha','acre','ft2'] },
-    volume: { label: '🧪 Volume', units: ['ml','l','m3','gal','floz','cup'] }
+    length: { units: ['mm','cm','m','km','inch','foot','yard','mile'] },
+    mass: { units: ['mg','g','kg','ton','lb','oz'] },
+    temperature: { units: ['celsius','fahrenheit','kelvin'] },
+    area: { units: ['mm2','cm2','m2','km2','ha','acre','ft2'] },
+    volume: { units: ['ml','l','m3','gal','floz','cup'] }
+  };
+
+  var CAT_I18N = {
+    length: 'cat.length',
+    mass: 'cat.mass',
+    temperature: 'cat.temperature',
+    area: 'cat.area',
+    volume: 'cat.volume'
   };
 
   var TO_BASE = {
@@ -202,6 +333,7 @@
   };
 
   var state = {};
+  var catKeys = Object.keys(CATS);
 
   function fmt(n) {
     if (Math.abs(n) >= 10000 || (Math.abs(n) < 0.001 && n !== 0)) return n.toExponential(4);
@@ -209,86 +341,79 @@
     return parseFloat(n.toFixed(6)).toString();
   }
 
-  function showToast(msg) {
-    toast.textContent = msg; toast.classList.add('show');
-    clearTimeout(toast._t);
-    toast._t = setTimeout(function() { toast.classList.remove('show'); }, 2000);
-  }
-
-  function copyText(text) {
-    if (!text) return;
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(function() { showToast('✅ Copied!'); })
-        .catch(function() { fallbackCopy(text); });
-    } else { fallbackCopy(text); }
-  }
-  function fallbackCopy(text) {
-    var ta = document.createElement('textarea');
-    ta.value = text; ta.style.position='fixed'; ta.style.left='-9999px';
-    document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); showToast('✅ Copied!'); } catch(e) {}
-    document.body.removeChild(ta);
-  }
-
-  var catKeys = Object.keys(CATS);
-
-  // Build tabs
-  var tabHtml = '';
-  for (var i = 0; i < catKeys.length; i++) {
-    var cat = catKeys[i];
-    tabHtml += '<button class="converter-tab' + (i === 0 ? ' active' : '') + '" data-cat="' + cat + '">' + CATS[cat].label + '</button>';
-  }
-  tabsEl.innerHTML = tabHtml;
-
-  // Build panels
-  var panelHtml = '';
-  for (var i = 0; i < catKeys.length; i++) {
-    var cat = catKeys[i];
-    var units = CATS[cat].units;
+  function buildUnitOptions(units, selectedFrom, selectedTo) {
     var fromOpts = '', toOpts = '';
     for (var j = 0; j < units.length; j++) {
       var u = units[j];
-      var selFrom = (j === 0) ? ' selected' : '';
-      var selTo = (j === Math.min(1, units.length - 1)) ? ' selected' : '';
+      var selFrom = (u === selectedFrom) ? ' selected' : '';
+      var selTo = (u === selectedTo) ? ' selected' : '';
       fromOpts += '<option value="' + u + '"' + selFrom + '>' + UNIT_LABELS[u] + ' (' + u + ')</option>';
       toOpts += '<option value="' + u + '"' + selTo + '>' + UNIT_LABELS[u] + ' (' + u + ')</option>';
     }
-
-    state[cat] = { fromUnit: units[0], toUnit: units[Math.min(1, units.length - 1)], inputValue: '' };
-
-    panelHtml += '<div class="converter-panel' + (i === 0 ? ' active' : '') + '" data-cat="' + cat + '">'
-      + '<div class="panel-body">'
-      + '  <div class="side">'
-      + '    <label>From</label>'
-      + '    <select class="from-unit" data-cat="' + cat + '">' + fromOpts + '</select>'
-      + '    <input type="number" class="from-value" data-cat="' + cat + '" placeholder="Enter value" step="any">'
-      + '    <div class="quick-values">'
-      +       [1,10,100,1000].map(function(n) { return '<button data-val="' + n + '" data-cat="' + cat + '">' + n + '</button>'; }).join('')
-      + '    </div>'
-      + '  </div>'
-      + '  <button class="swap-btn" data-cat="' + cat + '" title="Swap">⇄</button>'
-      + '  <div class="side">'
-      + '    <label>To</label>'
-      + '    <select class="to-unit" data-cat="' + cat + '">' + toOpts + '</select>'
-      + '    <div class="result-row" data-cat="' + cat + '">'
-      + '      <span class="result-value" id="rv-' + cat + '">—</span>'
-      + '      <span class="result-unit" id="ru-' + cat + '"></span>'
-      + '    </div>'
-      + '  </div>'
-      + '</div>'
-      + '<div class="formula" id="fm-' + cat + '">Enter a value to convert</div>'
-      + '</div>';
+    return { fromOpts: fromOpts, toOpts: toOpts };
   }
-  panelsEl.innerHTML = panelHtml;
 
-  // Conversion function
+  function buildUI() {
+    var tabHtml = '';
+    for (var i = 0; i < catKeys.length; i++) {
+      var cat = catKeys[i];
+      tabHtml += '<button class="converter-tab' + (i === 0 ? ' active' : '') + '" data-cat="' + cat + '">' + t(CAT_I18N[cat]) + '</button>';
+    }
+    tabsEl.innerHTML = tabHtml;
+
+    var panelHtml = '';
+    for (var i = 0; i < catKeys.length; i++) {
+      var cat = catKeys[i];
+      var units = CATS[cat].units;
+      var fromUnit = units[0];
+      var toUnit = units[Math.min(1, units.length - 1)];
+      if (!state[cat]) {
+        state[cat] = { fromUnit: fromUnit, toUnit: toUnit, inputValue: '' };
+      } else {
+        fromUnit = state[cat].fromUnit;
+        toUnit = state[cat].toUnit;
+      }
+      var opts = buildUnitOptions(units, fromUnit, toUnit);
+
+      panelHtml += '<div class="converter-panel' + (i === 0 ? ' active' : '') + '" data-cat="' + cat + '">'
+        + '<div class="panel-body">'
+        + '  <div class="side">'
+        + '    <label class="label-from">' + t('converter.from') + '</label>'
+        + '    <select class="from-unit" data-cat="' + cat + '">' + opts.fromOpts + '</select>'
+        + '    <input type="number" class="from-value" data-cat="' + cat + '" placeholder="' + t('converter.placeholder') + '" step="any">'
+        + '    <div class="quick-values">'
+        +       [1,10,100,1000].map(function(n) { return '<button data-val="' + n + '" data-cat="' + cat + '">' + n + '</button>'; }).join('')
+        + '    </div>'
+        + '  </div>'
+        + '  <button class="swap-btn" data-cat="' + cat + '" title="' + t('converter.swap') + '">⇄</button>'
+        + '  <div class="side">'
+        + '    <label class="label-to">' + t('converter.to') + '</label>'
+        + '    <select class="to-unit" data-cat="' + cat + '">' + opts.toOpts + '</select>'
+        + '    <div class="result-row" data-cat="' + cat + '">'
+        + '      <span class="result-value" id="rv-' + cat + '">—</span>'
+        + '      <span class="result-unit" id="ru-' + cat + '"></span>'
+        + '    </div>'
+        + '  </div>'
+        + '</div>'
+        + '<div class="formula" id="fm-' + cat + '">' + t('converter.formula') + '</div>'
+        + '</div>';
+    }
+    panelsEl.innerHTML = panelHtml;
+
+    for (var i = 0; i < catKeys.length; i++) {
+      var cat = catKeys[i];
+      var input = document.querySelector('.from-value[data-cat="' + cat + '"]');
+      if (input && state[cat].inputValue) input.value = state[cat].inputValue;
+    }
+  }
+
   function convert(cat) {
     var st = state[cat];
     var val = parseFloat(st.inputValue);
     if (isNaN(val) || st.inputValue === '') {
       document.getElementById('rv-' + cat).textContent = '—';
       document.getElementById('ru-' + cat).textContent = '';
-      document.getElementById('fm-' + cat).textContent = 'Enter a value to convert';
+      document.getElementById('fm-' + cat).textContent = t('converter.formula');
       return;
     }
     var base = TO_BASE[st.fromUnit](val);
@@ -301,7 +426,27 @@
     document.getElementById('fm-' + cat).innerHTML = '1 ' + fromLabel + ' (' + st.fromUnit + ') = ' + fmt(rate) + ' ' + toLabel + ' (' + st.toUnit + ')';
   }
 
-  // Bind events
+  function convertAll() {
+    for (var i = 0; i < catKeys.length; i++) convert(catKeys[i]);
+  }
+
+  function updateDynamicLabels() {
+    var tabBtns = document.querySelectorAll('.converter-tab');
+    for (var i = 0; i < tabBtns.length; i++) {
+      var cat = tabBtns[i].getAttribute('data-cat');
+      tabBtns[i].textContent = t(CAT_I18N[cat]);
+    }
+    document.querySelectorAll('.label-from').forEach(function(el) { el.textContent = t('converter.from'); });
+    document.querySelectorAll('.label-to').forEach(function(el) { el.textContent = t('converter.to'); });
+    document.querySelectorAll('.from-value').forEach(function(el) { el.placeholder = t('converter.placeholder'); });
+    document.querySelectorAll('.swap-btn').forEach(function(el) { el.title = t('converter.swap'); });
+    convertAll();
+  }
+
+  window.__onLanguageChange = function() {
+    updateDynamicLabels();
+  };
+
   document.addEventListener('change', function(e) {
     if (e.target.classList.contains('from-unit') || e.target.classList.contains('to-unit')) {
       var cat = e.target.getAttribute('data-cat');
@@ -320,7 +465,6 @@
   });
 
   document.addEventListener('click', function(e) {
-    // Tab switch
     if (e.target.classList.contains('converter-tab')) {
       document.querySelectorAll('.converter-tab').forEach(function(t) { t.classList.remove('active'); });
       e.target.classList.add('active');
@@ -328,7 +472,6 @@
       var panel = document.querySelector('.converter-panel[data-cat="' + e.target.getAttribute('data-cat') + '"]');
       if (panel) panel.classList.add('active');
     }
-    // Swap
     if (e.target.classList.contains('swap-btn')) {
       var cat = e.target.getAttribute('data-cat');
       var from = document.querySelector('.from-unit[data-cat="' + cat + '"]');
@@ -338,111 +481,27 @@
       state[cat].toUnit = to.value;
       convert(cat);
     }
-    // Quick value
     if (e.target.tagName === 'BUTTON' && e.target.getAttribute('data-val')) {
       var cat = e.target.getAttribute('data-cat');
       var val = e.target.getAttribute('data-val');
       var input = document.querySelector('.from-value[data-cat="' + cat + '"]');
       if (input) { input.value = val; state[cat].inputValue = val; convert(cat); }
     }
-    // Copy result
     var rv = e.target.closest('.result-row');
     if (rv) {
       var cat = rv.getAttribute('data-cat');
       var val = document.getElementById('rv-' + cat).textContent;
       var unit = document.getElementById('ru-' + cat).textContent;
-      if (val && val !== '—') copyText(val + ' ' + unit);
+      if (val && val !== '—') {
+        window.copyToClipboard(val + ' ' + unit, t('toast.copied'));
+      }
     }
   });
 
-  // Init: convert length with default 1
+  buildUI();
   state.length.inputValue = '1';
   var lenInput = document.querySelector('.from-value[data-cat="length"]');
   if (lenInput) { lenInput.value = '1'; convert('length'); }
-
-  // Theme
-  // ===== I18N =====
-  var LANG = {
-    en: { catLength:'📏 Length', catMass:'⚖️ Weight', catTemperature:'🌡️ Temperature', catArea:'📐 Area', catVolume:'🧪 Volume', fromLabel:'From', toLabel:'To', placeholder:'Enter value', formula:'Enter a value to convert', copyToast:'✅ Copied!', swapTitle:'Swap', pageTitle:'Unit Converter — Hyrule Toolbox', siteName:'Hyrule Toolbox', navHome:'Home', navConverter:'Unit Converter', breadcrumb:'Unit Converter', heading:'📏 Unit Converter', desc:'Length, Weight, Temperature, Area, Volume — real-time conversion.', hint:'💡 Click result to copy', footer:'Hyrule Toolbox · Unit Converter', footerCopy:'© 2026 Hyrule Toolbox', themeAria:'Toggle theme' },
-    zh: { catLength:'📏 长度', catMass:'⚖️ 重量', catTemperature:'🌡️ 温度', catArea:'📐 面积', catVolume:'🧪 体积', fromLabel:'从', toLabel:'到', placeholder:'输入数值', formula:'输入数值开始换算', copyToast:'✅ 已复制!', swapTitle:'交换', pageTitle:'单位换算 — 海拉鲁工具箱', siteName:'海拉鲁工具箱', navHome:'首页', navConverter:'单位换算', breadcrumb:'单位换算', heading:'📏 单位换算', desc:'长度、重量、温度、面积、体积 — 实时换算。', hint:'💡 点击结果复制', footer:'海拉鲁工具箱 · 单位换算', footerCopy:'© 2026 海拉鲁工具箱', themeAria:'切换主题' },
-    ja: { catLength:'📏 長さ', catMass:'⚖️ 重さ', catTemperature:'🌡️ 温度', catArea:'📐 面積', catVolume:'🧪 体積', fromLabel:'元の単位', toLabel:'変換先', placeholder:'値を入力', formula:'値を入力して変換', copyToast:'✅ コピーしました!', swapTitle:'交換', pageTitle:'単位変換 — Hyrule Toolbox', siteName:'Hyrule Toolbox', navHome:'ホーム', navConverter:'単位変換', breadcrumb:'単位変換', heading:'📏 単位変換', desc:'長さ、重さ、温度、面積、体積 — リアルタイム変換。', hint:'💡 結果をクリックしてコピー', footer:'Hyrule Toolbox · 単位変換', footerCopy:'© 2026 Hyrule Toolbox', themeAria:'テーマ切替' },
-    ko: { catLength:'📏 길이', catMass:'⚖️ 무게', catTemperature:'🌡️ 온도', catArea:'📐 면적', catVolume:'🧪 부피', fromLabel:'시작', toLabel:'도착', placeholder:'값 입력', formula:'값을 입력하여 변환', copyToast:'✅ 복사됨!', swapTitle:'교환', pageTitle:'단위 변환 — Hyrule Toolbox', siteName:'Hyrule Toolbox', navHome:'홈', navConverter:'단위 변환', breadcrumb:'단위 변환', heading:'📏 단위 변환', desc:'길이, 무게, 온도, 면적, 부피 — 실시간 변환.', hint:'💡 결과를 클릭하여 복사', footer:'Hyrule Toolbox · 단위 변환', footerCopy:'© 2026 Hyrule Toolbox', themeAria:'테마 전환' },
-    fr: { catLength:'📏 Longueur', catMass:'⚖️ Poids', catTemperature:'🌡️ Température', catArea:'📐 Surface', catVolume:'🧪 Volume', fromLabel:'De', toLabel:'À', placeholder:'Entrez la valeur', formula:'Entrez une valeur', copyToast:'✅ Copié!', swapTitle:'Échanger', pageTitle:'Convertisseur d\'unités — Hyrule Toolbox', siteName:'Hyrule Toolbox', navHome:'Accueil', navConverter:'Convertisseur', breadcrumb:'Convertisseur', heading:'📏 Convertisseur', desc:'Longueur, Poids, Température, Surface, Volume — conversion en temps réel.', hint:'💡 Cliquez pour copier', footer:'Hyrule Toolbox · Convertisseur', footerCopy:'© 2026 Hyrule Toolbox', themeAria:'Changer le thème' },
-    de: { catLength:'📏 Länge', catMass:'⚖️ Gewicht', catTemperature:'🌡️ Temperatur', catArea:'📐 Fläche', catVolume:'🧪 Volumen', fromLabel:'Von', toLabel:'Nach', placeholder:'Wert eingeben', formula:'Wert eingeben', copyToast:'✅ Kopiert!', swapTitle:'Tauschen', pageTitle:'Einheitenumrechner — Hyrule Toolbox', siteName:'Hyrule Toolbox', navHome:'Start', navConverter:'Umrechner', breadcrumb:'Umrechner', heading:'📏 Umrechner', desc:'Länge, Gewicht, Temperatur, Fläche, Volumen — Echtzeit-Umrechnung.', hint:'💡 Klicken zum Kopieren', footer:'Hyrule Toolbox · Umrechner', footerCopy:'© 2026 Hyrule Toolbox', themeAria:'Design wechseln' },
-  };
-
-  var langBtn = $('langBtn');
-  var langDropdown = $('langDropdown');
-  var currentLang = 'en';
-  try { var saved = localStorage.getItem('unit-lang'); if (saved) currentLang = saved; } catch(e) {}
-
-  function applyLang(lang) {
-    currentLang = lang;
-    var t = LANG[lang] || LANG.en;
-    langBtn.textContent = '🌐 ' + lang.toUpperCase();
-    var opts = langDropdown.querySelectorAll('button');
-    for (var i = 0; i < opts.length; i++) opts[i].classList.toggle('active', opts[i].getAttribute('data-lang') === lang);
-
-    // Update tab labels
-    var tabBtns = document.querySelectorAll('.converter-tab');
-    var keys = Object.keys(CATS);
-    for (var i = 0; i < tabBtns.length; i++) {
-      var cat = tabBtns[i].getAttribute('data-cat');
-      var key = 'cat' + cat.charAt(0).toUpperCase() + cat.slice(1);
-      tabBtns[i].textContent = t[key] || CATS[cat].label;
-    }
-    // Update "From/To" labels
-    var labels = document.querySelectorAll('.side label');
-    if (labels[0]) labels[0].textContent = t.fromLabel;
-    if (labels[1]) labels[1].textContent = t.toLabel;
-    // Page title, heading, description
-    document.title = t.pageTitle;
-    var h1 = document.querySelector('h1'); if (h1) h1.textContent = t.heading;
-    var desc = document.querySelector('.tool-header p'); if (desc) desc.textContent = t.desc;
-    var bc = document.querySelector('.breadcrumb span:last-child'); if (bc) bc.textContent = t.breadcrumb;
-    var navA = document.querySelector('.header-nav a:last-child'); if (navA) navA.textContent = t.navConverter;
-    var logo = document.querySelector('.header-logo span:last-child'); if (logo) logo.textContent = t.siteName;
-    var hint = document.querySelector('.tool-footer .hint'); if (hint) hint.textContent = t.hint;
-    var footers = document.querySelectorAll('.site-footer span, .site-footer a');
-    for (var i = 0; i < footers.length; i++) {
-      if (footers[i].getAttribute('href') === '/') footers[i].textContent = t.navHome;
-    }
-    var ttA = document.getElementById('themeToggle');
-    if (ttA) ttA.setAttribute('aria-label', t.themeAria);
-    // Placeholders
-    var inputs = document.querySelectorAll('.from-value');
-    for (var i = 0; i < inputs.length; i++) inputs[i].placeholder = t.placeholder;
-    // Formula hints
-    for (var i = 0; i < keys.length; i++) {
-      var fm = document.getElementById('fm-' + keys[i]);
-      if (fm && fm.textContent.indexOf('=') === -1 && fm.textContent.indexOf('→') === -1) {
-        fm.textContent = t.formula;
-      }
-    }
-    // Swap button titles
-    var swaps = document.querySelectorAll('.swap-btn');
-    for (var i = 0; i < swaps.length; i++) swaps[i].title = t.swapTitle;
-
-    try { localStorage.setItem('unit-lang', lang); } catch(e) {}
-  }
-  langBtn.addEventListener('click', function(e) { e.stopPropagation(); langDropdown.classList.toggle('open'); });
-  document.addEventListener('click', function() { langDropdown.classList.remove('open'); });
-  var langOpts = langDropdown.querySelectorAll('button');
-  for (var i = 0; i < langOpts.length; i++) {
-    (function(btn) { btn.addEventListener('click', function() { applyLang(btn.getAttribute('data-lang')); langDropdown.classList.remove('open'); }); })(langOpts[i]);
-  }
-
-  applyLang(currentLang);
-
-  var tt = $('themeToggle');
-  var isDark = (function() { var s = localStorage.getItem('unit-theme'); return s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; })();
-  function applyTheme(d) {
-    isDark = d; document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
-    tt.textContent = d ? '☀️' : '🌙';
-    try { localStorage.setItem('unit-theme', d ? 'dark' : 'light'); } catch(e) {}
-  }
-  applyTheme(isDark);
-  tt.addEventListener('click', function() { applyTheme(!isDark); });
 })();
 </script>
 </body>

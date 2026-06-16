@@ -16,8 +16,9 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8130430107774403" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-8130430107774403">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="title">Text Case Converter — Hyrule Toolbox</title>
+    <title>Text Case Converter — Hyrule Toolbox</title>
     <link rel="stylesheet" href="css/tools.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔤</text></svg>">
     <style>
         /* ===== TEXT CASE CONVERTER SPECIFIC ===== */
 
@@ -277,55 +278,6 @@
             font-size: 12px;
             padding: 5px 12px;
         }
-
-        /* ===== LANGUAGE SWITCHER ===== */
-        .lang-switcher {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .lang-switcher select {
-            appearance: none;
-            -webkit-appearance: none;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color-strong);
-            border-radius: var(--radius-md);
-            color: var(--text-secondary);
-            font-size: 12px;
-            padding: 4px 24px 4px 8px;
-            cursor: pointer;
-            outline: none;
-            transition: all var(--transition-fast);
-            font-family: var(--font-sans);
-            min-width: 64px;
-        }
-
-        .lang-switcher select:hover {
-            border-color: var(--accent);
-            color: var(--text-primary);
-        }
-
-        .lang-switcher::after {
-            content: '▾';
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 10px;
-            color: var(--text-tertiary);
-            pointer-events: none;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .header-inner .header-logo {
-            margin-right: auto;
-        }
     </style>
 <script type="application/ld+json">
 {
@@ -343,144 +295,141 @@
 </head>
 <body>
 
-<!-- ===== TOAST ===== -->
-<div class="toast" id="toast"></div>
-
 <!-- ===== HEADER ===== -->
 <header class="site-header">
-    <div class="header-inner">
-        <a href="/" class="header-logo">
-            <span class="logo-icon">🔤</span>
-            <span data-i18n="site_name">Hyrule Toolbox</span>
-        </a>
-        <nav class="header-nav">
-            <a href="/" data-i18n="nav_home">Home</a>
-            <a href="text-case.html" class="active" data-i18n="nav_text_case">Text Case</a>
-        </nav>
-        <div class="lang-switcher">
-            <select id="langSelect" aria-label="Language">
-                <option value="en">EN</option>
-                <option value="zh">中文</option>
-                <option value="ja">日本語</option>
-                <option value="ko">한국어</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-            </select>
-        </div>
-        <button class="theme-toggle" id="themeToggle" data-i18n-aria="theme_aria" aria-label="Toggle theme">🌙</button>
+  <div class="header-inner">
+    <a href="/" class="header-logo">
+      <span class="logo-icon">T</span>
+      <span data-i18n="header.logo">Hyrule Toolbox</span>
+    </a>
+    <nav class="header-nav">
+      <a href="password-generator.html" data-i18n-title="nav.password" title="Password Generator">🔑</a>
+      <a href="unit-converter.html" data-i18n-title="nav.unit" title="Unit Converter">📐</a>
+      <a href="text-counter.html" data-i18n-title="nav.counter" title="Text Counter">📊</a>
+      <a href="text-case.html" class="active" data-i18n-title="nav.case" title="Case Converter">🔤</a>
+      <a href="uuid-generator.html" data-i18n-title="nav.uuid" title="UUID Generator">🆔</a>
+      <a href="color-converter.html" data-i18n-title="nav.color" title="Color Converter">🎨</a>
+      <a href="json-formatter.html" data-i18n-title="nav.json" title="JSON Formatter">{ }</a>
+      <a href="qr-generator.html" data-i18n-title="nav.qr" title="QR Code Generator">📱</a>
+    </nav>
+    <div class="header-controls">
+      <div class="lang-switcher">
+        <select id="langSelect" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
     </div>
+  </div>
 </header>
 
 <!-- ===== MAIN ===== -->
 <main>
     <div class="container">
         <section class="tool-section">
-            <!-- Breadcrumb -->
             <div class="tool-header">
                 <div class="breadcrumb">
-                    <a href="/" data-i18n="nav_home">Home</a>
+                    <a href="/" data-i18n="footer.home">Home</a>
                     <span>›</span>
-                    <span data-i18n="nav_text_case">Text Case</span>
+                    <span data-i18n="nav.case">Case Converter</span>
                 </div>
-                <h1>🔤 <span data-i18n="title">Text Case Converter</span></h1>
-                <p data-i18n="description">Convert text between various case formats — UPPER, lower, Title, camelCase, snake_case, PascalCase, kebab-case, and more. Real-time preview with one-click copy.</p>
+                <h1>🔤 <span data-i18n="tool.title">Text Case Converter</span></h1>
+                <p data-i18n="tool.description">Convert text between various case formats — UPPER, lower, Title, camelCase, snake_case, PascalCase, kebab-case, and more. Real-time preview with one-click copy.</p>
             </div>
 
-            <!-- Tool Card -->
             <div class="tool-card-container">
                 <div class="tool-body">
 
-                    <!-- Active case badge -->
                     <div class="active-case-badge hidden" id="activeBadge">
                         <span>🔠</span>
                         <span id="activeCaseName">UPPER CASE</span>
                     </div>
 
-                    <!-- Textarea Input -->
                     <div class="case-input-area">
-                        <textarea id="inputText" data-i18n-placeholder="placeholder_input" placeholder="Enter text here…&#10;e.g. hello world 2024" spellcheck="false"></textarea>
-                        <span class="char-badge" id="inputCharBadge">0 <span data-i18n="chars">chars</span></span>
+                        <textarea id="inputText" data-i18n-placeholder="tool.placeholderInput" placeholder="Enter text here…&#10;e.g. hello world 2024" spellcheck="false"></textarea>
+                        <span class="char-badge" id="inputCharBadge">0</span>
                     </div>
 
-                    <!-- Tool actions -->
                     <div class="tool-actions">
-                        <button class="btn btn-sm btn-ghost" id="clearBtn" data-i18n="clear">✕ Clear</button>
-                        <button class="btn btn-sm btn-ghost" id="pasteBtn" data-i18n="paste">📋 Paste</button>
+                        <button class="btn btn-sm btn-ghost" id="clearBtn" data-i18n="btn.clear">✕ Clear</button>
+                        <button class="btn btn-sm btn-ghost" id="pasteBtn" data-i18n="btn.paste">📋 Paste</button>
                     </div>
 
-                    <!-- Case Buttons Grid -->
                     <div class="case-buttons" id="caseButtons">
                         <button class="case-btn" data-case="upper" data-preview="HELLO WORLD">
-                            <span data-i18n="case_upper">UPPER CASE</span>
+                            <span data-i18n="case.upper">UPPER CASE</span>
                             <span class="case-preview">HELLO</span>
                         </button>
                         <button class="case-btn" data-case="lower" data-preview="hello world">
-                            <span data-i18n="case_lower">lower case</span>
+                            <span data-i18n="case.lower">lower case</span>
                             <span class="case-preview">hello</span>
                         </button>
                         <button class="case-btn" data-case="title" data-preview="Hello World">
-                            <span data-i18n="case_title">Title Case</span>
+                            <span data-i18n="case.title">Title Case</span>
                             <span class="case-preview">Hello</span>
                         </button>
                         <button class="case-btn" data-case="camel" data-preview="helloWorld">
-                            <span data-i18n="case_camel">camelCase</span>
+                            <span data-i18n="case.camel">camelCase</span>
                             <span class="case-preview">helloWorld</span>
                         </button>
                         <button class="case-btn" data-case="snake" data-preview="hello_world">
-                            <span data-i18n="case_snake">snake_case</span>
+                            <span data-i18n="case.snake">snake_case</span>
                             <span class="case-preview">hello_world</span>
                         </button>
                         <button class="case-btn" data-case="pascal" data-preview="HelloWorld">
-                            <span data-i18n="case_pascal">PascalCase</span>
+                            <span data-i18n="case.pascal">PascalCase</span>
                             <span class="case-preview">HelloWorld</span>
                         </button>
                         <button class="case-btn" data-case="kebab" data-preview="hello-world">
-                            <span data-i18n="case_kebab">kebab-case</span>
+                            <span data-i18n="case.kebab">kebab-case</span>
                             <span class="case-preview">hello-world</span>
                         </button>
                         <button class="case-btn" data-case="toggle" data-preview="hELLO wORLD">
-                            <span data-i18n="case_toggle">Toggle Case</span>
+                            <span data-i18n="case.toggle">Toggle Case</span>
                             <span class="case-preview">hELLO</span>
                         </button>
                     </div>
 
-                    <!-- Output Display -->
                     <div class="input-group" style="margin-bottom: 0;">
-                        <label data-i18n="output_label">Output</label>
+                        <label data-i18n="tool.outputLabel">Output</label>
                     </div>
                     <div class="output-wrap">
                         <div class="output-display" id="outputDisplay">
-                            <span class="output-text placeholder" id="outputText"><span data-i18n="placeholder_output">Converted result will appear here</span></span>
-                            <button class="output-copy-btn" id="copyBtn" data-i18n-aria="copy" aria-label="Copy">
+                            <span class="output-text placeholder" id="outputText"></span>
+                            <button class="output-copy-btn" id="copyBtn" data-i18n-aria="btn.copy" aria-label="Copy">
                                 <span>📋</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Character Counts -->
                     <div class="char-counts">
                         <div class="char-count-item">
                             <span class="count-value" id="inputChars">0</span>
-                            <span class="count-label" data-i18n="input_chars">Input Characters</span>
+                            <span class="count-label" data-i18n="stats.inputChars">Input Characters</span>
                         </div>
                         <div class="char-count-item">
                             <span class="count-value" id="inputWords">0</span>
-                            <span class="count-label" data-i18n="input_words">Input Words</span>
+                            <span class="count-label" data-i18n="stats.inputWords">Input Words</span>
                         </div>
                         <div class="char-count-item">
                             <span class="count-value" id="outputChars">0</span>
-                            <span class="count-label" data-i18n="output_chars">Output Characters</span>
+                            <span class="count-label" data-i18n="stats.outputChars">Output Characters</span>
                         </div>
                         <div class="char-count-item">
                             <span class="count-value" id="outputLines">0</span>
-                            <span class="count-label" data-i18n="output_lines">Output Lines</span>
+                            <span class="count-label" data-i18n="stats.outputLines">Output Lines</span>
                         </div>
                     </div>
 
                 </div>
                 <div class="tool-footer">
-                    <span class="hint" data-i18n="hint_click_copy">💡 Click the output or copy button to copy</span>
-                    <span class="hint" data-i18n="hint_realtime">⚡ Real-time conversion — click any format button</span>
+                    <span class="hint" data-i18n="hint.clickCopy">💡 Click the output or copy button to copy</span>
+                    <span class="hint" data-i18n="hint.realtime">⚡ Real-time conversion — click any format button</span>
                 </div>
             </div>
         </section>
@@ -489,247 +438,242 @@
 
 <!-- ===== FOOTER ===== -->
 <footer class="site-footer">
-    <div class="footer-inner">
-        <span data-i18n="footer_text">© 2026 Hyrule Toolbox</span>
-        <span>
-            <a href="/" data-i18n="nav_home">Home</a>
-            <span style="margin:0 6px;opacity:0.3;">·</span>
-            <span data-i18n="nav_text_case">Text Case</span>
-        </span>
-    </div>
+  <div class="footer-inner">
+    <span>&copy; 2026 <a href="https://zhczlx.com">Hyrule Toolbox</a></span>
+    <nav>
+      <a href="/" data-i18n="footer.home">Home</a>
+      <a href="https://zhczlx.com/about" data-i18n="footer.about">About</a>
+      <a href="mailto:hi@zhczlx.com" data-i18n="footer.contact">Contact</a>
+    </nav>
+  </div>
 </footer>
 
-<!-- ===== JAVASCRIPT ===== -->
+<div class="toast" id="toast">✅ Copied to clipboard</div>
+
+<script>
+window.__pageTranslations = {
+  en: {
+    'page.title': 'Text Case Converter — Hyrule Toolbox',
+    'page.description': 'Convert text between UPPER, lower, Title, camelCase, snake_case, PascalCase, kebab-case, and more. One-click.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Password Generator', 'nav.unit': 'Unit Converter', 'nav.counter': 'Text Counter',
+    'nav.case': 'Case Converter', 'nav.uuid': 'UUID Generator', 'nav.color': 'Color Converter', 'nav.json': 'JSON Formatter', 'nav.qr': 'QR Code Generator',
+    'footer.home': 'Home', 'footer.about': 'About', 'footer.contact': 'Contact',
+    'toast.copied': '✅ Copied to clipboard', 'toast.failed': '❌ Copy failed, please copy manually',
+    'toast.nothing': 'Nothing to copy',
+    'toast.pasteFailed': 'Cannot read clipboard, please paste manually',
+    'tool.title': 'Text Case Converter',
+    'tool.description': 'Convert text between various case formats — UPPER, lower, Title, camelCase, snake_case, PascalCase, kebab-case, and more. Real-time preview with one-click copy.',
+    'tool.outputLabel': 'Output',
+    'tool.placeholderInput': 'Enter text here…\ne.g. hello world 2024',
+    'tool.placeholderNoInput': 'Enter text to convert',
+    'tool.placeholderClickFormat': 'Click a format button above',
+    'case.upper': 'UPPER CASE',
+    'case.lower': 'lower case',
+    'case.title': 'Title Case',
+    'case.camel': 'camelCase',
+    'case.snake': 'snake_case',
+    'case.pascal': 'PascalCase',
+    'case.kebab': 'kebab-case',
+    'case.toggle': 'Toggle Case',
+    'stats.inputChars': 'Input Characters',
+    'stats.inputWords': 'Input Words',
+    'stats.outputChars': 'Output Characters',
+    'stats.outputLines': 'Output Lines',
+    'stats.chars': 'chars',
+    'btn.clear': '✕ Clear',
+    'btn.paste': '📋 Paste',
+    'btn.copy': 'Copy',
+    'hint.clickCopy': '💡 Click the output or copy button to copy',
+    'hint.realtime': '⚡ Real-time conversion — click any format button'
+  },
+  zh: {
+    'page.title': '大小写转换 — Hyrule Toolbox',
+    'page.description': '将文本快速转换为各种大小写格式 — 大写、小写、标题、驼峰、蛇形、帕斯卡、连字符等，一键转换。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '密码生成器', 'nav.unit': '单位换算', 'nav.counter': '文本统计',
+    'nav.case': '大小写转换', 'nav.uuid': 'UUID生成', 'nav.color': '颜色转换', 'nav.json': 'JSON格式化', 'nav.qr': '二维码生成',
+    'footer.home': '首页', 'footer.about': '关于', 'footer.contact': '联系',
+    'toast.copied': '✅ 已复制到剪贴板', 'toast.failed': '❌ 复制失败，请手动复制',
+    'toast.nothing': '没有可复制的内容',
+    'toast.pasteFailed': '无法读取剪贴板，请手动粘贴',
+    'tool.title': '大小写转换',
+    'tool.description': '将文本快速转换为各种大小写格式 — 大写、小写、标题、驼峰、蛇形、帕斯卡、连字符等，实时预览并一键复制。',
+    'tool.outputLabel': '输出结果',
+    'tool.placeholderInput': '在此输入文本…\n例如: hello world 2024',
+    'tool.placeholderNoInput': '输入文本以开始转换',
+    'tool.placeholderClickFormat': '请点击上方的一个格式按钮',
+    'case.upper': '全部大写',
+    'case.lower': '全部小写',
+    'case.title': '首字母大写',
+    'case.camel': '驼峰式',
+    'case.snake': '蛇形式',
+    'case.pascal': '帕斯卡式',
+    'case.kebab': '连字符式',
+    'case.toggle': '反转大小写',
+    'stats.inputChars': '输入字符',
+    'stats.inputWords': '输入单词',
+    'stats.outputChars': '输出字符',
+    'stats.outputLines': '输出行数',
+    'stats.chars': '字符',
+    'btn.clear': '✕ 清空',
+    'btn.paste': '📋 粘贴',
+    'btn.copy': '复制',
+    'hint.clickCopy': '💡 点击输出结果或复制按钮一键复制',
+    'hint.realtime': '⚡ 实时转换，点击任意格式按钮即可'
+  },
+  ja: {
+    'page.title': 'テキストケース変換 — Hyrule Toolbox',
+    'page.description': 'テキストをさまざまなケース形式（大文字、小文字、タイトルケース、キャメルケース、スネークケースなど）に変換。ワンクリック。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'パスワード生成', 'nav.unit': '単位変換', 'nav.counter': 'テキスト統計',
+    'nav.case': '大文字小文字変換', 'nav.uuid': 'UUID生成', 'nav.color': 'カラー変換', 'nav.json': 'JSONフォーマッター', 'nav.qr': 'QRコード生成',
+    'footer.home': 'ホーム', 'footer.about': '概要', 'footer.contact': 'お問い合わせ',
+    'toast.copied': '✅ クリップボードにコピーしました', 'toast.failed': '❌ コピーに失敗しました。手動でコピーしてください',
+    'toast.nothing': 'コピーする内容がありません',
+    'toast.pasteFailed': 'クリップボードが読めません。手動で貼り付けてください',
+    'tool.title': 'テキストケース変換',
+    'tool.description': 'テキストをさまざまなケース形式（大文字、小文字、タイトルケース、キャメルケース、スネークケースなど）に変換。リアルタイムプレビューでワンクリックコピー。',
+    'tool.outputLabel': '出力結果',
+    'tool.placeholderInput': 'ここにテキストを入力…\n例: hello world 2024',
+    'tool.placeholderNoInput': 'テキストを入力してください',
+    'tool.placeholderClickFormat': '上のフォーマットボタンをクリック',
+    'case.upper': '大文字',
+    'case.lower': '小文字',
+    'case.title': 'タイトルケース',
+    'case.camel': 'キャメルケース',
+    'case.snake': 'スネークケース',
+    'case.pascal': 'パスカルケース',
+    'case.kebab': 'ケバブケース',
+    'case.toggle': '反転',
+    'stats.inputChars': '入力文字数',
+    'stats.inputWords': '入力単語数',
+    'stats.outputChars': '出力文字数',
+    'stats.outputLines': '出力行数',
+    'stats.chars': '文字',
+    'btn.clear': '✕ クリア',
+    'btn.paste': '📋 貼り付け',
+    'btn.copy': 'コピー',
+    'hint.clickCopy': '💡 出力またはコピーボタンをクリックしてコピー',
+    'hint.realtime': '⚡ リアルタイム変換 — 任意のフォーマットボタンをクリック'
+  },
+  ko: {
+    'page.title': '텍스트 대소문자 변환 — Hyrule Toolbox',
+    'page.description': '텍스트를 다양한 대소문자 형식(대문자, 소문자, 제목, 카멜, 스네이크, 파스칼, 케밥 등)으로 변환합니다. 원클릭.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '비밀번호 생성기', 'nav.unit': '단위 변환', 'nav.counter': '텍스트 통계',
+    'nav.case': '대소문자 변환', 'nav.uuid': 'UUID 생성', 'nav.color': '색상 변환', 'nav.json': 'JSON 포맷터', 'nav.qr': 'QR코드 생성',
+    'footer.home': '홈', 'footer.about': '소개', 'footer.contact': '문의',
+    'toast.copied': '✅ 클립보드에 복사되었습니다', 'toast.failed': '❌ 복사 실패, 수동으로 복사해주세요',
+    'toast.nothing': '복사할 내용이 없습니다',
+    'toast.pasteFailed': '클립보드를 읽을 수 없습니다. 직접 붙여넣기 해주세요',
+    'tool.title': '텍스트 대소문자 변환',
+    'tool.description': '텍스트를 다양한 대소문자 형식(대문자, 소문자, 제목, 카멜, 스네이크, 파스칼, 케밥 등)으로 변환합니다. 실시간 미리보기 및 원클릭 복사.',
+    'tool.outputLabel': '출력 결과',
+    'tool.placeholderInput': '여기에 텍스트 입력…\n예: hello world 2024',
+    'tool.placeholderNoInput': '변환할 텍스트를 입력하세요',
+    'tool.placeholderClickFormat': '위의 형식 버튼을 클릭하세요',
+    'case.upper': '대문자',
+    'case.lower': '소문자',
+    'case.title': '제목 형식',
+    'case.camel': '카멜케이스',
+    'case.snake': '스네이크케이스',
+    'case.pascal': '파스칼케이스',
+    'case.kebab': '케밥케이스',
+    'case.toggle': '대소문자 반전',
+    'stats.inputChars': '입력 문자',
+    'stats.inputWords': '입력 단어',
+    'stats.outputChars': '출력 문자',
+    'stats.outputLines': '출력 줄',
+    'stats.chars': '문자',
+    'btn.clear': '✕ 지우기',
+    'btn.paste': '📋 붙여넣기',
+    'btn.copy': '복사',
+    'hint.clickCopy': '💡 출력 또는 복사 버튼을 클릭하여 복사',
+    'hint.realtime': '⚡ 실시간 변환 — 형식 버튼을 클릭하세요'
+  },
+  fr: {
+    'page.title': 'Convertisseur de Casse — Hyrule Toolbox',
+    'page.description': 'Convertissez du texte entre différents formats de casse — MAJUSCULES, minuscules, Titre, camelCase, snake_case, PascalCase, kebab-case, etc.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Générateur de mots de passe', 'nav.unit': "Convertisseur d'unités", 'nav.counter': 'Compteur de texte',
+    'nav.case': 'Convertisseur de casse', 'nav.uuid': 'Générateur UUID', 'nav.color': 'Convertisseur de couleurs', 'nav.json': 'Formateur JSON', 'nav.qr': 'Générateur de QR Code',
+    'footer.home': 'Accueil', 'footer.about': 'À propos', 'footer.contact': 'Contact',
+    'toast.copied': '✅ Copié dans le presse-papiers', 'toast.failed': '❌ Échec de la copie, veuillez copier manuellement',
+    'toast.nothing': 'Rien à copier',
+    'toast.pasteFailed': 'Impossible de lire le presse-papiers, collez manuellement',
+    'tool.title': 'Convertisseur de Casse',
+    'tool.description': 'Convertissez du texte entre différents formats de casse — MAJUSCULES, minuscules, Titre, camelCase, snake_case, PascalCase, kebab-case, etc. Aperçu en temps réel avec copie en un clic.',
+    'tool.outputLabel': 'Résultat',
+    'tool.placeholderInput': 'Saisissez du texte ici…\nex. : hello world 2024',
+    'tool.placeholderNoInput': 'Saisissez du texte à convertir',
+    'tool.placeholderClickFormat': 'Cliquez sur un bouton de format ci-dessus',
+    'case.upper': 'MAJUSCULES',
+    'case.lower': 'minuscules',
+    'case.title': 'Titre',
+    'case.camel': 'camelCase',
+    'case.snake': 'snake_case',
+    'case.pascal': 'PascalCase',
+    'case.kebab': 'kebab-case',
+    'case.toggle': 'Inverser',
+    'stats.inputChars': 'Caractères saisis',
+    'stats.inputWords': 'Mots saisis',
+    'stats.outputChars': 'Caractères sortie',
+    'stats.outputLines': 'Lignes sortie',
+    'stats.chars': 'car.',
+    'btn.clear': '✕ Effacer',
+    'btn.paste': '📋 Coller',
+    'btn.copy': 'Copier',
+    'hint.clickCopy': '💡 Cliquez sur le résultat ou le bouton copier',
+    'hint.realtime': '⚡ Conversion en temps réel — cliquez sur un format'
+  },
+  de: {
+    'page.title': 'Text Groß-/Kleinschreibung — Hyrule Toolbox',
+    'page.description': 'Konvertieren Sie Text zwischen verschiedenen Schreibweisen — GROSSBUCHSTABEN, klein, Titel, camelCase, snake_case, PascalCase, kebab-case u.v.m.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Passwortgenerator', 'nav.unit': 'Einheitenumrechner', 'nav.counter': 'Textzähler',
+    'nav.case': 'Fallumwandler', 'nav.uuid': 'UUID-Generator', 'nav.color': 'Farbkonverter', 'nav.json': 'JSON-Formatierer', 'nav.qr': 'QR-Code-Generator',
+    'footer.home': 'Startseite', 'footer.about': 'Über uns', 'footer.contact': 'Kontakt',
+    'toast.copied': '✅ In die Zwischenablage kopiert', 'toast.failed': '❌ Kopieren fehlgeschlagen, bitte manuell kopieren',
+    'toast.nothing': 'Nichts zu kopieren',
+    'toast.pasteFailed': 'Zwischenablage kann nicht gelesen werden, bitte manuell einfügen',
+    'tool.title': 'Text Groß-/Kleinschreibung',
+    'tool.description': 'Konvertieren Sie Text zwischen verschiedenen Schreibweisen — GROSSBUCHSTABEN, klein, Titel, camelCase, snake_case, PascalCase, kebab-case u.v.m. Echtzeit-Vorschau mit Ein-Klick-Kopie.',
+    'tool.outputLabel': 'Ausgabe',
+    'tool.placeholderInput': 'Text hier eingeben…\nz.B. hello world 2024',
+    'tool.placeholderNoInput': 'Text zum Konvertieren eingeben',
+    'tool.placeholderClickFormat': 'Klicken Sie oben auf eine Format-Schaltfläche',
+    'case.upper': 'GROSSBUCHSTABEN',
+    'case.lower': 'kleinbuchstaben',
+    'case.title': 'Titel',
+    'case.camel': 'camelCase',
+    'case.snake': 'snake_case',
+    'case.pascal': 'PascalCase',
+    'case.kebab': 'kebab-case',
+    'case.toggle': 'Umkehren',
+    'stats.inputChars': 'Eingabezeichen',
+    'stats.inputWords': 'Eingabewörter',
+    'stats.outputChars': 'Ausgabezeichen',
+    'stats.outputLines': 'Ausgabezeilen',
+    'stats.chars': 'Zeichen',
+    'btn.clear': '✕ Löschen',
+    'btn.paste': '📋 Einfügen',
+    'btn.copy': 'Kopieren',
+    'hint.clickCopy': '💡 Klicken Sie auf das Ergebnis oder den Kopier-Button',
+    'hint.realtime': '⚡ Echtzeit-Konvertierung — klicken Sie auf ein Format'
+  }
+};
+</script>
+<script src="js/theme.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
 <script>
 (function () {
     'use strict';
 
-    /* ============================================================
-       I18N DICTIONARY
-       ============================================================ */
-
-    const i18n = {
-        en: {
-            title: 'Text Case Converter — Hyrule Toolbox',
-            site_name: 'Hyrule Toolbox',
-            nav_home: 'Home',
-            nav_text_case: 'Text Case',
-            description: 'Convert text between various case formats — UPPER, lower, Title, camelCase, snake_case, PascalCase, kebab-case, and more. Real-time preview with one-click copy.',
-            case_upper: 'UPPER CASE',
-            case_lower: 'lower case',
-            case_title: 'Title Case',
-            case_camel: 'camelCase',
-            case_snake: 'snake_case',
-            case_pascal: 'PascalCase',
-            case_kebab: 'kebab-case',
-            case_toggle: 'Toggle Case',
-            input_chars: 'Input Characters',
-            input_words: 'Input Words',
-            output_chars: 'Output Characters',
-            output_lines: 'Output Lines',
-            chars: 'chars',
-            clear: '✕ Clear',
-            paste: '📋 Paste',
-            copy: 'Copy',
-            output_label: 'Output',
-            placeholder_input: 'Enter text here…\ne.g. hello world 2024',
-            placeholder_output: 'Converted result will appear here',
-            placeholder_no_input: 'Enter text to convert',
-            placeholder_click_format: 'Click a format button above',
-            hint_click_copy: '💡 Click the output or copy button to copy',
-            hint_realtime: '⚡ Real-time conversion — click any format button',
-            theme_aria: 'Toggle theme',
-            toast_copied: 'Copied to clipboard',
-            toast_nothing_copy: 'Nothing to copy',
-            toast_copy_failed: 'Copy failed',
-            toast_paste_failed: 'Cannot read clipboard, please paste manually',
-            footer_text: '© 2026 Hyrule Toolbox',
-        },
-        zh: {
-            title: '大小写转换 — 海拉鲁工具箱',
-            site_name: '海拉鲁工具箱',
-            nav_home: '首页',
-            nav_text_case: '大小写转换',
-            description: '将文本快速转换为各种大小写格式 — 大写、小写、标题、驼峰、蛇形、帕斯卡、连字符等，实时预览并一键复制。',
-            case_upper: '全部大写',
-            case_lower: '全部小写',
-            case_title: '首字母大写',
-            case_camel: '驼峰式',
-            case_snake: '蛇形式',
-            case_pascal: '帕斯卡式',
-            case_kebab: '连字符式',
-            case_toggle: '反转大小写',
-            input_chars: '输入字符',
-            input_words: '输入单词',
-            output_chars: '输出字符',
-            output_lines: '输出行数',
-            chars: '字符',
-            clear: '✕ 清空',
-            paste: '📋 粘贴',
-            copy: '复制',
-            output_label: '输出结果',
-            placeholder_input: '在此输入文本…\n例如: hello world 2024',
-            placeholder_output: '转换后的结果将显示在这里',
-            placeholder_no_input: '输入文本以开始转换',
-            placeholder_click_format: '请点击上方的一个格式按钮',
-            hint_click_copy: '💡 点击输出结果或复制按钮一键复制',
-            hint_realtime: '⚡ 实时转换，点击任意格式按钮即可',
-            theme_aria: '切换主题',
-            toast_copied: '已复制到剪贴板',
-            toast_nothing_copy: '没有可复制的内容',
-            toast_copy_failed: '复制失败',
-            toast_paste_failed: '无法读取剪贴板，请手动粘贴',
-            footer_text: '© 2026 海拉鲁工具箱',
-        },
-        ja: {
-            title: 'テキストケース変換 — ハイラルツールボックス',
-            site_name: 'ハイラルツールボックス',
-            nav_home: 'ホーム',
-            nav_text_case: 'テキストケース',
-            description: 'テキストをさまざまなケース形式（大文字、小文字、タイトルケース、キャメルケース、スネークケースなど）に変換。リアルタイムプレビューでワンクリックコピー。',
-            case_upper: '大文字',
-            case_lower: '小文字',
-            case_title: 'タイトルケース',
-            case_camel: 'キャメルケース',
-            case_snake: 'スネークケース',
-            case_pascal: 'パスカルケース',
-            case_kebab: 'ケバブケース',
-            case_toggle: '反転',
-            input_chars: '入力文字数',
-            input_words: '入力単語数',
-            output_chars: '出力文字数',
-            output_lines: '出力行数',
-            chars: '文字',
-            clear: '✕ クリア',
-            paste: '📋 貼り付け',
-            copy: 'コピー',
-            output_label: '出力結果',
-            placeholder_input: 'ここにテキストを入力…\n例: hello world 2024',
-            placeholder_output: '変換結果がここに表示されます',
-            placeholder_no_input: 'テキストを入力してください',
-            placeholder_click_format: '上のフォーマットボタンをクリック',
-            hint_click_copy: '💡 出力またはコピーボタンをクリックしてコピー',
-            hint_realtime: '⚡ リアルタイム変換 — 任意のフォーマットボタンをクリック',
-            theme_aria: 'テーマ切替',
-            toast_copied: 'クリップボードにコピーしました',
-            toast_nothing_copy: 'コピーする内容がありません',
-            toast_copy_failed: 'コピーに失敗しました',
-            toast_paste_failed: 'クリップボードが読めません。手動で貼り付けてください',
-            footer_text: '© 2026 ハイラルツールボックス',
-        },
-        ko: {
-            title: '텍스트 대소문자 변환 — 하이랄 툴박스',
-            site_name: '하이랄 툴박스',
-            nav_home: '홈',
-            nav_text_case: '대소문자 변환',
-            description: '텍스트를 다양한 대소문자 형식(대문자, 소문자, 제목, 카멜, 스네이크, 파스칼, 케밥 등)으로 변환합니다. 실시간 미리보기 및 원클릭 복사.',
-            case_upper: '대문자',
-            case_lower: '소문자',
-            case_title: '제목 형식',
-            case_camel: '카멜케이스',
-            case_snake: '스네이크케이스',
-            case_pascal: '파스칼케이스',
-            case_kebab: '케밥케이스',
-            case_toggle: '대소문자 반전',
-            input_chars: '입력 문자',
-            input_words: '입력 단어',
-            output_chars: '출력 문자',
-            output_lines: '출력 줄',
-            chars: '문자',
-            clear: '✕ 지우기',
-            paste: '📋 붙여넣기',
-            copy: '복사',
-            output_label: '출력 결과',
-            placeholder_input: '여기에 텍스트 입력…\n예: hello world 2024',
-            placeholder_output: '변환 결과가 여기에 표시됩니다',
-            placeholder_no_input: '변환할 텍스트를 입력하세요',
-            placeholder_click_format: '위의 형식 버튼을 클릭하세요',
-            hint_click_copy: '💡 출력 또는 복사 버튼을 클릭하여 복사',
-            hint_realtime: '⚡ 실시간 변환 — 형식 버튼을 클릭하세요',
-            theme_aria: '테마 전환',
-            toast_copied: '클립보드에 복사되었습니다',
-            toast_nothing_copy: '복사할 내용이 없습니다',
-            toast_copy_failed: '복사 실패',
-            toast_paste_failed: '클립보드를 읽을 수 없습니다. 직접 붙여넣기 해주세요',
-            footer_text: '© 2026 하이랄 툴박스',
-        },
-        fr: {
-            title: 'Convertisseur de Casse — Hyrule Toolbox',
-            site_name: 'Hyrule Toolbox',
-            nav_home: 'Accueil',
-            nav_text_case: 'Convertisseur',
-            description: 'Convertissez du texte entre différents formats de casse — MAJUSCULES, minuscules, Titre, camelCase, snake_case, PascalCase, kebab-case, etc. Aperçu en temps réel avec copie en un clic.',
-            case_upper: 'MAJUSCULES',
-            case_lower: 'minuscules',
-            case_title: 'Titre',
-            case_camel: 'camelCase',
-            case_snake: 'snake_case',
-            case_pascal: 'PascalCase',
-            case_kebab: 'kebab-case',
-            case_toggle: 'Inverser',
-            input_chars: 'Caractères saisis',
-            input_words: 'Mots saisis',
-            output_chars: 'Caractères sortie',
-            output_lines: 'Lignes sortie',
-            chars: 'car.',
-            clear: '✕ Effacer',
-            paste: '📋 Coller',
-            copy: 'Copier',
-            output_label: 'Résultat',
-            placeholder_input: 'Saisissez du texte ici…\nex. : hello world 2024',
-            placeholder_output: 'Le résultat converti apparaîtra ici',
-            placeholder_no_input: 'Saisissez du texte à convertir',
-            placeholder_click_format: 'Cliquez sur un bouton de format ci-dessus',
-            hint_click_copy: '💡 Cliquez sur le résultat ou le bouton copier',
-            hint_realtime: '⚡ Conversion en temps réel — cliquez sur un format',
-            theme_aria: 'Changer le thème',
-            toast_copied: 'Copié dans le presse-papiers',
-            toast_nothing_copy: 'Rien à copier',
-            toast_copy_failed: 'Échec de la copie',
-            toast_paste_failed: 'Impossible de lire le presse-papiers, collez manuellement',
-            footer_text: '© 2026 Hyrule Toolbox',
-        },
-        de: {
-            title: 'Text Groß-/Kleinschreibung — Hyrule Toolbox',
-            site_name: 'Hyrule Toolbox',
-            nav_home: 'Start',
-            nav_text_case: 'Textumwandlung',
-            description: 'Konvertieren Sie Text zwischen verschiedenen Schreibweisen — GROSSBUCHSTABEN, klein, Titel, camelCase, snake_case, PascalCase, kebab-case u.v.m. Echtzeit-Vorschau mit Ein-Klick-Kopie.',
-            case_upper: 'GROSSBUCHSTABEN',
-            case_lower: 'kleinbuchstaben',
-            case_title: 'Titel',
-            case_camel: 'camelCase',
-            case_snake: 'snake_case',
-            case_pascal: 'PascalCase',
-            case_kebab: 'kebab-case',
-            case_toggle: 'Umkehren',
-            input_chars: 'Eingabezeichen',
-            input_words: 'Eingabewörter',
-            output_chars: 'Ausgabezeichen',
-            output_lines: 'Ausgabezeilen',
-            chars: 'Zeichen',
-            clear: '✕ Löschen',
-            paste: '📋 Einfügen',
-            copy: 'Kopieren',
-            output_label: 'Ausgabe',
-            placeholder_input: 'Text hier eingeben…\nz.B. hello world 2024',
-            placeholder_output: 'Das konvertierte Ergebnis erscheint hier',
-            placeholder_no_input: 'Text zum Konvertieren eingeben',
-            placeholder_click_format: 'Klicken Sie oben auf eine Format-Schaltfläche',
-            hint_click_copy: '💡 Klicken Sie auf das Ergebnis oder den Kopier-Button',
-            hint_realtime: '⚡ Echtzeit-Konvertierung — klicken Sie auf ein Format',
-            theme_aria: 'Theme wechseln',
-            toast_copied: 'In die Zwischenablage kopiert',
-            toast_nothing_copy: 'Nichts zu kopieren',
-            toast_copy_failed: 'Kopieren fehlgeschlagen',
-            toast_paste_failed: 'Zwischenablage kann nicht gelesen werden, bitte manuell einfügen',
-            footer_text: '© 2026 Hyrule Toolbox',
-        },
-    };
-
-    /* ============================================================
-       DOM REFS
-       ============================================================ */
+    function t(key) {
+        return window.HyruleI18n ? window.HyruleI18n.t(key) : key;
+    }
 
     const inputText = document.getElementById('inputText');
     const outputText = document.getElementById('outputText');
@@ -744,16 +688,8 @@
     const outputLines = document.getElementById('outputLines');
     const clearBtn = document.getElementById('clearBtn');
     const pasteBtn = document.getElementById('pasteBtn');
-    const toastEl = document.getElementById('toast');
-    const langSelect = document.getElementById('langSelect');
 
-    let toastTimer = null;
     let currentCase = null;
-    let currentLang = 'en';
-
-    /* ============================================================
-       CASE CONVERSION FUNCTIONS
-       ============================================================ */
 
     function toUpper(str) {
         return str.toUpperCase();
@@ -818,98 +754,26 @@
     }
 
     const converterMap = {
-        upper: { fn: toUpper, i18nKey: 'case_upper' },
-        lower: { fn: toLower, i18nKey: 'case_lower' },
-        title: { fn: toTitle, i18nKey: 'case_title' },
-        camel: { fn: toCamelCase, i18nKey: 'case_camel' },
-        snake: { fn: toSnakeCase, i18nKey: 'case_snake' },
-        pascal: { fn: toPascalCase, i18nKey: 'case_pascal' },
-        kebab: { fn: toKebabCase, i18nKey: 'case_kebab' },
-        toggle: { fn: toToggleCase, i18nKey: 'case_toggle' },
+        upper: { fn: toUpper, i18nKey: 'case.upper' },
+        lower: { fn: toLower, i18nKey: 'case.lower' },
+        title: { fn: toTitle, i18nKey: 'case.title' },
+        camel: { fn: toCamelCase, i18nKey: 'case.camel' },
+        snake: { fn: toSnakeCase, i18nKey: 'case.snake' },
+        pascal: { fn: toPascalCase, i18nKey: 'case.pascal' },
+        kebab: { fn: toKebabCase, i18nKey: 'case.kebab' },
+        toggle: { fn: toToggleCase, i18nKey: 'case.toggle' },
     };
-
-    /* ============================================================
-       I18N ENGINE
-       ============================================================ */
-
-    function getTranslation(lang, key) {
-        const dict = i18n[lang] || i18n.en;
-        return dict[key] !== undefined ? dict[key] : (i18n.en[key] || key);
-    }
-
-    function applyLanguage(lang) {
-        currentLang = lang;
-
-        // Update document lang attribute
-        document.documentElement.lang = lang;
-
-        // Update all data-i18n elements (text content)
-        document.querySelectorAll('[data-i18n]').forEach(function (el) {
-            const key = el.getAttribute('data-i18n');
-            el.textContent = getTranslation(lang, key);
-        });
-
-        // Update all data-i18n-placeholder elements
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
-            const key = el.getAttribute('data-i18n-placeholder');
-            el.placeholder = getTranslation(lang, key);
-        });
-
-        // Update all data-i18n-aria elements
-        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
-            const key = el.getAttribute('data-i18n-aria');
-            const val = getTranslation(lang, key);
-            el.setAttribute('aria-label', val);
-            if (el.id === 'themeToggle') {
-                el.title = val;
-            }
-        });
-
-        // Update document title (separate element)
-        const titleEl = document.querySelector('title');
-        if (titleEl) {
-            const key = titleEl.getAttribute('data-i18n');
-            if (key) {
-                titleEl.textContent = getTranslation(lang, key);
-            }
-        }
-
-        // Update active case badge name if there's an active case
-        if (currentCase && converterMap[currentCase]) {
-            activeCaseName.textContent = getTranslation(lang, converterMap[currentCase].i18nKey);
-        }
-
-        // Update char badge text (preserve count number)
-        updateCharBadgeLabel(lang);
-
-        // Re-run conversion to refresh any dynamic i18n content
-        convertAndDisplay();
-    }
-
-    function updateCharBadgeLabel(lang) {
-        const count = inputChars.textContent || '0';
-        const label = getTranslation(lang, 'chars');
-        inputCharBadge.textContent = count + ' ' + label;
-    }
-
-    /* ============================================================
-       CONVERT & UPDATE
-       ============================================================ */
 
     function updateCounts(input, output) {
         const inStr = input || '';
         const outStr = output || '';
-
-        // Input char badge
         const inLen = inStr.length;
-        const label = getTranslation(currentLang, 'chars');
-        inputCharBadge.textContent = inLen + ' ' + label;
+
+        inputCharBadge.textContent = inLen + ' ' + t('stats.chars');
         inputCharBadge.classList.toggle('has-text', inLen > 0);
 
-        // Detailed counts
         inputChars.textContent = inLen;
         inputWords.textContent = inStr.trim() ? inStr.trim().split(/\s+/).length : 0;
-
         outputChars.textContent = outStr.length;
         outputLines.textContent = outStr ? outStr.split('\n').length : 0;
     }
@@ -918,9 +782,8 @@
         const input = inputText.value;
 
         if (!input) {
-            outputText.textContent = '';
+            outputText.textContent = t('tool.placeholderNoInput');
             outputText.classList.add('placeholder');
-            outputText.textContent = getTranslation(currentLang, 'placeholder_no_input');
             activeBadge.classList.add('hidden');
             copyBtn.querySelector('span').textContent = '📋';
             copyBtn.classList.remove('copied');
@@ -929,9 +792,8 @@
         }
 
         if (!currentCase) {
-            outputText.textContent = '';
+            outputText.textContent = t('tool.placeholderClickFormat');
             outputText.classList.add('placeholder');
-            outputText.textContent = getTranslation(currentLang, 'placeholder_click_format');
             activeBadge.classList.add('hidden');
             updateCounts(input, '');
             return;
@@ -944,7 +806,7 @@
 
         outputText.textContent = result;
         outputText.classList.remove('placeholder');
-        activeCaseName.textContent = getTranslation(currentLang, converter.i18nKey);
+        activeCaseName.textContent = t(converter.i18nKey);
         activeBadge.classList.remove('hidden');
         copyBtn.querySelector('span').textContent = '📋';
         copyBtn.classList.remove('copied');
@@ -952,24 +814,20 @@
         updateCounts(input, result);
     }
 
-    /* ============================================================
-       EVENT HANDLERS
-       ============================================================ */
+    window.__onLanguageChange = function () {
+        convertAndDisplay();
+    };
 
-    // Input text changes
     inputText.addEventListener('input', convertAndDisplay);
 
-    // Case button clicks
     caseButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
             const caseType = btn.dataset.case;
 
-            // Toggle off if already active
             if (currentCase === caseType) {
                 currentCase = null;
                 btn.classList.remove('active');
             } else {
-                // Deactivate all
                 caseButtons.forEach(function (b) { b.classList.remove('active'); });
                 currentCase = caseType;
                 btn.classList.add('active');
@@ -979,11 +837,10 @@
         });
     });
 
-    // Copy output
     copyBtn.addEventListener('click', function () {
         const text = outputText.textContent;
         if (!text || outputText.classList.contains('placeholder')) {
-            showToast(getTranslation(currentLang, 'toast_nothing_copy'));
+            showToast(t('toast.nothing'));
             return;
         }
 
@@ -991,7 +848,7 @@
             navigator.clipboard.writeText(text).then(function () {
                 copyBtn.querySelector('span').textContent = '✓';
                 copyBtn.classList.add('copied');
-                showToast(getTranslation(currentLang, 'toast_copied'));
+                showToast(t('toast.copied'));
                 setTimeout(function () {
                     copyBtn.querySelector('span').textContent = '📋';
                     copyBtn.classList.remove('copied');
@@ -1004,14 +861,12 @@
         }
     });
 
-    // Click on output text to copy
     outputText.addEventListener('click', function () {
         if (!outputText.classList.contains('placeholder')) {
             copyBtn.click();
         }
     });
 
-    // Clear button
     clearBtn.addEventListener('click', function () {
         inputText.value = '';
         currentCase = null;
@@ -1020,41 +875,27 @@
         inputText.focus();
     });
 
-    // Paste button
     pasteBtn.addEventListener('click', function () {
         if (navigator.clipboard && navigator.clipboard.readText) {
             navigator.clipboard.readText().then(function (text) {
                 inputText.value = text;
                 convertAndDisplay();
             }).catch(function () {
-                showToast(getTranslation(currentLang, 'toast_paste_failed'));
+                showToast(t('toast.pasteFailed'));
             });
         } else {
             inputText.focus();
             document.execCommand('paste');
-            // Small delay for paste to complete
             setTimeout(convertAndDisplay, 50);
         }
     });
 
-    // Keyboard shortcut: Ctrl+Enter to copy
     inputText.addEventListener('keydown', function (e) {
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
             e.preventDefault();
             copyBtn.click();
         }
     });
-
-    // Language switcher
-    langSelect.addEventListener('change', function () {
-        const lang = this.value;
-        applyLanguage(lang);
-        localStorage.setItem('preferred_lang', lang);
-    });
-
-    /* ============================================================
-       FALLBACK COPY
-       ============================================================ */
 
     function fallbackCopy(text) {
         const ta = document.createElement('textarea');
@@ -1070,85 +911,21 @@
             if (success) {
                 copyBtn.querySelector('span').textContent = '✓';
                 copyBtn.classList.add('copied');
-                showToast(getTranslation(currentLang, 'toast_copied'));
+                showToast(t('toast.copied'));
                 setTimeout(function () {
                     copyBtn.querySelector('span').textContent = '📋';
                     copyBtn.classList.remove('copied');
                 }, 1500);
             } else {
-                showToast(getTranslation(currentLang, 'toast_copy_failed'));
+                showToast(t('toast.failed'));
             }
         } catch (e) {
-            showToast(getTranslation(currentLang, 'toast_copy_failed'));
+            showToast(t('toast.failed'));
         }
         document.body.removeChild(ta);
     }
 
-    /* ============================================================
-       TOAST
-       ============================================================ */
-
-    function showToast(message) {
-        toastEl.textContent = message;
-        toastEl.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(function () {
-            toastEl.classList.remove('show');
-        }, 2000);
-    }
-
-    /* ============================================================
-       THEME TOGGLE (dark mode)
-       ============================================================ */
-
-    const themeToggle = document.getElementById('themeToggle');
-
-    function getPreferredTheme() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-
-    function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-        localStorage.setItem('theme', theme);
-    }
-
-    // On load: check stored or system preference
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-        applyTheme(storedTheme);
-    } else {
-        applyTheme(getPreferredTheme());
-    }
-
-    themeToggle.addEventListener('click', function () {
-        const current = localStorage.getItem('theme') || getPreferredTheme();
-        applyTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    // Listen for system theme changes (if no stored preference)
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-        if (!localStorage.getItem('theme')) {
-            applyTheme(e.matches ? 'dark' : 'light');
-        }
-    });
-
-    /* ============================================================
-       I18N INIT
-       ============================================================ */
-
-    // Restore saved language preference, default to 'en'
-    const savedLang = localStorage.getItem('preferred_lang') || 'en';
-    langSelect.value = savedLang;
-    applyLanguage(savedLang);
-
-    /* ============================================================
-       INIT
-       ============================================================ */
-
-    // Show initial placeholder
     convertAndDisplay();
-
 })();
 </script>
 

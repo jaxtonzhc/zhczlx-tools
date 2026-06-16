@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 <meta property="og:title" content="UUID Generator — Free Online UUID v4/v1/v7 Generator">
 <meta property="og:description" content="Generate UUIDs in v4, v1, and v7 formats. Batch generation, bulk copy, case toggle. Client-side using crypto.randomUUID().">
 <meta name="twitter:title" content="UUID Generator — Free Online UUID v4/v1/v7 Generator">
@@ -15,359 +15,224 @@
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8130430107774403" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-8130430107774403">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UUID Generator — Hyrule Toolbox</title>
-    <link rel="stylesheet" href="css/tools.css">
-    <style>
-        /* ===== UUID GENERATOR SPECIFIC ===== */
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UUID Generator — Hyrule Toolbox</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
+<link rel="stylesheet" href="css/tools.css">
+<style>
+/* ===== UUID GENERATOR SPECIFIC ===== */
 
-        /* Options row */
-        .options-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-        @media (max-width: 560px) {
-            .options-row {
-                grid-template-columns: 1fr;
-            }
-        }
+.options-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+@media (max-width: 560px) {
+  .options-row { grid-template-columns: 1fr; }
+}
+.options-row .input-group { margin-bottom: 0; }
 
-        .options-row .input-group {
-            margin-bottom: 0;
-        }
+.qty-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.qty-slider-row input[type="range"] { flex: 1; }
+.qty-slider-row .qty-value {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 36px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
 
-        /* Quantity slider row */
-        .qty-slider-row {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .qty-slider-row input[type="range"] {
-            flex: 1;
-        }
-        .qty-slider-row .qty-value {
-            font-family: var(--font-mono);
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--accent);
-            min-width: 36px;
-            text-align: center;
-            letter-spacing: -0.5px;
-        }
+.format-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.format-btn {
+  padding: 8px 14px;
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+.format-btn:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+.format-btn.active {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+}
 
-        /* Format toggle group */
-        .format-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        .format-btn {
-            padding: 8px 14px;
-            border: 1px solid var(--border-color-strong);
-            border-radius: var(--radius-md);
-            background: var(--bg-input);
-            color: var(--text-secondary);
-            font-family: var(--font-sans);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            user-select: none;
-        }
-        .format-btn:hover {
-            border-color: var(--accent);
-            color: var(--text-primary);
-        }
-        .format-btn.active {
-            background: var(--accent-light);
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+.generate-wrap {
+  position: relative;
+  margin-bottom: 24px;
+}
 
-        /* Generate button */
-        .generate-wrap {
-            position: relative;
-            margin-bottom: 24px;
-        }
-        .btn-generate {
-            width: 100%;
-            padding: 14px 24px;
-            border: none;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
-            color: white;
-            font-family: var(--font-sans);
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-normal);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            letter-spacing: -0.2px;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-generate:hover {
-            transform: translateY(-1px);
-            box-shadow: 0px 4px 12px rgba(59,130,246,0.35);
-        }
-        .btn-generate:active {
-            transform: scale(0.98);
-        }
-        .btn-generate.generating {
-            pointer-events: none;
-            opacity: 0.85;
-        }
-        .btn-generate .generate-icon {
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-        .btn-generate.generating .generate-icon {
-            animation: spin-gen 0.6s ease-in-out;
-        }
-        @keyframes spin-gen {
-            0% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(90deg) scale(1.15); }
-            50% { transform: rotate(180deg) scale(1); }
-            75% { transform: rotate(270deg) scale(1.15); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+.bulk-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+  min-height: 36px;
+}
+.btn-bulk-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.btn-bulk-copy:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+  border-color: var(--text-tertiary);
+}
+.btn-bulk-copy.copied {
+  background: var(--success);
+  color: white;
+  border-color: var(--success);
+}
 
-        /* Bulk copy row */
-        .bulk-row {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 12px;
-            min-height: 36px;
-        }
-        .btn-bulk-copy {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border: 1px solid var(--border-color-strong);
-            border-radius: var(--radius-md);
-            background: var(--bg-input);
-            color: var(--text-secondary);
-            font-family: var(--font-sans);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-        .btn-bulk-copy:hover {
-            color: var(--text-primary);
-            background: var(--bg-hover);
-            border-color: var(--text-tertiary);
-        }
-        .btn-bulk-copy.copied {
-            background: var(--success);
-            color: white;
-            border-color: var(--success);
-        }
+.uuid-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+.uuid-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-primary);
+  animation: fadeIn 0.3s ease both;
+  transition: border-color var(--transition-fast);
+}
+.uuid-item:hover { border-color: var(--border-color-strong); }
+.uuid-item .uuid-text {
+  flex: 1;
+  word-break: break-all;
+  user-select: all;
+  cursor: text;
+  line-height: 1.5;
+}
+.uuid-item .uuid-copy-btn {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+.uuid-item .uuid-copy-btn:hover {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+.uuid-item .uuid-copy-btn:active { transform: scale(0.9); }
+.uuid-item .uuid-copy-btn.copied {
+  color: var(--success);
+  background: rgba(16,185,129,0.1);
+}
 
-        /* UUID result list */
-        .uuid-list {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin: 0;
-        }
-        .uuid-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 10px 14px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--text-primary);
-            animation: fadeIn 0.3s ease both;
-            transition: border-color var(--transition-fast);
-        }
-        .uuid-item:hover {
-            border-color: var(--border-color-strong);
-        }
-        .uuid-item .uuid-text {
-            flex: 1;
-            word-break: break-all;
-            user-select: all;
-            cursor: text;
-            line-height: 1.5;
-        }
-        .uuid-item .uuid-copy-btn {
-            flex-shrink: 0;
-            width: 30px;
-            height: 30px;
-            border: none;
-            border-radius: var(--radius-sm);
-            background: transparent;
-            color: var(--text-tertiary);
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition-fast);
-        }
-        .uuid-item .uuid-copy-btn:hover {
-            color: var(--accent);
-            background: var(--accent-light);
-        }
-        .uuid-item .uuid-copy-btn:active {
-            transform: scale(0.9);
-        }
-        .uuid-item .uuid-copy-btn.copied {
-            color: var(--success);
-            background: rgba(16,185,129,0.1);
-        }
+.uuid-item .uuid-version-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  background: var(--accent-light);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
 
-        /* Version badge */
-        .uuid-item .uuid-version-badge {
-            flex-shrink: 0;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: var(--radius-full);
-            background: var(--accent-light);
-            color: var(--accent);
-            font-family: var(--font-sans);
-            letter-spacing: 0;
-        }
+.uuid-empty-state {
+  text-align: center;
+  padding: 50px 20px;
+}
+.uuid-empty-state .empty-icon {
+  font-size: 48px;
+  margin-bottom: 14px;
+  opacity: 0.5;
+}
+.uuid-empty-state h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.uuid-empty-state p {
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
 
-        /* Empty state */
-        .uuid-empty-state {
-            text-align: center;
-            padding: 50px 20px;
-        }
-        .uuid-empty-state .empty-icon {
-            font-size: 48px;
-            margin-bottom: 14px;
-            opacity: 0.5;
-        }
-        .uuid-empty-state h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-        }
-        .uuid-empty-state p {
-            font-size: 14px;
-            color: var(--text-tertiary);
-        }
-
-        /* Stats row */
-        .uuid-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
-        }
-        .uuid-stat {
-            text-align: center;
-            padding: 10px 8px;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-        }
-        .uuid-stat .stat-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent);
-            line-height: 1.3;
-            letter-spacing: -0.3px;
-        }
-        .uuid-stat .stat-label {
-            font-size: 11px;
-            color: var(--text-tertiary);
-            font-weight: 500;
-            margin-top: 2px;
-        }
-        @media (max-width: 480px) {
-            .uuid-stats {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .uuid-stat .stat-value {
-                font-size: 15px;
-            }
-        }
-
-        /* Hidden textarea for bulk copy fallback */
-        .bulk-textarea {
-            position: fixed;
-            left: -9999px;
-            top: 0;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-        }
-
-        /* ===== LANGUAGE SWITCHER ===== */
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .lang-switcher {
-            position: relative;
-        }
-        .lang-switcher select {
-            appearance: none;
-            -webkit-appearance: none;
-            padding: 4px 26px 4px 10px;
-            border: 1px solid var(--border-color-strong);
-            border-radius: var(--radius-md);
-            background: var(--bg-input);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            outline: none;
-            transition: border-color var(--transition-fast);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23666' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 8px center;
-            min-width: 72px;
-        }
-        .lang-switcher select:hover {
-            border-color: var(--accent);
-        }
-        .lang-switcher select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-light);
-        }
-
-        /* ===== THEME TOGGLE ===== */
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border: 1px solid var(--border-color-strong);
-            border-radius: var(--radius-md);
-            background: var(--bg-input);
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 16px;
-            transition: all var(--transition-fast);
-            flex-shrink: 0;
-        }
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-    </style>
+.uuid-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+.uuid-stat {
+  text-align: center;
+  padding: 10px 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+.uuid-stat .stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+.uuid-stat .stat-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-top: 2px;
+}
+@media (max-width: 480px) {
+  .uuid-stats { grid-template-columns: repeat(3, 1fr); }
+  .uuid-stat .stat-value { font-size: 15px; }
+}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -384,876 +249,712 @@
 </head>
 <body>
 
-<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
-<!-- ===== HEADER ===== -->
 <header class="site-header">
-    <div class="header-inner">
-        <a href="/" class="header-logo">
-            <span class="logo-icon">🔧</span>
-            <span id="siteName">Hyrule Toolbox</span>
-        </a>
-        <nav class="header-nav">
-            <a href="/" id="navHome">Home</a>
-            <a href="uuid-generator.html" class="active" id="navUUID">UUID Generator</a>
-        </nav>
-        <div class="header-controls">
-            <div class="lang-switcher">
-                <select id="langSelect" aria-label="Language">
-                    <option value="en">EN</option>
-                    <option value="zh">中文</option>
-                    <option value="ja">日本語</option>
-                    <option value="ko">한국어</option>
-                    <option value="fr">Français</option>
-                    <option value="de">Deutsch</option>
-                </select>
-            </div>
-            <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
-        </div>
+  <div class="header-inner">
+    <a href="/" class="header-logo">
+      <span class="logo-icon">T</span>
+      <span data-i18n="header.logo">Hyrule Toolbox</span>
+    </a>
+    <nav class="header-nav">
+      <a href="password-generator.html" data-i18n-title="nav.password" title="Password Generator">🔑</a>
+      <a href="unit-converter.html" data-i18n-title="nav.unit" title="Unit Converter">📐</a>
+      <a href="text-counter.html" data-i18n-title="nav.counter" title="Text Counter">📊</a>
+      <a href="text-case.html" data-i18n-title="nav.case" title="Case Converter">🔤</a>
+      <a href="uuid-generator.html" class="active" data-i18n-title="nav.uuid" title="UUID Generator">🆔</a>
+      <a href="color-converter.html" data-i18n-title="nav.color" title="Color Converter">🎨</a>
+      <a href="json-formatter.html" data-i18n-title="nav.json" title="JSON Formatter">{ }</a>
+      <a href="qr-generator.html" data-i18n-title="nav.qr" title="QR Code Generator">📱</a>
+    </nav>
+    <div class="header-controls">
+      <div class="lang-switcher">
+        <select id="langSelect" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
     </div>
+  </div>
 </header>
 
-<!-- ===== MAIN ===== -->
 <main>
-    <div class="container">
-        <div class="tool-section">
+  <div class="container">
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="breadcrumb">
+          <a href="/" data-i18n="footer.home">Home</a>
+          <span>›</span>
+          <span data-i18n="nav.uuid">UUID Generator</span>
+        </div>
+        <h1>🔖 <span data-i18n="page.heading">UUID Generator</span></h1>
+        <p data-i18n="page.desc">Generate universally unique identifiers (UUIDs), supporting v1, v4, v7 with multiple output formats.</p>
+      </div>
 
-            <!-- Breadcrumb -->
-            <div class="tool-header">
-                <div class="breadcrumb">
-                    <a href="/" id="breadcrumbHome">Home</a>
-                    <span>›</span>
-                    <span id="breadcrumbUUID">UUID Generator</span>
-                </div>
-                <h1 id="pageTitle">🔖 UUID Generator</h1>
-                <p id="pageDescription">Generate universally unique identifiers (UUIDs), supporting v1, v4, v7 with multiple output formats.</p>
+      <div class="tool-card-container">
+        <div class="tool-body">
+
+          <div class="options-row">
+            <div class="input-group">
+              <label><span data-i18n="field.version">UUID Version</span> <span class="label-hint" data-i18n="field.versionHint">(v4 recommended)</span></label>
+              <select id="versionSelect">
+                <option value="v4">v4 — Random</option>
+                <option value="v1">v1 — Time-based</option>
+                <option value="v7">v7 — Time-ordered</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label><span data-i18n="field.quantity">Quantity</span> <span class="label-hint" data-i18n="field.quantityHint">(1–20)</span></label>
+              <div class="qty-slider-row">
+                <input type="range" id="qtySlider" min="1" max="20" value="5">
+                <span class="qty-value" id="qtyDisplay">5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label data-i18n="field.format">Output Format</label>
+            <div class="format-group" id="formatGroup">
+              <button class="format-btn active" data-format="lowercase" data-i18n="format.lowercase">lowercase</button>
+              <button class="format-btn" data-format="uppercase" data-i18n="format.uppercase">UPPERCASE</button>
+              <button class="format-btn" data-format="no-hyphens" data-i18n="format.noHyphens">no hyphens</button>
+              <button class="format-btn" data-format="braces" data-i18n="format.braces">braces</button>
+            </div>
+          </div>
+
+          <div class="generate-wrap">
+            <button class="btn-generate" id="generateBtn">
+              <span class="generate-icon">🎲</span>
+              <span data-i18n="btn.generate">Generate UUIDs</span>
+            </button>
+          </div>
+
+          <div id="resultsArea">
+            <div class="uuid-empty-state" id="emptyState">
+              <div class="empty-icon">🔖</div>
+              <h3 data-i18n="empty.title">Ready to Generate</h3>
+              <p data-i18n="empty.desc">Choose a version and quantity, then click the button above to generate UUIDs</p>
             </div>
 
-            <!-- Tool Card -->
-            <div class="tool-card-container">
-                <div class="tool-body">
-
-                    <!-- Options -->
-                    <div class="options-row">
-                        <!-- UUID Version -->
-                        <div class="input-group">
-                            <label id="labelVersion">UUID Version <span class="label-hint" id="labelVersionHint">(v4 recommended)</span></label>
-                            <select id="versionSelect">
-                                <option value="v4">v4 — Random</option>
-                                <option value="v1">v1 — Time-based</option>
-                                <option value="v7">v7 — Time-ordered</option>
-                            </select>
-                        </div>
-
-                        <!-- Quantity -->
-                        <div class="input-group">
-                            <label id="labelQuantity">Quantity <span class="label-hint" id="labelQuantityHint">(1–20)</span></label>
-                            <div class="qty-slider-row">
-                                <input type="range" id="qtySlider" min="1" max="20" value="5">
-                                <span class="qty-value" id="qtyDisplay">5</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Format -->
-                    <div class="input-group">
-                        <label id="labelFormat">Output Format</label>
-                        <div class="format-group" id="formatGroup">
-                            <button class="format-btn active" data-format="lowercase" data-i18n="formatLowercase">lowercase</button>
-                            <button class="format-btn" data-format="uppercase" data-i18n="formatUppercase">UPPERCASE</button>
-                            <button class="format-btn" data-format="no-hyphens" data-i18n="formatNoHyphens">no hyphens</button>
-                            <button class="format-btn" data-format="braces" data-i18n="formatBraces">braces</button>
-                        </div>
-                    </div>
-
-                    <!-- Generate Button -->
-                    <div class="generate-wrap">
-                        <button class="btn-generate" id="generateBtn">
-                            <span class="generate-icon">🎲</span>
-                            <span id="btnGenerate">Generate UUIDs</span>
-                        </button>
-                    </div>
-
-                    <!-- Results Area -->
-                    <div id="resultsArea">
-                        <!-- Empty state (shown before first generation) -->
-                        <div class="uuid-empty-state" id="emptyState">
-                            <div class="empty-icon">🔖</div>
-                            <h3 id="emptyTitle">Ready to Generate</h3>
-                            <p id="emptyDesc">Choose a version and quantity, then click the button above to generate UUIDs</p>
-                        </div>
-
-                        <!-- Results (hidden initially) -->
-                        <div id="resultsContent" style="display:none;">
-                            <!-- Bulk copy row -->
-                            <div class="bulk-row">
-                                <button class="btn-bulk-copy" id="bulkCopyBtn">📋 <span id="bulkCopyText">Copy All</span></button>
-                            </div>
-
-                            <!-- UUID list -->
-                            <div class="uuid-list" id="uuidList"></div>
-
-                            <!-- Stats -->
-                            <div class="uuid-stats" id="uuidStats">
-                                <div class="uuid-stat">
-                                    <div class="stat-value" id="statCount">0</div>
-                                    <div class="stat-label" id="statCountLabel">Generated</div>
-                                </div>
-                                <div class="uuid-stat">
-                                    <div class="stat-value" id="statVersion">—</div>
-                                    <div class="stat-label" id="statVersionLabel">UUID Version</div>
-                                </div>
-                                <div class="uuid-stat">
-                                    <div class="stat-value" id="statFormat">—</div>
-                                    <div class="stat-label" id="statFormatLabel">Output Format</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+            <div id="resultsContent" style="display:none;">
+              <div class="bulk-row">
+                <button class="btn-bulk-copy" id="bulkCopyBtn">📋 <span data-i18n="btn.bulkCopy">Copy All</span></button>
+              </div>
+              <div class="uuid-list" id="uuidList"></div>
+              <div class="uuid-stats" id="uuidStats">
+                <div class="uuid-stat">
+                  <div class="stat-value" id="statCount">0</div>
+                  <div class="stat-label" data-i18n="stat.count">Generated</div>
                 </div>
-
-                <!-- Footer hints -->
-                <div class="tool-footer">
-                    <span class="hint" id="hintLocal">🔒 All UUIDs generated locally, never sent to a server</span>
-                    <span class="hint" id="hintSelect">Click UUID to select all, click 📋 to copy individual</span>
+                <div class="uuid-stat">
+                  <div class="stat-value" id="statVersion">—</div>
+                  <div class="stat-label" data-i18n="stat.version">UUID Version</div>
                 </div>
+                <div class="uuid-stat">
+                  <div class="stat-value" id="statFormat">—</div>
+                  <div class="stat-label" data-i18n="stat.format">Output Format</div>
+                </div>
+              </div>
             </div>
+          </div>
 
         </div>
+        <div class="tool-footer">
+          <span class="hint" data-i18n="hint.local">🔒 All UUIDs generated locally, never sent to a server</span>
+          <span class="hint" data-i18n="hint.select">Click UUID to select all, click 📋 to copy individual</span>
+        </div>
+      </div>
     </div>
+  </div>
 </main>
 
-<!-- ===== FOOTER ===== -->
 <footer class="site-footer">
-    <div class="footer-inner">
-        <span id="footerText">© 2026 Hyrule Toolbox · Local Tools</span>
-        <span>
-            <a href="/" id="footerHome">Home</a>
-            <span style="margin:0 6px;opacity:0.3;">·</span>
-            <span id="footerUUID">UUID Generator</span>
-        </span>
-    </div>
+  <div class="footer-inner">
+    <span>&copy; 2026 <a href="https://zhczlx.com">Hyrule Toolbox</a></span>
+    <nav>
+      <a href="/" data-i18n="footer.home">Home</a>
+      <a href="https://zhczlx.com/about" data-i18n="footer.about">About</a>
+      <a href="mailto:hi@zhczlx.com" data-i18n="footer.contact">Contact</a>
+    </nav>
+  </div>
 </footer>
 
-<!-- Hidden textarea for bulk copy fallback -->
-<textarea class="bulk-textarea" id="bulkTextarea"></textarea>
+<script>
+window.__pageTranslations = {
+  en: {
+    'page.title': 'UUID Generator — Hyrule Toolbox',
+    'page.description': 'Generate UUIDs in v4, v1, and v7 formats. Batch generation, bulk copy, case toggle. Client-side using crypto.randomUUID().',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Password Generator',
+    'nav.unit': 'Unit Converter',
+    'nav.counter': 'Text Counter',
+    'nav.case': 'Case Converter',
+    'nav.uuid': 'UUID Generator',
+    'nav.color': 'Color Converter',
+    'nav.json': 'JSON Formatter',
+    'nav.qr': 'QR Code Generator',
+    'footer.home': 'Home',
+    'footer.about': 'About',
+    'footer.contact': 'Contact',
+    'toast.copied': '✅ Copied to clipboard',
+    'toast.failed': '❌ Copy failed, please copy manually',
+    'page.heading': 'UUID Generator',
+    'page.desc': 'Generate universally unique identifiers (UUIDs), supporting v1, v4, v7 with multiple output formats.',
+    'field.version': 'UUID Version',
+    'field.versionHint': '(v4 recommended)',
+    'field.quantity': 'Quantity',
+    'field.quantityHint': '(1–20)',
+    'field.format': 'Output Format',
+    'format.lowercase': 'lowercase',
+    'format.uppercase': 'UPPERCASE',
+    'format.noHyphens': 'no hyphens',
+    'format.braces': 'braces',
+    'btn.generate': 'Generate UUIDs',
+    'btn.bulkCopy': 'Copy All',
+    'empty.title': 'Ready to Generate',
+    'empty.desc': 'Choose a version and quantity, then click the button above to generate UUIDs',
+    'stat.count': 'Generated',
+    'stat.version': 'UUID Version',
+    'stat.format': 'Output Format',
+    'hint.local': '🔒 All UUIDs generated locally, never sent to a server',
+    'hint.select': 'Click UUID to select all, click 📋 to copy individual',
+    'version.v4': 'v4 — Random',
+    'version.v1': 'v1 — Time-based',
+    'version.v7': 'v7 — Time-ordered',
+    'versionName.v4': 'v4 Random',
+    'versionName.v1': 'v1 Time-based',
+    'versionName.v7': 'v7 Time-ordered',
+    'formatName.lowercase': 'lowercase',
+    'formatName.uppercase': 'UPPERCASE',
+    'formatName.noHyphens': 'no hyphens',
+    'formatName.braces': 'braces',
+    'btn.copyUUID': 'Copy this UUID',
+    'toast.noUUIDs': 'No UUIDs to copy'
+  },
+  zh: {
+    'page.title': 'UUID生成器 — Hyrule Toolbox',
+    'page.description': '生成 v4、v1、v7 格式的 UUID，支持批量生成、批量复制和大小写切换。纯客户端运行。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '密码生成器',
+    'nav.unit': '单位换算',
+    'nav.counter': '文本统计',
+    'nav.case': '大小写转换',
+    'nav.uuid': 'UUID生成器',
+    'nav.color': '颜色转换',
+    'nav.json': 'JSON格式化',
+    'nav.qr': '二维码生成',
+    'footer.home': '首页',
+    'footer.about': '关于',
+    'footer.contact': '联系',
+    'toast.copied': '✅ 已复制到剪贴板',
+    'toast.failed': '❌ 复制失败，请手动复制',
+    'page.heading': 'UUID生成器',
+    'page.desc': '生成通用唯一识别码 (UUID)，支持 v1、v4、v7 版本，多种格式输出。',
+    'field.version': 'UUID 版本',
+    'field.versionHint': '(v4 推荐)',
+    'field.quantity': '生成数量',
+    'field.quantityHint': '(1–20)',
+    'field.format': '输出格式',
+    'format.lowercase': '小写',
+    'format.uppercase': '大写',
+    'format.noHyphens': '无连字符',
+    'format.braces': '带花括号',
+    'btn.generate': '生成 UUID',
+    'btn.bulkCopy': '批量复制',
+    'empty.title': '等待生成',
+    'empty.desc': '选择版本和数量，点击上方按钮生成 UUID',
+    'stat.count': '生成数量',
+    'stat.version': 'UUID 版本',
+    'stat.format': '输出格式',
+    'hint.local': '🔒 所有 UUID 均在本地生成，不会发送到服务器',
+    'hint.select': '点击 UUID 可全选，点击 📋 复制单个',
+    'version.v4': 'v4 — 随机',
+    'version.v1': 'v1 — 时间',
+    'version.v7': 'v7 — 时间排序',
+    'versionName.v4': 'v4 随机',
+    'versionName.v1': 'v1 时间',
+    'versionName.v7': 'v7 时间排序',
+    'formatName.lowercase': '小写',
+    'formatName.uppercase': '大写',
+    'formatName.noHyphens': '无连字符',
+    'formatName.braces': '带花括号',
+    'btn.copyUUID': '复制此 UUID',
+    'toast.noUUIDs': '没有可复制的 UUID'
+  },
+  ja: {
+    'page.title': 'UUID生成器 — Hyrule Toolbox',
+    'page.description': 'v4、v1、v7 形式の UUID を生成。一括生成・一括コピー・大文字小文字切替に対応。クライアントサイドで実行。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'パスワード生成',
+    'nav.unit': '単位変換',
+    'nav.counter': 'テキストカウンター',
+    'nav.case': '大文字小文字変換',
+    'nav.uuid': 'UUID生成器',
+    'nav.color': 'カラー変換',
+    'nav.json': 'JSONフォーマッター',
+    'nav.qr': 'QRコード生成',
+    'footer.home': 'ホーム',
+    'footer.about': '概要',
+    'footer.contact': 'お問い合わせ',
+    'toast.copied': '✅ クリップボードにコピーしました',
+    'toast.failed': '❌ コピーに失敗しました。手動でコピーしてください',
+    'page.heading': 'UUID生成器',
+    'page.desc': 'ユニバーサル一意識別子 (UUID) を生成します。v1、v4、v7 に対応し、複数の出力形式をサポートします。',
+    'field.version': 'UUID バージョン',
+    'field.versionHint': '(v4 推奨)',
+    'field.quantity': '生成数',
+    'field.quantityHint': '(1–20)',
+    'field.format': '出力形式',
+    'format.lowercase': '小文字',
+    'format.uppercase': '大文字',
+    'format.noHyphens': 'ハイフンなし',
+    'format.braces': '中括弧付き',
+    'btn.generate': 'UUIDを生成',
+    'btn.bulkCopy': '一括コピー',
+    'empty.title': '生成準備完了',
+    'empty.desc': 'バージョンと数量を選択し、上のボタンをクリックしてUUIDを生成',
+    'stat.count': '生成数',
+    'stat.version': 'UUID バージョン',
+    'stat.format': '出力形式',
+    'hint.local': '🔒 すべてのUUIDはローカルで生成され、サーバーには送信されません',
+    'hint.select': 'UUIDをクリックして全選択、📋をクリックして個別コピー',
+    'version.v4': 'v4 — ランダム',
+    'version.v1': 'v1 — 時間ベース',
+    'version.v7': 'v7 — 時間順序',
+    'versionName.v4': 'v4 ランダム',
+    'versionName.v1': 'v1 時間ベース',
+    'versionName.v7': 'v7 時間順序',
+    'formatName.lowercase': '小文字',
+    'formatName.uppercase': '大文字',
+    'formatName.noHyphens': 'ハイフンなし',
+    'formatName.braces': '中括弧付き',
+    'btn.copyUUID': 'このUUIDをコピー',
+    'toast.noUUIDs': 'コピーするUUIDがありません'
+  },
+  ko: {
+    'page.title': 'UUID 생성기 — Hyrule Toolbox',
+    'page.description': 'v4, v1, v7 형식의 UUID 생성. 일괄 생성, 일괄 복사, 대소문자 전환 지원. 클라이언트 측 실행.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '비밀번호 생성기',
+    'nav.unit': '단위 변환',
+    'nav.counter': '텍스트 카운터',
+    'nav.case': '대소문자 변환',
+    'nav.uuid': 'UUID 생성기',
+    'nav.color': '색상 변환',
+    'nav.json': 'JSON 포맷터',
+    'nav.qr': 'QR코드 생성',
+    'footer.home': '홈',
+    'footer.about': '소개',
+    'footer.contact': '문의',
+    'toast.copied': '✅ 클립보드에 복사됨',
+    'toast.failed': '❌ 복사 실패. 수동으로 복사해주세요',
+    'page.heading': 'UUID 생성기',
+    'page.desc': '범용 고유 식별자(UUID)를 생성합니다. v1, v4, v7을 지원하며 여러 출력 형식을 제공합니다.',
+    'field.version': 'UUID 버전',
+    'field.versionHint': '(v4 권장)',
+    'field.quantity': '생성 개수',
+    'field.quantityHint': '(1–20)',
+    'field.format': '출력 형식',
+    'format.lowercase': '소문자',
+    'format.uppercase': '대문자',
+    'format.noHyphens': '하이픈 없음',
+    'format.braces': '중괄호 포함',
+    'btn.generate': 'UUID 생성',
+    'btn.bulkCopy': '일괄 복사',
+    'empty.title': '생성 준비 완료',
+    'empty.desc': '버전과 개수를 선택하고 위 버튼을 클릭하여 UUID 생성',
+    'stat.count': '생성 개수',
+    'stat.version': 'UUID 버전',
+    'stat.format': '출력 형식',
+    'hint.local': '🔒 모든 UUID는 로컬에서 생성되며 서버로 전송되지 않습니다',
+    'hint.select': 'UUID를 클릭하여 전체 선택, 📋를 클릭하여 개별 복사',
+    'version.v4': 'v4 — 랜덤',
+    'version.v1': 'v1 — 시간 기반',
+    'version.v7': 'v7 — 시간 순서',
+    'versionName.v4': 'v4 랜덤',
+    'versionName.v1': 'v1 시간 기반',
+    'versionName.v7': 'v7 시간 순서',
+    'formatName.lowercase': '소문자',
+    'formatName.uppercase': '대문자',
+    'formatName.noHyphens': '하이픈 없음',
+    'formatName.braces': '중괄호 포함',
+    'btn.copyUUID': '이 UUID 복사',
+    'toast.noUUIDs': '복사할 UUID가 없습니다'
+  },
+  fr: {
+    'page.title': 'Générateur d\'UUID — Hyrule Toolbox',
+    'page.description': 'Générez des UUID en formats v4, v1 et v7. Génération par lot, copie en masse, bascule de casse. Exécution côté client.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Générateur de mots de passe',
+    'nav.unit': 'Convertisseur d\'unités',
+    'nav.counter': 'Compteur de texte',
+    'nav.case': 'Convertisseur de casse',
+    'nav.uuid': 'Générateur d\'UUID',
+    'nav.color': 'Convertisseur de couleurs',
+    'nav.json': 'Formateur JSON',
+    'nav.qr': 'Générateur de QR Code',
+    'footer.home': 'Accueil',
+    'footer.about': 'À propos',
+    'footer.contact': 'Contact',
+    'toast.copied': '✅ Copié dans le presse-papiers',
+    'toast.failed': '❌ Échec de la copie, veuillez copier manuellement',
+    'page.heading': 'Générateur d\'UUID',
+    'page.desc': 'Générez des identifiants uniques universels (UUID), prenant en charge les versions v1, v4 et v7 avec plusieurs formats de sortie.',
+    'field.version': 'Version UUID',
+    'field.versionHint': '(v4 recommandé)',
+    'field.quantity': 'Quantité',
+    'field.quantityHint': '(1–20)',
+    'field.format': 'Format de sortie',
+    'format.lowercase': 'minuscules',
+    'format.uppercase': 'MAJUSCULES',
+    'format.noHyphens': 'sans tirets',
+    'format.braces': 'accolades',
+    'btn.generate': 'Générer des UUID',
+    'btn.bulkCopy': 'Tout copier',
+    'empty.title': 'Prêt à générer',
+    'empty.desc': 'Choisissez une version et une quantité, puis cliquez sur le bouton ci-dessus',
+    'stat.count': 'Générés',
+    'stat.version': 'Version UUID',
+    'stat.format': 'Format de sortie',
+    'hint.local': '🔒 Tous les UUID sont générés localement, jamais envoyés à un serveur',
+    'hint.select': 'Cliquez sur un UUID pour tout sélectionner, cliquez sur 📋 pour copier',
+    'version.v4': 'v4 — Aléatoire',
+    'version.v1': 'v1 — Temporel',
+    'version.v7': 'v7 — Ordonné',
+    'versionName.v4': 'v4 Aléatoire',
+    'versionName.v1': 'v1 Temporel',
+    'versionName.v7': 'v7 Ordonné',
+    'formatName.lowercase': 'minuscules',
+    'formatName.uppercase': 'MAJUSCULES',
+    'formatName.noHyphens': 'sans tirets',
+    'formatName.braces': 'accolades',
+    'btn.copyUUID': 'Copier cet UUID',
+    'toast.noUUIDs': 'Aucun UUID à copier'
+  },
+  de: {
+    'page.title': 'UUID-Generator — Hyrule Toolbox',
+    'page.description': 'UUIDs in v4-, v1- und v7-Formaten erzeugen. Stapelgenerierung, Massenkopie, Groß-/Kleinschreibung. Clientseitig.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Passwortgenerator',
+    'nav.unit': 'Einheitenumrechner',
+    'nav.counter': 'Textzähler',
+    'nav.case': 'Fallumwandler',
+    'nav.uuid': 'UUID-Generator',
+    'nav.color': 'Farbkonverter',
+    'nav.json': 'JSON-Formatierer',
+    'nav.qr': 'QR-Code-Generator',
+    'footer.home': 'Startseite',
+    'footer.about': 'Über uns',
+    'footer.contact': 'Kontakt',
+    'toast.copied': '✅ In die Zwischenablage kopiert',
+    'toast.failed': '❌ Kopieren fehlgeschlagen, bitte manuell kopieren',
+    'page.heading': 'UUID-Generator',
+    'page.desc': 'Erzeugen Sie universell eindeutige Identifikatoren (UUIDs) mit Unterstützung für v1, v4, v7 und mehreren Ausgabeformaten.',
+    'field.version': 'UUID-Version',
+    'field.versionHint': '(v4 empfohlen)',
+    'field.quantity': 'Anzahl',
+    'field.quantityHint': '(1–20)',
+    'field.format': 'Ausgabeformat',
+    'format.lowercase': 'kleinbuchstaben',
+    'format.uppercase': 'GROSSBUCHSTABEN',
+    'format.noHyphens': 'ohne Bindestrich',
+    'format.braces': 'geschweifte Klammern',
+    'btn.generate': 'UUIDs generieren',
+    'btn.bulkCopy': 'Alle kopieren',
+    'empty.title': 'Bereit zum Generieren',
+    'empty.desc': 'Wählen Sie eine Version und Anzahl, dann klicken Sie auf den Button oben',
+    'stat.count': 'Generiert',
+    'stat.version': 'UUID-Version',
+    'stat.format': 'Ausgabeformat',
+    'hint.local': '🔒 Alle UUIDs werden lokal generiert, nie an einen Server gesendet',
+    'hint.select': 'Klicken Sie auf eine UUID zur Auswahl, auf 📋 zum Kopieren',
+    'version.v4': 'v4 — Zufall',
+    'version.v1': 'v1 — Zeitbasiert',
+    'version.v7': 'v7 — Zeitgeordnet',
+    'versionName.v4': 'v4 Zufall',
+    'versionName.v1': 'v1 Zeitbasiert',
+    'versionName.v7': 'v7 Zeitgeordnet',
+    'formatName.lowercase': 'kleinbuchstaben',
+    'formatName.uppercase': 'GROSSBUCHSTABEN',
+    'formatName.noHyphens': 'ohne Bindestrich',
+    'formatName.braces': 'geschweifte Klammern',
+    'btn.copyUUID': 'Diese UUID kopieren',
+    'toast.noUUIDs': 'Keine UUIDs zum Kopieren'
+  }
+};
+</script>
+<script src="js/theme.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
 
 <script>
 (function() {
-    'use strict';
+  'use strict';
 
-    // ===== I18N DICTIONARY =====
-    const i18n = {
-        en: {
-            siteName: 'Hyrule Toolbox',
-            navHome: 'Home',
-            navUUID: 'UUID Generator',
-            breadcrumbHome: 'Home',
-            breadcrumbUUID: 'UUID Generator',
-            pageTitle: '🔖 UUID Generator',
-            pageDescription: 'Generate universally unique identifiers (UUIDs), supporting v1, v4, v7 with multiple output formats.',
-            labelVersion: 'UUID Version',
-            labelVersionHint: '(v4 recommended)',
-            labelQuantity: 'Quantity',
-            labelQuantityHint: '(1–20)',
-            labelFormat: 'Output Format',
-            formatLowercase: 'lowercase',
-            formatUppercase: 'UPPERCASE',
-            formatNoHyphens: 'no hyphens',
-            formatBraces: 'braces',
-            btnGenerate: 'Generate UUIDs',
-            emptyTitle: 'Ready to Generate',
-            emptyDesc: 'Choose a version and quantity, then click the button above to generate UUIDs',
-            bulkCopyText: 'Copy All',
-            statCountLabel: 'Generated',
-            statVersionLabel: 'UUID Version',
-            statFormatLabel: 'Output Format',
-            hintLocal: '🔒 All UUIDs generated locally, never sent to a server',
-            hintSelect: 'Click UUID to select all, click 📋 to copy individual',
-            footerText: '© 2026 Hyrule Toolbox · Local Tools',
-            footerHome: 'Home',
-            footerUUID: 'UUID Generator',
-            copied: 'Copied!',
-            noUUIDs: 'No UUIDs to copy',
-            copyFailed: 'Copy failed, please copy manually',
-            versionV4: 'v4 Random',
-            versionV1: 'v1 Time-based',
-            versionV7: 'v7 Time-ordered',
-            formatNameLowercase: 'lowercase',
-            formatNameUppercase: 'UPPERCASE',
-            formatNameNoHyphens: 'no hyphens',
-            formatNameBraces: 'braces',
-            copyUUID: 'Copy this UUID',
-            historyTitle: 'History',
-            toggleTheme: 'Toggle theme',
-        },
-        zh: {
-            siteName: '海拉鲁工具箱',
-            navHome: '首页',
-            navUUID: 'UUID生成器',
-            breadcrumbHome: '首页',
-            breadcrumbUUID: 'UUID生成器',
-            pageTitle: '🔖 UUID生成器',
-            pageDescription: '生成通用唯一识别码 (UUID)，支持 v1、v4、v7 版本，多种格式输出。',
-            labelVersion: 'UUID 版本',
-            labelVersionHint: '(v4 推荐)',
-            labelQuantity: '生成数量',
-            labelQuantityHint: '(1–20)',
-            labelFormat: '输出格式',
-            formatLowercase: '小写',
-            formatUppercase: '大写',
-            formatNoHyphens: '无连字符',
-            formatBraces: '带花括号',
-            btnGenerate: '生成 UUID',
-            emptyTitle: '等待生成',
-            emptyDesc: '选择版本和数量，点击上方按钮生成 UUID',
-            bulkCopyText: '批量复制',
-            statCountLabel: '生成数量',
-            statVersionLabel: 'UUID 版本',
-            statFormatLabel: '输出格式',
-            hintLocal: '🔒 所有 UUID 均在本地生成，不会发送到服务器',
-            hintSelect: '点击 UUID 可全选，点击 📋 复制单个',
-            footerText: '© 2026 海拉鲁工具箱 · 本地工具集',
-            footerHome: '首页',
-            footerUUID: 'UUID生成器',
-            copied: '已复制!',
-            noUUIDs: '没有可复制的 UUID',
-            copyFailed: '复制失败，请手动复制',
-            versionV4: 'v4 随机',
-            versionV1: 'v1 时间',
-            versionV7: 'v7 时间排序',
-            formatNameLowercase: '小写',
-            formatNameUppercase: '大写',
-            formatNameNoHyphens: '无连字符',
-            formatNameBraces: '带花括号',
-            copyUUID: '复制此 UUID',
-            historyTitle: '历史记录',
-            toggleTheme: '切换主题',
-        },
-        ja: {
-            siteName: 'ハイラルツールボックス',
-            navHome: 'ホーム',
-            navUUID: 'UUID生成器',
-            breadcrumbHome: 'ホーム',
-            breadcrumbUUID: 'UUID生成器',
-            pageTitle: '🔖 UUID生成器',
-            pageDescription: 'ユニバーサル一意識別子 (UUID) を生成します。v1、v4、v7 に対応し、複数の出力形式をサポートします。',
-            labelVersion: 'UUID バージョン',
-            labelVersionHint: '(v4 推奨)',
-            labelQuantity: '生成数',
-            labelQuantityHint: '(1–20)',
-            labelFormat: '出力形式',
-            formatLowercase: '小文字',
-            formatUppercase: '大文字',
-            formatNoHyphens: 'ハイフンなし',
-            formatBraces: '中括弧付き',
-            btnGenerate: 'UUIDを生成',
-            emptyTitle: '生成準備完了',
-            emptyDesc: 'バージョンと数量を選択し、上のボタンをクリックしてUUIDを生成',
-            bulkCopyText: '一括コピー',
-            statCountLabel: '生成数',
-            statVersionLabel: 'UUID バージョン',
-            statFormatLabel: '出力形式',
-            hintLocal: '🔒 すべてのUUIDはローカルで生成され、サーバーには送信されません',
-            hintSelect: 'UUIDをクリックして全選択、📋をクリックして個別コピー',
-            footerText: '© 2026 ハイラルツールボックス · ローカルツール',
-            footerHome: 'ホーム',
-            footerUUID: 'UUID生成器',
-            copied: 'コピーしました!',
-            noUUIDs: 'コピーするUUIDがありません',
-            copyFailed: 'コピーに失敗しました。手動でコピーしてください',
-            versionV4: 'v4 ランダム',
-            versionV1: 'v1 時間ベース',
-            versionV7: 'v7 時間順序',
-            formatNameLowercase: '小文字',
-            formatNameUppercase: '大文字',
-            formatNameNoHyphens: 'ハイフンなし',
-            formatNameBraces: '中括弧付き',
-            copyUUID: 'このUUIDをコピー',
-            historyTitle: '履歴',
-            toggleTheme: 'テーマ切替',
-        },
-        ko: {
-            siteName: '하이랄 툴박스',
-            navHome: '홈',
-            navUUID: 'UUID 생성기',
-            breadcrumbHome: '홈',
-            breadcrumbUUID: 'UUID 생성기',
-            pageTitle: '🔖 UUID 생성기',
-            pageDescription: '범용 고유 식별자(UUID)를 생성합니다. v1, v4, v7을 지원하며 여러 출력 형식을 제공합니다.',
-            labelVersion: 'UUID 버전',
-            labelVersionHint: '(v4 권장)',
-            labelQuantity: '생성 개수',
-            labelQuantityHint: '(1–20)',
-            labelFormat: '출력 형식',
-            formatLowercase: '소문자',
-            formatUppercase: '대문자',
-            formatNoHyphens: '하이픈 없음',
-            formatBraces: '중괄호 포함',
-            btnGenerate: 'UUID 생성',
-            emptyTitle: '생성 준비 완료',
-            emptyDesc: '버전과 개수를 선택하고 위 버튼을 클릭하여 UUID 생성',
-            bulkCopyText: '일괄 복사',
-            statCountLabel: '생성 개수',
-            statVersionLabel: 'UUID 버전',
-            statFormatLabel: '출력 형식',
-            hintLocal: '🔒 모든 UUID는 로컬에서 생성되며 서버로 전송되지 않습니다',
-            hintSelect: 'UUID를 클릭하여 전체 선택, 📋를 클릭하여 개별 복사',
-            footerText: '© 2026 하이랄 툴박스 · 로컬 도구',
-            footerHome: '홈',
-            footerUUID: 'UUID 생성기',
-            copied: '복사됨!',
-            noUUIDs: '복사할 UUID가 없습니다',
-            copyFailed: '복사 실패. 수동으로 복사해주세요',
-            versionV4: 'v4 랜덤',
-            versionV1: 'v1 시간 기반',
-            versionV7: 'v7 시간 순서',
-            formatNameLowercase: '소문자',
-            formatNameUppercase: '대문자',
-            formatNameNoHyphens: '하이픈 없음',
-            formatNameBraces: '중괄호 포함',
-            copyUUID: '이 UUID 복사',
-            historyTitle: '기록',
-            toggleTheme: '테마 전환',
-        },
-        fr: {
-            siteName: 'Hyrule Toolbox',
-            navHome: 'Accueil',
-            navUUID: 'Générateur d\'UUID',
-            breadcrumbHome: 'Accueil',
-            breadcrumbUUID: 'Générateur d\'UUID',
-            pageTitle: '🔖 Générateur d\'UUID',
-            pageDescription: 'Générez des identifiants uniques universels (UUID), prenant en charge les versions v1, v4 et v7 avec plusieurs formats de sortie.',
-            labelVersion: 'Version UUID',
-            labelVersionHint: '(v4 recommandé)',
-            labelQuantity: 'Quantité',
-            labelQuantityHint: '(1–20)',
-            labelFormat: 'Format de sortie',
-            formatLowercase: 'minuscules',
-            formatUppercase: 'MAJUSCULES',
-            formatNoHyphens: 'sans tirets',
-            formatBraces: 'accolades',
-            btnGenerate: 'Générer des UUID',
-            emptyTitle: 'Prêt à générer',
-            emptyDesc: 'Choisissez une version et une quantité, puis cliquez sur le bouton ci-dessus',
-            bulkCopyText: 'Tout copier',
-            statCountLabel: 'Générés',
-            statVersionLabel: 'Version UUID',
-            statFormatLabel: 'Format de sortie',
-            hintLocal: '🔒 Tous les UUID sont générés localement, jamais envoyés à un serveur',
-            hintSelect: 'Cliquez sur un UUID pour tout sélectionner, cliquez sur 📋 pour copier',
-            footerText: '© 2026 Hyrule Toolbox · Outils locaux',
-            footerHome: 'Accueil',
-            footerUUID: 'Générateur d\'UUID',
-            copied: 'Copié !',
-            noUUIDs: 'Aucun UUID à copier',
-            copyFailed: 'Échec de la copie, veuillez copier manuellement',
-            versionV4: 'v4 Aléatoire',
-            versionV1: 'v1 Temporel',
-            versionV7: 'v7 Ordonné',
-            formatNameLowercase: 'minuscules',
-            formatNameUppercase: 'MAJUSCULES',
-            formatNameNoHyphens: 'sans tirets',
-            formatNameBraces: 'accolades',
-            copyUUID: 'Copier cet UUID',
-            historyTitle: 'Historique',
-            toggleTheme: 'Changer le thème',
-        },
-        de: {
-            siteName: 'Hyrule Toolbox',
-            navHome: 'Startseite',
-            navUUID: 'UUID-Generator',
-            breadcrumbHome: 'Startseite',
-            breadcrumbUUID: 'UUID-Generator',
-            pageTitle: '🔖 UUID-Generator',
-            pageDescription: 'Erzeugen Sie universell eindeutige Identifikatoren (UUIDs) mit Unterstützung für v1, v4, v7 und mehreren Ausgabeformaten.',
-            labelVersion: 'UUID-Version',
-            labelVersionHint: '(v4 empfohlen)',
-            labelQuantity: 'Anzahl',
-            labelQuantityHint: '(1–20)',
-            labelFormat: 'Ausgabeformat',
-            formatLowercase: 'kleinbuchstaben',
-            formatUppercase: 'GROSSBUCHSTABEN',
-            formatNoHyphens: 'ohne Bindestrich',
-            formatBraces: 'geschweifte Klammern',
-            btnGenerate: 'UUIDs generieren',
-            emptyTitle: 'Bereit zum Generieren',
-            emptyDesc: 'Wählen Sie eine Version und Anzahl, dann klicken Sie auf den Button oben',
-            bulkCopyText: 'Alle kopieren',
-            statCountLabel: 'Generiert',
-            statVersionLabel: 'UUID-Version',
-            statFormatLabel: 'Ausgabeformat',
-            hintLocal: '🔒 Alle UUIDs werden lokal generiert, nie an einen Server gesendet',
-            hintSelect: 'Klicken Sie auf eine UUID zur Auswahl, auf 📋 zum Kopieren',
-            footerText: '© 2026 Hyrule Toolbox · Lokale Werkzeuge',
-            footerHome: 'Startseite',
-            footerUUID: 'UUID-Generator',
-            copied: 'Kopiert!',
-            noUUIDs: 'Keine UUIDs zum Kopieren',
-            copyFailed: 'Kopie fehlgeschlagen, bitte manuell kopieren',
-            versionV4: 'v4 Zufall',
-            versionV1: 'v1 Zeitbasiert',
-            versionV7: 'v7 Zeitgeordnet',
-            formatNameLowercase: 'kleinbuchstaben',
-            formatNameUppercase: 'GROSSBUCHSTABEN',
-            formatNameNoHyphens: 'ohne Bindestrich',
-            formatNameBraces: 'geschweifte Klammern',
-            copyUUID: 'Diese UUID kopieren',
-            historyTitle: 'Verlauf',
-            toggleTheme: 'Design wechseln',
+  var currentUUIDs = [];
+  var currentVersion = 'v4';
+
+  var $ = function(id) { return document.getElementById(id); };
+  var versionSelect = $('versionSelect');
+  var qtySlider = $('qtySlider');
+  var qtyDisplay = $('qtyDisplay');
+  var formatGroup = $('formatGroup');
+  var generateBtn = $('generateBtn');
+  var emptyState = $('emptyState');
+  var resultsContent = $('resultsContent');
+  var uuidList = $('uuidList');
+  var bulkCopyBtn = $('bulkCopyBtn');
+  var statCount = $('statCount');
+  var statVersion = $('statVersion');
+  var statFormat = $('statFormat');
+
+  function t(key) {
+    return window.HyruleI18n ? window.HyruleI18n.t(key) : key;
+  }
+
+  function updateVersionOptions() {
+    var versions = ['v4', 'v1', 'v7'];
+    for (var i = 0; i < versions.length; i++) {
+      var v = versions[i];
+      var opt = versionSelect.querySelector('option[value="' + v + '"]');
+      if (opt) opt.textContent = t('version.' + v);
+    }
+  }
+
+  function getActiveFormat() {
+    var active = formatGroup.querySelector('.format-btn.active');
+    return active ? active.getAttribute('data-format') : 'lowercase';
+  }
+
+  function formatUUID(uuid, format) {
+    if (format === 'uppercase') return uuid.toUpperCase();
+    if (format === 'no-hyphens') return uuid.replace(/-/g, '');
+    if (format === 'braces') return '{' + uuid + '}';
+    return uuid;
+  }
+
+  function generateV4() {
+    return crypto.randomUUID();
+  }
+
+  function generateV1() {
+    var uuidEpochOffset = 122192928000000000;
+    var now = Date.now();
+    var msecs = now * 10000 + uuidEpochOffset;
+    var timeLow = (msecs & 0xffffffff) >>> 0;
+    var timeMid = ((msecs >>> 32) & 0xffff) >>> 0;
+    var timeHiAndVersion = ((msecs >>> 48) & 0x0fff) | 0x1000;
+    var clockSeqHi = ((Math.random() * 64) | 0) & 0x3f;
+    var clockSeqLow = (Math.random() * 256) | 0;
+    var nodeBytes = new Uint8Array(6);
+    crypto.getRandomValues(nodeBytes);
+    nodeBytes[0] = (nodeBytes[0] & 0xfe) | 0x01;
+
+    function toHex(n, pad) {
+      return n.toString(16).padStart(pad, '0');
+    }
+
+    return [
+      toHex(timeLow, 8),
+      toHex(timeMid, 4),
+      toHex(timeHiAndVersion, 4),
+      toHex(clockSeqHi, 2) + toHex(clockSeqLow, 2),
+      Array.from(nodeBytes).map(function(b) { return toHex(b, 2); }).join('')
+    ].join('-');
+  }
+
+  function generateV7() {
+    var timestamp = BigInt(Date.now());
+    var randBytes = new Uint8Array(10);
+    crypto.getRandomValues(randBytes);
+    var tsBytes = new Uint8Array(6);
+    var tVal = timestamp;
+    for (var i = 5; i >= 0; i--) {
+      tsBytes[i] = Number(tVal & 0xffn);
+      tVal >>= 8n;
+    }
+    var b6 = (0x70) | (randBytes[0] >> 4);
+    var b7 = ((randBytes[0] & 0x0f) << 4) | (randBytes[1] >> 4);
+    var b8 = (0x80) | (randBytes[1] & 0x3f);
+    var remaining = randBytes.slice(2, 9);
+
+    function toHexByte(n) {
+      return n.toString(16).padStart(2, '0');
+    }
+
+    var allBytes = [].concat(
+      Array.from(tsBytes),
+      [b6, b7, b8],
+      Array.from(remaining)
+    );
+    var hex = allBytes.map(function(b) { return toHexByte(b); }).join('');
+    return hex.substring(0, 8) + '-' +
+           hex.substring(8, 12) + '-' +
+           hex.substring(12, 16) + '-' +
+           hex.substring(16, 20) + '-' +
+           hex.substring(20, 32);
+  }
+
+  function generateUUID(version) {
+    if (version === 'v4') return generateV4();
+    if (version === 'v1') return generateV1();
+    if (version === 'v7') return generateV7();
+    return generateV4();
+  }
+
+  function copyText(text, btnEl) {
+    if (!text) {
+      showToast(t('toast.noUUIDs'));
+      return;
+    }
+    var msg = t('toast.copied');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        if (btnEl) {
+          btnEl.classList.add('copied');
+          setTimeout(function() { btnEl.classList.remove('copied'); }, 1200);
         }
+        showToast(msg);
+      }).catch(function() {
+        window.copyToClipboard(text, msg);
+        if (btnEl) {
+          btnEl.classList.add('copied');
+          setTimeout(function() { btnEl.classList.remove('copied'); }, 1200);
+        }
+      });
+    } else {
+      window.copyToClipboard(text, msg);
+      if (btnEl) {
+        btnEl.classList.add('copied');
+        setTimeout(function() { btnEl.classList.remove('copied'); }, 1200);
+      }
+    }
+  }
+
+  function renderResults(uuids, format, version) {
+    if (!uuids || uuids.length === 0) return;
+
+    currentUUIDs = uuids;
+    currentVersion = version;
+
+    emptyState.style.display = 'none';
+    resultsContent.style.display = 'block';
+
+    var versionNames = {
+      v4: t('versionName.v4'),
+      v1: t('versionName.v1'),
+      v7: t('versionName.v7')
+    };
+    var formatNames = {
+      lowercase: t('formatName.lowercase'),
+      uppercase: t('formatName.uppercase'),
+      'no-hyphens': t('formatName.noHyphens'),
+      braces: t('formatName.braces')
     };
 
-    // ===== DOM REFS =====
-    const versionSelect = document.getElementById('versionSelect');
-    const qtySlider     = document.getElementById('qtySlider');
-    const qtyDisplay    = document.getElementById('qtyDisplay');
-    const formatGroup   = document.getElementById('formatGroup');
-    const generateBtn   = document.getElementById('generateBtn');
-    const emptyState    = document.getElementById('emptyState');
-    const resultsContent = document.getElementById('resultsContent');
-    const uuidList      = document.getElementById('uuidList');
-    const bulkCopyBtn   = document.getElementById('bulkCopyBtn');
-    const bulkTextarea  = document.getElementById('bulkTextarea');
-    const toast         = document.getElementById('toast');
-    const langSelect    = document.getElementById('langSelect');
-    const themeToggle   = document.getElementById('themeToggle');
-
-    const statCount    = document.getElementById('statCount');
-    const statVersion  = document.getElementById('statVersion');
-    const statFormat   = document.getElementById('statFormat');
-
-    // ===== STATE =====
-    let currentUUIDs = [];
-    let currentFormat = 'lowercase';
-    let currentVersion = 'v4';
-
-    // ===== I18N ENGINE =====
-    function getLang() {
-        return localStorage.getItem('uuid-lang') || 'en';
+    var html = '';
+    for (var idx = 0; idx < uuids.length; idx++) {
+      var uuid = uuids[idx];
+      var formatted = formatUUID(uuid, format);
+      var escaped = formatted.replace(/"/g, '&quot;');
+      html += '<div class="uuid-item" style="animation-delay:' + (idx * 0.04) + 's" data-uuid="' + uuid.replace(/"/g, '&quot;') + '">' +
+        '<span class="uuid-text" title="' + escaped + '">' + formatted + '</span>' +
+        '<span class="uuid-version-badge">' + version.toUpperCase() + '</span>' +
+        '<button class="uuid-copy-btn" title="' + t('btn.copyUUID') + '">📋</button>' +
+        '</div>';
     }
+    uuidList.innerHTML = html;
 
-    function setLang(lang) {
-        localStorage.setItem('uuid-lang', lang);
-    }
-
-    function applyLanguage(lang) {
-        const dict = i18n[lang];
-        if (!dict) return;
-
-        // Elements with id matching i18n key (1:1 mapping)
-        const idMap = {
-            siteName: 'siteName',
-            navHome: 'navHome',
-            navUUID: 'navUUID',
-            breadcrumbHome: 'breadcrumbHome',
-            breadcrumbUUID: 'breadcrumbUUID',
-            pageTitle: 'pageTitle',
-            pageDescription: 'pageDescription',
-            labelVersion: 'labelVersion',
-            labelVersionHint: 'labelVersionHint',
-            labelQuantity: 'labelQuantity',
-            labelQuantityHint: 'labelQuantityHint',
-            labelFormat: 'labelFormat',
-            btnGenerate: 'btnGenerate',
-            emptyTitle: 'emptyTitle',
-            emptyDesc: 'emptyDesc',
-            bulkCopyText: 'bulkCopyText',
-            statCountLabel: 'statCountLabel',
-            statVersionLabel: 'statVersionLabel',
-            statFormatLabel: 'statFormatLabel',
-            hintLocal: 'hintLocal',
-            hintSelect: 'hintSelect',
-            footerText: 'footerText',
-            footerHome: 'footerHome',
-            footerUUID: 'footerUUID',
-        };
-
-        for (const [key, id] of Object.entries(idMap)) {
-            const el = document.getElementById(id);
-            if (el && dict[key] !== undefined) {
-                el.textContent = dict[key];
-            }
-        }
-
-        // Format buttons
-        document.querySelectorAll('.format-btn[data-i18n]').forEach(btn => {
-            const i18nKey = btn.dataset.i18n;
-            if (dict[i18nKey] !== undefined) {
-                btn.textContent = dict[i18nKey];
-            }
+    var items = uuidList.querySelectorAll('.uuid-item');
+    for (var i = 0; i < items.length; i++) {
+      (function(item) {
+        var btn = item.querySelector('.uuid-copy-btn');
+        var rawUuid = item.getAttribute('data-uuid');
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          copyText(formatUUID(rawUuid, getActiveFormat()), btn);
         });
-
-        // Update stat format/version labels when re-rendering
-        // (handled in renderResults)
-
-        // Store current lang for dynamic updates
-        document.documentElement.lang = lang;
+      })(items[i]);
     }
 
-    function initLanguage() {
-        const saved = getLang();
-        langSelect.value = saved;
-        applyLanguage(saved);
+    statCount.textContent = uuids.length;
+    statVersion.textContent = versionNames[version] || version.toUpperCase();
+    statFormat.textContent = formatNames[format] || format;
+  }
+
+  function doGenerate() {
+    var version = versionSelect.value;
+    var qty = parseInt(qtySlider.value, 10);
+    var format = getActiveFormat();
+
+    generateBtn.classList.add('generating');
+
+    setTimeout(function() {
+      var uuids = [];
+      for (var i = 0; i < qty; i++) {
+        uuids.push(generateUUID(version));
+      }
+      renderResults(uuids, format, version);
+      generateBtn.classList.remove('generating');
+    }, 300);
+  }
+
+  function copyBulk() {
+    if (currentUUIDs.length === 0) {
+      showToast(t('toast.noUUIDs'));
+      return;
     }
+    var format = getActiveFormat();
+    var text = currentUUIDs.map(function(u) { return formatUUID(u, format); }).join('\n');
+    copyText(text, bulkCopyBtn);
+  }
 
-    // ===== THEME TOGGLE =====
-    function getTheme() {
-        return localStorage.getItem('uuid-theme') || 'light';
+  window.__onLanguageChange = function(lang) {
+    updateVersionOptions();
+    if (currentUUIDs.length > 0) {
+      renderResults(currentUUIDs, getActiveFormat(), currentVersion);
     }
+  };
 
-    function setTheme(theme) {
-        localStorage.setItem('uuid-theme', theme);
-        applyTheme(theme);
-    }
+  qtySlider.addEventListener('input', function() {
+    qtyDisplay.textContent = this.value;
+  });
 
-    function applyTheme(theme) {
-        if (theme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.textContent = '☀️';
-            themeToggle.title = i18n[getLang()]?.toggleTheme || 'Toggle theme';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
-            themeToggle.title = i18n[getLang()]?.toggleTheme || 'Toggle theme';
-        }
-    }
-
-    function initTheme() {
-        const saved = getTheme();
-        applyTheme(saved);
-    }
-
-    // ===== HELPERS =====
-
-    function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add('show');
-        clearTimeout(toast._timer);
-        toast._timer = setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2000);
-    }
-
-    function copyToClipboard(text, btnEl) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(() => {
-                if (btnEl) {
-                    btnEl.classList.add('copied');
-                    setTimeout(() => btnEl.classList.remove('copied'), 1200);
-                }
-                showToast(i18n[getLang()].copied);
-            }).catch(() => {
-                fallbackCopy(text, btnEl);
-            });
-        } else {
-            fallbackCopy(text, btnEl);
-        }
-    }
-
-    function fallbackCopy(text, btnEl) {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        try {
-            document.execCommand('copy');
-            if (btnEl) {
-                btnEl.classList.add('copied');
-                setTimeout(() => btnEl.classList.remove('copied'), 1200);
-            }
-            showToast(i18n[getLang()].copied);
-        } catch (e) {
-            showToast(i18n[getLang()].copyFailed);
-        }
-        document.body.removeChild(ta);
-    }
-
-    function getActiveFormat() {
-        const active = formatGroup.querySelector('.format-btn.active');
-        return active ? active.dataset.format : 'lowercase';
-    }
-
-    function formatUUID(uuid, format) {
-        if (format === 'uppercase') {
-            return uuid.toUpperCase();
-        }
-        if (format === 'no-hyphens') {
-            return uuid.replace(/-/g, '');
-        }
-        if (format === 'braces') {
-            return '{' + uuid + '}';
-        }
-        return uuid; // lowercase (default)
-    }
-
-    // ===== UUID GENERATORS =====
-
-    // v4: random (using built-in crypto.randomUUID)
-    function generateV4() {
-        return crypto.randomUUID();
-    }
-
-    // v1: time-based UUID (RFC 4122)
-    function generateV1() {
-        const uuidEpochOffset = 122192928000000000; // 100-ns intervals between 1582-10-15 and 1970-01-01
-        const now = Date.now();
-        const msecs = now * 10000 + uuidEpochOffset; // convert to 100-ns intervals
-
-        // Build the 60-bit timestamp parts
-        const timeLow = (msecs & 0xffffffff) >>> 0;
-        const timeMid = ((msecs >>> 32) & 0xffff) >>> 0;
-        const timeHiAndVersion = ((msecs >>> 48) & 0x0fff) | 0x1000; // version 1
-
-        // Random clock sequence (14 bits)
-        const clockSeqHi = ((Math.random() * 64) | 0) & 0x3f;
-        const clockSeqLow = (Math.random() * 256) | 0;
-
-        // Random node (6 bytes, instead of MAC)
-        const nodeBytes = new Uint8Array(6);
-        crypto.getRandomValues(nodeBytes);
-        // Set multicast bit (IEEE 802) to indicate random
-        nodeBytes[0] = (nodeBytes[0] & 0xfe) | 0x01;
-
-        function toHex(n, pad) {
-            return n.toString(16).padStart(pad, '0');
-        }
-
-        const parts = [
-            toHex(timeLow, 8),
-            toHex(timeMid, 4),
-            toHex(timeHiAndVersion, 4),
-            toHex(clockSeqHi, 2) + toHex(clockSeqLow, 2),
-            Array.from(nodeBytes).map(b => toHex(b, 2)).join('')
-        ];
-
-        return parts.join('-');
-    }
-
-    // v7: time-ordered UUID (RFC 9562)
-    // Layout: unix_ts_ms (48 bits) | ver (4 bits, 0x7) | rand_a (12 bits) | var (2 bits, 0b10) | rand_b (62 bits)
-    function generateV7() {
-        // RFC 9562: UUID v7
-        // unix_ts_ms (48 bits) | ver (4 bits, 0x7) | rand_a (12 bits) | var (2 bits, 0b10) | rand_b (62 bits)
-        const timestamp = BigInt(Date.now());
-        const randBytes = new Uint8Array(10);
-        crypto.getRandomValues(randBytes);
-
-        // Build the UUID as hex string
-        // Bytes 0-5: timestamp (48 bits)
-        const tsBytes = new Uint8Array(6);
-        let t = timestamp;
-        for (let i = 5; i >= 0; i--) {
-            tsBytes[i] = Number(t & 0xffn);
-            t >>= 8n;
-        }
-
-        // Byte 6: 4 bits version (0x7) + 4 bits high rand_a
-        const b6 = (0x70) | (randBytes[0] >> 4);
-
-        // Byte 7: 8 bits low rand_a
-        const b7 = ((randBytes[0] & 0x0f) << 4) | (randBytes[1] >> 4);
-
-        // Byte 8: 4 bits high rand_b + 2 bits variant (0b10) + 2 bits
-        // Actually: var is 2 bits at positions 7-6 of byte 8 (1-indexed)
-        // Byte 8 = variant (10) + rand_b high bits
-        const b8 = (0x80) | (randBytes[1] & 0x3f);
-
-        // Bytes 9-15: remaining rand_b (7 bytes)
-        const remaining = randBytes.slice(2, 9);
-
-        function toHex(n) {
-            return n.toString(16).padStart(2, '0');
-        }
-
-        const allBytes = [
-            ...Array.from(tsBytes),
-            b6,
-            b7,
-            b8,
-            ...Array.from(remaining)
-        ];
-
-        const hex = allBytes.map(b => toHex(b)).join('');
-
-        // Insert hyphens at standard positions
-        return hex.substring(0, 8) + '-' +
-               hex.substring(8, 12) + '-' +
-               hex.substring(12, 16) + '-' +
-               hex.substring(16, 20) + '-' +
-               hex.substring(20, 32);
-    }
-
-    function generateUUID(version) {
-        if (version === 'v4') return generateV4();
-        if (version === 'v1') return generateV1();
-        if (version === 'v7') return generateV7();
-        return generateV4();
-    }
-
-    // ===== RENDER =====
-
-    function renderResults(uuids, format, version) {
-        if (!uuids || uuids.length === 0) return;
-
-        currentUUIDs = uuids;
-        currentVersion = version;
-
-        // Hide empty state, show results
-        emptyState.style.display = 'none';
-        resultsContent.style.display = 'block';
-
-        const lang = getLang();
-        const dict = i18n[lang];
-        const versionNames = { v4: dict.versionV4, v1: dict.versionV1, v7: dict.versionV7 };
-        const formatNames = {
-            lowercase: dict.formatNameLowercase,
-            uppercase: dict.formatNameUppercase,
-            'no-hyphens': dict.formatNameNoHyphens,
-            braces: dict.formatNameBraces
-        };
-
-        // Build list HTML
-        let html = '';
-        uuids.forEach((uuid, idx) => {
-            const formatted = formatUUID(uuid, format);
-            html += `
-                <div class="uuid-item" style="animation-delay:${idx * 0.04}s" data-uuid="${uuid.replace(/"/g, '&quot;')}">
-                    <span class="uuid-text" title="${formatted.replace(/"/g, '&quot;')}">${formatted}</span>
-                    <span class="uuid-version-badge">${version.toUpperCase()}</span>
-                    <button class="uuid-copy-btn" title="${dict.copyUUID}">📋</button>
-                </div>
-            `;
-        });
-        uuidList.innerHTML = html;
-
-        // Bind per-item copy buttons
-        uuidList.querySelectorAll('.uuid-item').forEach((item, idx) => {
-            const btn = item.querySelector('.uuid-copy-btn');
-            const rawUuid = item.dataset.uuid;
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const formatted = formatUUID(rawUuid, getActiveFormat());
-                copyToClipboard(formatted, this);
-            });
-        });
-
-        // Update stats
-        statCount.textContent = uuids.length;
-        statVersion.textContent = versionNames[version] || version.toUpperCase();
-        statFormat.textContent = formatNames[format] || format;
-    }
-
-    function showEmptyState() {
-        emptyState.style.display = 'block';
-        resultsContent.style.display = 'none';
-        currentUUIDs = [];
-    }
-
-    // ===== GENERATE =====
-
-    function doGenerate() {
-        const version = versionSelect.value;
-        const qty = parseInt(qtySlider.value, 10);
-        const format = getActiveFormat();
-
-        // Animate button
-        generateBtn.classList.add('generating');
-
-        setTimeout(() => {
-            const uuids = [];
-            for (let i = 0; i < qty; i++) {
-                uuids.push(generateUUID(version));
-            }
-
-            renderResults(uuids, format, version);
-            generateBtn.classList.remove('generating');
-        }, 300);
-    }
-
-    // ===== BULK COPY =====
-
-    function copyBulk() {
-        if (currentUUIDs.length === 0) {
-            showToast(i18n[getLang()].noUUIDs);
-            return;
-        }
-
-        const format = getActiveFormat();
-        const text = currentUUIDs.map(u => formatUUID(u, format)).join('\n');
-        copyToClipboard(text, bulkCopyBtn);
-    }
-
-    // ===== EVENT BINDING =====
-
-    // Quantity slider
-    qtySlider.addEventListener('input', function() {
-        qtyDisplay.textContent = this.value;
-    });
-
-    // Format buttons
-    formatGroup.querySelectorAll('.format-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            formatGroup.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            currentFormat = this.dataset.format;
-
-            // Re-render existing results with new format
-            if (currentUUIDs.length > 0) {
-                const version = versionSelect.value;
-                renderResults(currentUUIDs, getActiveFormat(), version);
-            }
-        });
-    });
-
-    // Generate button
-    generateBtn.addEventListener('click', doGenerate);
-
-    // Bulk copy
-    bulkCopyBtn.addEventListener('click', copyBulk);
-
-    // Keyboard shortcut: Enter to generate
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && !e.target.matches('input, textarea, select, button')) {
-            doGenerate();
-        }
-    });
-
-    // Language switcher
-    langSelect.addEventListener('change', function() {
-        setLang(this.value);
-        applyLanguage(this.value);
-        // Re-render results with new language
+  var formatBtns = formatGroup.querySelectorAll('.format-btn');
+  for (var i = 0; i < formatBtns.length; i++) {
+    (function(btn) {
+      btn.addEventListener('click', function() {
+        var all = formatGroup.querySelectorAll('.format-btn');
+        for (var j = 0; j < all.length; j++) all[j].classList.remove('active');
+        btn.classList.add('active');
         if (currentUUIDs.length > 0) {
-            renderResults(currentUUIDs, getActiveFormat(), currentVersion);
+          renderResults(currentUUIDs, getActiveFormat(), versionSelect.value);
         }
-        // Update toggle theme text
-        applyTheme(getTheme());
-    });
+      });
+    })(formatBtns[i]);
+  }
 
-    // Theme toggle
-    themeToggle.addEventListener('click', function() {
-        const current = getTheme();
-        const next = current === 'dark' ? 'light' : 'dark';
-        setTheme(next);
-    });
+  generateBtn.addEventListener('click', doGenerate);
+  bulkCopyBtn.addEventListener('click', copyBulk);
 
-    // ===== INIT =====
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.target.matches('input, textarea, select, button')) {
+      doGenerate();
+    }
+  });
 
-    initLanguage();
-    initTheme();
+  updateVersionOptions();
 
-    // Generate initial UUIDs on load for demo
-    setTimeout(() => {
-        doGenerate();
-    }, 100);
+  setTimeout(function() {
+    doGenerate();
+  }, 100);
 
 })();
 </script>
-
 </body>
 </html>

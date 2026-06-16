@@ -15,6 +15,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JSON Formatter — Hyrule Toolbox</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
 <link rel="stylesheet" href="css/tools.css">
 <style>
 /* ===== FULL WIDTH LAYOUT ===== */
@@ -125,31 +126,6 @@
   border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-tertiary);
 }
 
-/* ===== LANGUAGE SWITCHER ===== */
-.lang-switcher { position: relative; margin-left: auto; }
-.lang-btn {
-  background: none; border: 1px solid var(--border-color-strong); padding: 6px 12px;
-  border-radius: var(--radius-md); color: var(--text-secondary); font-size: 13px;
-  font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px;
-  transition: all var(--transition-fast); font-family: var(--font-sans);
-}
-.lang-btn:hover { color: var(--text-primary); background: var(--bg-hover); }
-.lang-dropdown {
-  position: absolute; top: 100%; right: 0; margin-top: 4px;
-  background: var(--bg-card); border: 1px solid var(--border-color-strong);
-  border-radius: var(--radius-md); box-shadow: var(--shadow-md); min-width: 160px;
-  z-index: 200; display: none; overflow: hidden;
-}
-.lang-dropdown.open { display: block; }
-.lang-dropdown button {
-  display: block; width: 100%; padding: 10px 16px; border: none;
-  background: transparent; color: var(--text-primary); font-size: 14px;
-  text-align: left; cursor: pointer; transition: background var(--transition-fast);
-  font-family: var(--font-sans);
-}
-.lang-dropdown button:hover { background: var(--bg-hover); }
-.lang-dropdown button.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
-
 @media (max-width: 900px) {
   .json-layout { grid-template-columns: 1fr; }
 }
@@ -173,62 +149,75 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="header-logo"><span class="logo-icon">🔧</span><span>Hyrule Toolbox</span></a>
+    <a href="/" class="header-logo">
+      <span class="logo-icon">T</span>
+      <span data-i18n="header.logo">Hyrule Toolbox</span>
+    </a>
     <nav class="header-nav">
-      <a href="/">Home</a>
-      <a href="json-formatter.html" class="active">JSON</a>
+      <a href="password-generator.html" data-i18n-title="nav.password" title="Password Generator">🔑</a>
+      <a href="unit-converter.html" data-i18n-title="nav.unit" title="Unit Converter">📐</a>
+      <a href="text-counter.html" data-i18n-title="nav.counter" title="Text Counter">📊</a>
+      <a href="text-case.html" data-i18n-title="nav.case" title="Case Converter">🔤</a>
+      <a href="uuid-generator.html" data-i18n-title="nav.uuid" title="UUID Generator">🆔</a>
+      <a href="color-converter.html" data-i18n-title="nav.color" title="Color Converter">🎨</a>
+      <a href="json-formatter.html" class="active" data-i18n-title="nav.json" title="JSON Formatter">{ }</a>
+      <a href="qr-generator.html" data-i18n-title="nav.qr" title="QR Code Generator">📱</a>
     </nav>
-    <div class="lang-switcher">
-      <button class="lang-btn" id="langBtn">🌐 EN</button>
-      <div class="lang-dropdown" id="langDropdown">
-        <button data-lang="en" class="active">🇬🇧 English</button>
-        <button data-lang="zh">🇨🇳 中文</button>
-        <button data-lang="ja">🇯🇵 日本語</button>
-        <button data-lang="ko">🇰🇷 한국어</button>
-        <button data-lang="fr">🇫🇷 Français</button>
-        <button data-lang="de">🇩🇪 Deutsch</button>
+    <div class="header-controls">
+      <div class="lang-switcher">
+        <select id="langSelect" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
       </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
     </div>
-    <button class="theme-toggle" id="themeToggle">🌙</button>
   </div>
 </header>
 
 <main class="json-page" id="jsonMain">
   <div class="tool-section">
     <div class="tool-header" id="jsonHeader">
-      <h1>{ } JSON Formatter &amp; Viewer</h1>
-      <p>Format, validate, and visualize JSON — supports JSON5 with comments, trailing commas, auto-fix.</p>
+      <div class="breadcrumb">
+        <a href="/" data-i18n="footer.home">Home</a> <span>›</span> <span data-i18n="json.nav">JSON Formatter</span>
+      </div>
+      <h1 data-i18n="json.title">{ } JSON Formatter &amp; Viewer</h1>
+      <p data-i18n="json.desc">Format, validate, and visualize JSON — supports JSON5 with comments, trailing commas, auto-fix.</p>
     </div>
 
     <div class="json-toolbar">
-      <button class="btn btn-primary" id="formatBtn">▶ Format</button>
-      <button class="btn btn-secondary" id="copyBtn">📋 Copy All</button>
-      <button class="btn btn-secondary" id="collapseBtn">📂 Collapse</button>
-      <button class="btn btn-secondary" id="expandBtn">📂 Expand</button>
-      <button class="btn btn-secondary" id="clearBtn">🗑 Clear</button>
-      <button class="btn btn-secondary" id="sampleBtn">📄 Sample</button>
+      <button class="btn btn-primary" id="formatBtn" data-i18n="json.btn.format">▶ Format</button>
+      <button class="btn btn-secondary" id="copyBtn" data-i18n="json.btn.copy">📋 Copy All</button>
+      <button class="btn btn-secondary" id="collapseBtn" data-i18n="json.btn.collapse">📂 Collapse</button>
+      <button class="btn btn-secondary" id="expandBtn" data-i18n="json.btn.expand">📂 Expand</button>
+      <button class="btn btn-secondary" id="clearBtn" data-i18n="json.btn.clear">🗑 Clear</button>
+      <button class="btn btn-secondary" id="sampleBtn" data-i18n="json.btn.sample">📄 Sample</button>
     </div>
 
     <div class="json-layout">
       <div class="json-panel">
         <div class="json-panel-header">
-          <span>📝 Input</span>
+          <span data-i18n="json.label.input">📝 Input</span>
           <span id="inputStats"></span>
         </div>
         <div class="json-panel-body">
-          <textarea id="jsonInput" placeholder='Paste JSON here... Supports JSON5 (comments, trailing commas, single quotes). Auto-formats on paste.' spellcheck="false"></textarea>
+          <textarea id="jsonInput" data-i18n-placeholder="json.placeholder" placeholder="Paste JSON here... Supports JSON5 (comments, trailing commas, single quotes). Auto-formats on paste." spellcheck="false"></textarea>
         </div>
       </div>
 
       <div class="json-panel">
         <div class="json-panel-header">
-          <span>🌳 Tree View</span>
+          <span data-i18n="json.label.tree">🌳 Tree View</span>
           <span id="outputStats"></span>
-          <button class="btn-icon" id="fullscreenBtn" title="Fullscreen" style="width:28px;height:28px;font-size:13px;margin-left:auto">⛶</button>
+          <button class="btn-icon" id="fullscreenBtn" data-i18n-title="json.fullscreen" title="Fullscreen" style="width:28px;height:28px;font-size:13px;margin-left:auto">⛶</button>
         </div>
         <div class="json-panel-body">
           <div class="tree-wrap" id="treeWrap">
-            <div class="empty-state">Paste JSON and <strong>Format</strong> to see the tree view</div>
+            <div class="empty-state" data-i18n-html="json.emptyState">Paste JSON and <strong>Format</strong> to see the tree view</div>
           </div>
         </div>
       </div>
@@ -237,15 +226,252 @@
 </main>
 
 <footer class="site-footer">
-  <div class="footer-inner"><span>© 2026 Hyrule Toolbox</span><span><a href="/">Home</a> · JSON Formatter</span></div>
+  <div class="footer-inner">
+    <span>&copy; 2026 <a href="https://zhczlx.com">Hyrule Toolbox</a></span>
+    <nav>
+      <a href="/" data-i18n="footer.home">Home</a>
+      <a href="https://zhczlx.com/about" data-i18n="footer.about">About</a>
+      <a href="mailto:hi@zhczlx.com" data-i18n="footer.contact">Contact</a>
+    </nav>
+  </div>
 </footer>
 
+<script>
+window.__pageTranslations = {
+  en: {
+    'page.title': 'JSON Formatter — Hyrule Toolbox',
+    'page.description': 'The most powerful JSON formatter online. Supports JSON5 (comments, trailing commas, single quotes). Auto-fix broken JSON. Visual tree view with fold/expand and copy subtree.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Password Generator', 'nav.unit': 'Unit Converter', 'nav.counter': 'Text Counter',
+    'nav.case': 'Case Converter', 'nav.uuid': 'UUID Generator', 'nav.color': 'Color Converter', 'nav.json': 'JSON Formatter', 'nav.qr': 'QR Code Generator',
+    'footer.home': 'Home', 'footer.about': 'About', 'footer.contact': 'Contact',
+    'toast.copied': '✅ Copied!', 'toast.failed': '❌ Copy failed',
+    'json.nav': 'JSON Formatter',
+    'json.title': '{ } JSON Formatter & Viewer',
+    'json.desc': 'Format, validate, and visualize JSON — supports JSON5 with comments, trailing commas, auto-fix.',
+    'json.placeholder': 'Paste JSON here... Supports JSON5 (comments, trailing commas, single quotes). Auto-formats on paste.',
+    'json.emptyState': 'Paste JSON and <strong>Format</strong> to see the tree view',
+    'json.btn.format': '▶ Format',
+    'json.btn.copy': '📋 Copy All',
+    'json.btn.collapse': '📂 Collapse',
+    'json.btn.expand': '📂 Expand',
+    'json.btn.clear': '🗑 Clear',
+    'json.btn.sample': '📄 Sample',
+    'json.label.input': '📝 Input',
+    'json.label.tree': '🌳 Tree View',
+    'json.fullscreen': 'Fullscreen',
+    'json.exitFullscreen': 'Exit fullscreen',
+    'json.copySubtree': 'Copy this subtree',
+    'json.error.empty': 'Empty input',
+    'json.stats.lines': 'lines',
+    'json.stats.chars': 'chars',
+    'json.stats.autofix': 'auto-fixed ⚡',
+    'json.summary.keys': 'keys',
+    'json.summary.items': 'items',
+    'json.toast.empty': 'Nothing to copy',
+    'json.toast.copyFailed': 'Copy failed',
+    'json.toast.cleared': 'Cleared',
+    'json.toast.sampleLoaded': '📄 Sample loaded',
+    'json.toast.formatted': '✅ Formatted',
+    'json.toast.formattedFixed': '✅ Formatted with auto-fix'
+  },
+  zh: {
+    'page.title': 'JSON 格式化 — Hyrule Toolbox',
+    'page.description': '最强大的在线 JSON 格式化工具。支持 JSON5（注释、尾逗号、单引号），自动修复错误 JSON，树形视图折叠/展开与复制子树。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '密码生成器', 'nav.unit': '单位换算', 'nav.counter': '文本统计',
+    'nav.case': '大小写转换', 'nav.uuid': 'UUID生成', 'nav.color': '颜色转换', 'nav.json': 'JSON格式化', 'nav.qr': '二维码生成',
+    'footer.home': '首页', 'footer.about': '关于', 'footer.contact': '联系',
+    'toast.copied': '✅ 已复制!', 'toast.failed': '❌ 复制失败',
+    'json.nav': 'JSON 格式化',
+    'json.title': '{ } JSON 格式化与查看器',
+    'json.desc': '格式化、验证与可视化 JSON — 支持 JSON5（注释、尾逗号），自动修复。',
+    'json.placeholder': '在此粘贴 JSON... 支持 JSON5（注释、尾逗号、单引号），粘贴自动格式化。',
+    'json.emptyState': '粘贴 JSON 后点击 <strong>格式化</strong> 查看树视图',
+    'json.btn.format': '▶ 格式化',
+    'json.btn.copy': '📋 复制全部',
+    'json.btn.collapse': '📂 全部折叠',
+    'json.btn.expand': '📂 全部展开',
+    'json.btn.clear': '🗑 清空',
+    'json.btn.sample': '📄 示例',
+    'json.label.input': '📝 输入',
+    'json.label.tree': '🌳 树视图',
+    'json.fullscreen': '全屏',
+    'json.exitFullscreen': '退出全屏',
+    'json.copySubtree': '复制此子树',
+    'json.error.empty': '输入为空',
+    'json.stats.lines': '行',
+    'json.stats.chars': '字符',
+    'json.stats.autofix': '已自动修复 ⚡',
+    'json.summary.keys': '个键',
+    'json.summary.items': '项',
+    'json.toast.empty': '没有可复制的内容',
+    'json.toast.copyFailed': '复制失败',
+    'json.toast.cleared': '已清空',
+    'json.toast.sampleLoaded': '📄 示例已加载',
+    'json.toast.formatted': '✅ 格式化成功',
+    'json.toast.formattedFixed': '✅ 格式化成功（已自动修复）'
+  },
+  ja: {
+    'page.title': 'JSON フォーマッター — Hyrule Toolbox',
+    'page.description': '最強のオンライン JSON フォーマッター。JSON5対応（コメント、末尾カンマ、シングルクォート）、自動修正、折りたたみ/展開とサブツリーコピー付きツリービュー。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'パスワード生成', 'nav.unit': '単位変換', 'nav.counter': 'テキスト統計',
+    'nav.case': '大文字小文字変換', 'nav.uuid': 'UUID生成', 'nav.color': 'カラー変換', 'nav.json': 'JSONフォーマッター', 'nav.qr': 'QRコード生成',
+    'footer.home': 'ホーム', 'footer.about': '概要', 'footer.contact': 'お問い合わせ',
+    'toast.copied': '✅ コピーしました!', 'toast.failed': '❌ コピー失敗',
+    'json.nav': 'JSON フォーマッター',
+    'json.title': '{ } JSON フォーマッター & ビューアー',
+    'json.desc': 'JSONをフォーマット、検証、可視化 — JSON5対応（コメント、末尾カンマ、シングルクォート）、自動修正。',
+    'json.placeholder': 'ここにJSONを貼り付け... JSON5対応（コメント、末尾カンマ、シングルクォート）、貼り付け自動フォーマット。',
+    'json.emptyState': 'JSONを貼り付けて <strong>フォーマット</strong> をクリック',
+    'json.btn.format': '▶ フォーマット',
+    'json.btn.copy': '📋 すべてコピー',
+    'json.btn.collapse': '📂 すべて折りたたむ',
+    'json.btn.expand': '📂 すべて展開',
+    'json.btn.clear': '🗑 クリア',
+    'json.btn.sample': '📄 サンプル',
+    'json.label.input': '📝 入力',
+    'json.label.tree': '🌳 ツリービュー',
+    'json.fullscreen': '全画面',
+    'json.exitFullscreen': '全画面終了',
+    'json.copySubtree': 'このサブツリーをコピー',
+    'json.error.empty': '入力が空です',
+    'json.stats.lines': '行',
+    'json.stats.chars': '文字',
+    'json.stats.autofix': '自動修正 ⚡',
+    'json.summary.keys': 'キー',
+    'json.summary.items': '項目',
+    'json.toast.empty': 'コピーするものがありません',
+    'json.toast.copyFailed': 'コピー失敗',
+    'json.toast.cleared': 'クリアしました',
+    'json.toast.sampleLoaded': '📄 サンプルを読み込みました',
+    'json.toast.formatted': '✅ フォーマット成功',
+    'json.toast.formattedFixed': '✅ フォーマット成功（自動修正あり）'
+  },
+  ko: {
+    'page.title': 'JSON 포맷터 — Hyrule Toolbox',
+    'page.description': '가장 강력한 온라인 JSON 포맷터. JSON5 지원(주석, 후행 쉼표, 작은따옴표), 자동 수정, 접기/펼치기 및 서브트리 복사가 가능한 트리 뷰.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '비밀번호 생성기', 'nav.unit': '단위 변환', 'nav.counter': '텍스트 통계',
+    'nav.case': '대소문자 변환', 'nav.uuid': 'UUID 생성', 'nav.color': '색상 변환', 'nav.json': 'JSON 포맷터', 'nav.qr': 'QR코드 생성',
+    'footer.home': '홈', 'footer.about': '소개', 'footer.contact': '문의',
+    'toast.copied': '✅ 복사됨!', 'toast.failed': '❌ 복사 실패',
+    'json.nav': 'JSON 포맷터',
+    'json.title': '{ } JSON 포맷터 & 뷰어',
+    'json.desc': 'JSON 포맷팅, 검증, 시각화 — JSON5 지원 (주석, 후행 쉼표, 작은따옴표), 자동 수정.',
+    'json.placeholder': '여기에 JSON을 붙여넣기... JSON5 지원 (주석, 후행 쉼표, 작은따옴표). 붙여넣기 자동 포맷.',
+    'json.emptyState': 'JSON을 붙여넣고 <strong>포맷</strong>을 클릭하세요',
+    'json.btn.format': '▶ 포맷',
+    'json.btn.copy': '📋 전체 복사',
+    'json.btn.collapse': '📂 모두 접기',
+    'json.btn.expand': '📂 모두 펼치기',
+    'json.btn.clear': '🗑 지우기',
+    'json.btn.sample': '📄 샘플',
+    'json.label.input': '📝 입력',
+    'json.label.tree': '🌳 트리 뷰',
+    'json.fullscreen': '전체 화면',
+    'json.exitFullscreen': '전체 화면 종료',
+    'json.copySubtree': '이 서브트리 복사',
+    'json.error.empty': '입력이 비어 있음',
+    'json.stats.lines': '줄',
+    'json.stats.chars': '자',
+    'json.stats.autofix': '자동 수정 ⚡',
+    'json.summary.keys': '키',
+    'json.summary.items': '항목',
+    'json.toast.empty': '복사할 내용 없음',
+    'json.toast.copyFailed': '복사 실패',
+    'json.toast.cleared': '지워짐',
+    'json.toast.sampleLoaded': '📄 샘플 로드됨',
+    'json.toast.formatted': '✅ 포맷 성공',
+    'json.toast.formattedFixed': '✅ 포맷 성공 (자동 수정됨)'
+  },
+  fr: {
+    'page.title': 'Formateur JSON — Hyrule Toolbox',
+    'page.description': 'Le formateur JSON en ligne le plus puissant. Prend en charge JSON5 (commentaires, virgules finales, guillemets simples). Correction automatique, arborescence avec plier/déplier et copie de sous-arbre.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Générateur de mots de passe', 'nav.unit': "Convertisseur d'unités", 'nav.counter': 'Compteur de texte',
+    'nav.case': 'Convertisseur de casse', 'nav.uuid': 'Générateur UUID', 'nav.color': 'Convertisseur de couleurs', 'nav.json': 'Formateur JSON', 'nav.qr': 'Générateur de QR Code',
+    'footer.home': 'Accueil', 'footer.about': 'À propos', 'footer.contact': 'Contact',
+    'toast.copied': '✅ Copié!', 'toast.failed': '❌ Échec de la copie',
+    'json.nav': 'Formateur JSON',
+    'json.title': '{ } Formateur & Visionneuse JSON',
+    'json.desc': 'Formatez, validez et visualisez du JSON — prend en charge JSON5 (commentaires, virgules finales), correction automatique.',
+    'json.placeholder': 'Collez votre JSON ici... Prend en charge JSON5 (commentaires, virgules finales, guillemets simples). Formatage automatique au collage.',
+    'json.emptyState': 'Collez du JSON et cliquez sur <strong>Formater</strong>',
+    'json.btn.format': '▶ Formater',
+    'json.btn.copy': '📋 Tout copier',
+    'json.btn.collapse': '📂 Tout plier',
+    'json.btn.expand': '📂 Tout déplier',
+    'json.btn.clear': '🗑 Effacer',
+    'json.btn.sample': '📄 Exemple',
+    'json.label.input': '📝 Entrée',
+    'json.label.tree': '🌳 Arborescence',
+    'json.fullscreen': 'Plein écran',
+    'json.exitFullscreen': 'Quitter le plein écran',
+    'json.copySubtree': 'Copier ce sous-arbre',
+    'json.error.empty': 'Entrée vide',
+    'json.stats.lines': 'lignes',
+    'json.stats.chars': 'car.',
+    'json.stats.autofix': 'correction auto ⚡',
+    'json.summary.keys': 'clés',
+    'json.summary.items': 'éléments',
+    'json.toast.empty': 'Rien à copier',
+    'json.toast.copyFailed': 'Échec de la copie',
+    'json.toast.cleared': 'Effacé',
+    'json.toast.sampleLoaded': '📄 Exemple chargé',
+    'json.toast.formatted': '✅ Formaté',
+    'json.toast.formattedFixed': '✅ Formaté (correction automatique)'
+  },
+  de: {
+    'page.title': 'JSON-Formatierer — Hyrule Toolbox',
+    'page.description': 'Der leistungsstärkste JSON-Formatierer online. Unterstützt JSON5 (Kommentare, nachgestellte Kommas, einfache Anführungszeichen). Automatische Korrektur, Baumansicht mit Ein-/Ausklappen und Unterbaum-Kopie.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Passwortgenerator', 'nav.unit': 'Einheitenumrechner', 'nav.counter': 'Textzähler',
+    'nav.case': 'Fallumwandler', 'nav.uuid': 'UUID-Generator', 'nav.color': 'Farbkonverter', 'nav.json': 'JSON-Formatierer', 'nav.qr': 'QR-Code-Generator',
+    'footer.home': 'Startseite', 'footer.about': 'Über uns', 'footer.contact': 'Kontakt',
+    'toast.copied': '✅ Kopiert!', 'toast.failed': '❌ Kopieren fehlgeschlagen',
+    'json.nav': 'JSON-Formatierer',
+    'json.title': '{ } JSON-Formatierer & -Anzeige',
+    'json.desc': 'JSON formatieren, validieren und visualisieren — unterstützt JSON5 (Kommentare, nachgestellte Kommas), automatische Korrektur.',
+    'json.placeholder': 'JSON hier einfügen... Unterstützt JSON5 (Kommentare, nachgestellte Kommas, einfache Anführungszeichen). Auto-Format beim Einfügen.',
+    'json.emptyState': 'JSON einfügen und auf <strong>Formatieren</strong> klicken',
+    'json.btn.format': '▶ Formatieren',
+    'json.btn.copy': '📋 Alles kopieren',
+    'json.btn.collapse': '📂 Alle einklappen',
+    'json.btn.expand': '📂 Alle ausklappen',
+    'json.btn.clear': '🗑 Löschen',
+    'json.btn.sample': '📄 Beispiel',
+    'json.label.input': '📝 Eingabe',
+    'json.label.tree': '🌳 Baumansicht',
+    'json.fullscreen': 'Vollbild',
+    'json.exitFullscreen': 'Vollbild beenden',
+    'json.copySubtree': 'Diesen Unterbaum kopieren',
+    'json.error.empty': 'Keine Eingabe',
+    'json.stats.lines': 'Zeilen',
+    'json.stats.chars': 'Zch.',
+    'json.stats.autofix': 'auto-korrigiert ⚡',
+    'json.summary.keys': 'Schlüssel',
+    'json.summary.items': 'Elemente',
+    'json.toast.empty': 'Nichts zu kopieren',
+    'json.toast.copyFailed': 'Kopieren fehlgeschlagen',
+    'json.toast.cleared': 'Gelöscht',
+    'json.toast.sampleLoaded': '📄 Beispiel geladen',
+    'json.toast.formatted': '✅ Formatiert',
+    'json.toast.formattedFixed': '✅ Formatiert (automatisch korrigiert)'
+  }
+};
+</script>
+<script src="js/theme.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
 <script>
 (function() {
   'use strict';
 
   var $ = function(id) { return document.getElementById(id); };
-  var toast = $('toast');
+  function t(key) { return window.HyruleI18n ? window.HyruleI18n.t(key) : key; }
+
   var jsonInput = $('jsonInput');
   var treeWrap = $('treeWrap');
   var formatBtn = $('formatBtn');
@@ -263,6 +489,22 @@
 
   var _lastFormatted = '';
   var _lastData = null;
+
+  function formatInputStats(lines, chars) {
+    return lines + ' ' + t('json.stats.lines') + ' · ' + chars + ' ' + t('json.stats.chars');
+  }
+
+  function formatOutputStats(len, fixed) {
+    var s = len + ' ' + t('json.stats.chars');
+    if (fixed) s += ' · ' + t('json.stats.autofix');
+    return s;
+  }
+
+  function emptyStateHtml() {
+    return '<div class="empty-state">' + t('json.emptyState') + '</div>';
+  }
+
+  function copySubtreeTitle() { return t('json.copySubtree'); }
 
   // ===== VIEWPORT HEIGHT FILL =====
   function resizePanels() {
@@ -315,7 +557,7 @@
   }
 
   function parseJSON(str) {
-    if (!str || !str.trim()) return { success: false, error: 'Empty input' };
+    if (!str || !str.trim()) return { success: false, error: t('json.error.empty') };
     var cleaned = cleanJSON5(str);
     try { return { success: true, data: JSON.parse(cleaned), fixed: false }; }
     catch (e) {
@@ -338,7 +580,7 @@
     function line(html) { return '<div class="json-line">' + html + '</div>'; }
     function toggleTag(id) { return '<span class="json-toggle" id="tg_' + id + '" onclick="tg(\'' + id + '\')">▼</span>'; }
     function emptyT() { return '<span class="json-toggle empty"></span>'; }
-    function copyTag(id) { return '<span class="json-copy-sub" title="Copy this subtree" onclick="copySub(\'' + id + '\', event)">📋</span>'; }
+    function copyTag(id) { return '<span class="json-copy-sub" title="' + esc(copySubtreeTitle()) + '" onclick="copySub(\'' + id + '\', event)">📋</span>'; }
 
     function val(v, k, parPath) {
       var path = parPath;
@@ -370,7 +612,7 @@
       var h = '<div class="json-line" style="cursor:pointer" onclick="tg(\'' + id + '\')">'
         + kHtml + toggleTag(id)
         + '<span class="json-bracket">{</span>'
-        + ' <span class="json-summary">' + keys.length + ' keys</span>'
+        + ' <span class="json-summary">' + keys.length + ' ' + t('json.summary.keys') + '</span>'
         + ' <span class="json-bracket">}</span>'
         + copyTag('s_' + id)
         + '</div>'
@@ -397,7 +639,7 @@
       var h = '<div class="json-line" style="cursor:pointer" onclick="tg(\'' + id + '\')">'
         + kHtml + toggleTag(id)
         + '<span class="json-bracket">[</span>'
-        + ' <span class="json-summary">' + a.length + ' items</span>'
+        + ' <span class="json-summary">' + a.length + ' ' + t('json.summary.items') + '</span>'
         + ' <span class="json-bracket">]</span>'
         + copyTag('s_' + id)
         + '</div>'
@@ -429,27 +671,20 @@
 
   window.copySub = function(id, ev) {
     if (ev) { ev.stopPropagation(); }
-    if (!_lastData) { showToast('Nothing to copy'); return; }
+    if (!_lastData) { showToast(t('json.toast.empty')); return; }
 
-    // Resolve the subtree path from the node id
-    // Map node IDs to paths using data attributes in the rendered tree
     var ch = document.getElementById('ch_' + id.replace('s_', ''));
-    if (!ch) { showToast('Nothing to copy'); return; }
+    if (!ch) { showToast(t('json.toast.empty')); return; }
 
-    // Walk _lastData to find the right subtree by matching the DOM structure
-    // Simpler approach: use the path stored in the node
     var nodeEl = ch.parentNode;
-    // Find the line that has onclick=tg
     var headerLine = nodeEl ? nodeEl.querySelector('.json-line') : null;
-    if (!headerLine) { showToast('Copy failed'); return; }
+    if (!headerLine) { showToast(t('json.toast.copyFailed')); return; }
 
-    // We stored _lastSubData map during render
     var subData = _lastSubMap ? _lastSubMap[id] : null;
     if (subData !== null && subData !== undefined) {
-      copyText(JSON.stringify(subData, null, 2));
+      copyToClipboard(JSON.stringify(subData, null, 2), t('toast.copied'));
     } else {
-      // Last resort: copy all formatted data
-      copyText(_lastFormatted);
+      copyToClipboard(_lastFormatted, t('toast.copied'));
     }
   };
 
@@ -491,9 +726,9 @@
       treeWrap.innerHTML = html;
 
       var lines = input.split('\n').length;
-      inputStats.textContent = lines + ' lines · ' + input.length + ' chars';
-      outputStats.textContent = _lastFormatted.length + ' chars' + (result.fixed ? ' · auto-fixed ⚡' : '');
-      showToast(result.fixed ? '✅ Formatted with auto-fix' : '✅ Formatted');
+      inputStats.textContent = formatInputStats(lines, input.length);
+      outputStats.textContent = formatOutputStats(_lastFormatted.length, result.fixed);
+      showToast(result.fixed ? t('json.toast.formattedFixed') : t('json.toast.formatted'));
     } else {
       treeWrap.innerHTML = '<div class="error-state">❌ ' + result.error + '</div>';
       _lastData = null; _lastFormatted = ''; _lastSubMap = null;
@@ -513,7 +748,7 @@
     function line(html) { return '<div class="json-line">' + html + '</div>'; }
     function toggleTag(id) { return '<span class="json-toggle" id="tg_' + id + '" onclick="event.stopPropagation();tg(\'' + id + '\')">▼</span>'; }
     function emptyT() { return '<span class="json-toggle empty"></span>'; }
-    function copyTag(id) { return '<span class="json-copy-sub" title="Copy this subtree" onclick="copySub(\'' + id + '\', event)">📋</span>'; }
+    function copyTag(id) { return '<span class="json-copy-sub" title="' + esc(copySubtreeTitle()) + '" onclick="copySub(\'' + id + '\', event)">📋</span>'; }
 
     function val(v, k) {
       var kHtml = k !== undefined
@@ -539,7 +774,7 @@
       _lastSubMap['s_' + id] = o;
       var h = '<div class="json-line" style="cursor:pointer" onclick="tg(\'' + id + '\')">'
         + kHtml + toggleTag(id)
-        + '<span class="json-bracket">{</span> <span class="json-summary">' + keys.length + ' keys</span>'
+        + '<span class="json-bracket">{</span> <span class="json-summary">' + keys.length + ' ' + t('json.summary.keys') + '</span>'
         + ' <span class="json-bracket">}</span>' + copyTag('s_' + id) + '</div>'
         + '<div class="json-children" id="ch_' + id + '">';
       for (var i = 0; i < keys.length; i++) {
@@ -560,7 +795,7 @@
       _lastSubMap['s_' + id] = a;
       var h = '<div class="json-line" style="cursor:pointer" onclick="tg(\'' + id + '\')">'
         + kHtml + toggleTag(id)
-        + '<span class="json-bracket">[</span> <span class="json-summary">' + a.length + ' items</span>'
+        + '<span class="json-bracket">[</span> <span class="json-summary">' + a.length + ' ' + t('json.summary.items') + '</span>'
         + ' <span class="json-bracket">]</span>' + copyTag('s_' + id) + '</div>'
         + '<div class="json-children" id="ch_' + id + '">';
       for (var i = 0; i < a.length; i++) {
@@ -599,42 +834,24 @@
   function loadSample() {
     jsonInput.value = SAMPLES[sIdx % SAMPLES.length];
     sIdx++;
-    inputStats.textContent = jsonInput.value.split('\n').length + ' lines · ' + jsonInput.value.length + ' chars';
-    showToast('📄 Sample loaded');
+    inputStats.textContent = formatInputStats(jsonInput.value.split('\n').length, jsonInput.value.length);
+    showToast(t('json.toast.sampleLoaded'));
     setTimeout(doFormat, 50);
-  }
-
-  // ===== TOAST / COPY =====
-  function showToast(msg) {
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toast._t);
-    toast._t = setTimeout(function() { toast.classList.remove('show'); }, 2000);
-  }
-  function copyText(text) {
-    if (!text) { showToast('Nothing to copy'); return; }
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(function() { showToast('✅ Copied!'); }).catch(function() { fallbackCopy(text); });
-    } else { fallbackCopy(text); }
-  }
-  function fallbackCopy(text) {
-    var ta = document.createElement('textarea');
-    ta.value = text; ta.style.position='fixed'; ta.style.left='-9999px';
-    document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); showToast('✅ Copied!'); } catch(e) { showToast('Copy failed'); }
-    document.body.removeChild(ta);
   }
 
   // ===== EVENTS =====
   formatBtn.addEventListener('click', doFormat);
-  copyBtn.addEventListener('click', function() { copyText(_lastFormatted); });
+  copyBtn.addEventListener('click', function() {
+    if (!_lastFormatted) { showToast(t('json.toast.empty')); return; }
+    copyToClipboard(_lastFormatted, t('toast.copied'));
+  });
   collapseBtn.addEventListener('click', collapseAll);
   expandBtn.addEventListener('click', expandAll);
   clearBtn.addEventListener('click', function() {
     jsonInput.value = ''; _lastFormatted = ''; _lastData = null; _lastSubMap = null;
-    treeWrap.innerHTML = '<div class="empty-state">Paste JSON and click <strong>Format</strong> to see the tree view</div>';
+    treeWrap.innerHTML = emptyStateHtml();
     inputStats.textContent = ''; outputStats.textContent = '';
-    showToast('Cleared');
+    showToast(t('json.toast.cleared'));
   });
   sampleBtn.addEventListener('click', loadSample);
   jsonInput.addEventListener('keydown', function(e) {
@@ -650,13 +867,12 @@
     if (_isFullscreen) {
       rightPanel.classList.add('json-fullscreen');
       fullscreenBtn.textContent = '✕';
-      fullscreenBtn.title = 'Exit fullscreen';
-      // Update tree height
+      fullscreenBtn.title = t('json.exitFullscreen');
       setTimeout(resizePanels, 100);
     } else {
       rightPanel.classList.remove('json-fullscreen');
       fullscreenBtn.textContent = '⛶';
-      fullscreenBtn.title = 'Fullscreen';
+      fullscreenBtn.title = t('json.fullscreen');
       resizePanels();
     }
   }
@@ -668,268 +884,21 @@
     }
   });
 
-  // ===== I18N =====
-  var LANG = {
-    en: {
-      title: 'JSON Formatter — Hyrule Toolbox',
-      siteName: 'Hyrule Toolbox',
-      home: 'Home',
-      navJson: 'JSON',
-      pageTitle: '{ } JSON Formatter & Viewer',
-      pageDesc: 'Format, validate, and visualize JSON — supports JSON5 with comments, trailing commas, auto-fix.',
-      inputPlaceholder: 'Paste JSON here... Supports JSON5 (comments, trailing commas, single quotes). Auto-formats on paste.',
-      emptyState: 'Paste JSON and <strong>Format</strong> to see the tree view',
-      btnFormat: '▶ Format',
-      btnCopy: '📋 Copy All',
-      btnCollapse: '📂 Collapse',
-      btnExpand: '📂 Expand',
-      btnClear: '🗑 Clear',
-      btnSample: '📄 Sample',
-      inputLabel: '📝 Input',
-      treeLabel: '🌳 Tree View',
-      fullscreenTitle: 'Fullscreen',
-      exitFullscreenTitle: 'Exit fullscreen',
-      copied: '✅ Copied!',
-      cleared: 'Cleared',
-      sampleLoaded: '📄 Sample loaded',
-      formatted: '✅ Formatted',
-      formattedFixed: '✅ Formatted with auto-fix',
-      nothingCopy: 'Nothing to copy',
-      copyFailed: 'Copy failed',
-      emptyInput: 'Empty input',
-      chars: 'chars',
-      lines: 'lines',
-      keys: 'keys',
-      items: 'items',
-    },
-    zh: {
-      title: 'JSON 格式化 — 海拉鲁工具箱',
-      siteName: '海拉鲁工具箱',
-      home: '首页',
-      navJson: 'JSON',
-      pageTitle: '{ } JSON 格式化与查看器',
-      pageDesc: '格式化、验证与可视化 JSON — 支持 JSON5（注释、尾逗号），自动修复。',
-      inputPlaceholder: '在此粘贴 JSON... 支持 JSON5（注释、尾逗号、单引号），粘贴自动格式化。',
-      emptyState: '粘贴 JSON 后点击 <strong>格式化</strong> 查看树视图',
-      btnFormat: '▶ 格式化',
-      btnCopy: '📋 复制全部',
-      btnCollapse: '📂 全部折叠',
-      btnExpand: '📂 全部展开',
-      btnClear: '🗑 清空',
-      btnSample: '📄 示例',
-      inputLabel: '📝 输入',
-      treeLabel: '🌳 树视图',
-      fullscreenTitle: '全屏',
-      exitFullscreenTitle: '退出全屏',
-      copied: '✅ 已复制!',
-      cleared: '已清空',
-      sampleLoaded: '📄 示例已加载',
-      formatted: '✅ 格式化成功',
-      formattedFixed: '✅ 格式化成功（已自动修复）',
-      nothingCopy: '没有可复制的内容',
-      copyFailed: '复制失败',
-      emptyInput: '输入为空',
-      chars: '字符',
-      lines: '行',
-      keys: '个键',
-      items: '项',
-    },
-  };
-  // Japanese
-  LANG.ja = {
-    title: 'JSON フォーマッター — Hyrule Toolbox',
-    siteName: 'Hyrule Toolbox',
-    home: 'ホーム',
-    navJson: 'JSON',
-    pageTitle: '{ } JSON フォーマッター & ビューアー',
-    pageDesc: 'JSONをフォーマット、検証、可視化 — JSON5対応（コメント、末尾カンマ、シングルクォート）、自動修正。',
-    inputPlaceholder: 'ここにJSONを貼り付け... JSON5対応（コメント、末尾カンマ、シングルクォート）、貼り付け自動フォーマット。',
-    emptyState: 'JSONを貼り付けて <strong>フォーマット</strong> をクリック',
-    btnFormat: '▶ フォーマット',
-    btnCopy: '📋 すべてコピー',
-    btnCollapse: '📂 すべて折りたたむ',
-    btnExpand: '📂 すべて展開',
-    btnClear: '🗑 クリア',
-    btnSample: '📄 サンプル',
-    inputLabel: '📝 入力',
-    treeLabel: '🌳 ツリービュー',
-    fullscreenTitle: '全画面',
-    exitFullscreenTitle: '全画面終了',
-    copied: '✅ コピーしました!',
-    cleared: 'クリアしました',
-    sampleLoaded: '📄 サンプルを読み込みました',
-    formatted: '✅ フォーマット成功',
-    formattedFixed: '✅ フォーマット成功（自動修正あり）',
-    nothingCopy: 'コピーするものがありません',
-    copyFailed: 'コピー失敗',
-    emptyInput: '入力が空です',
-    chars: '文字',
-    lines: '行',
-    keys: 'キー',
-    items: '項目',
-  };
-  // Korean
-  LANG.ko = {
-    title: 'JSON 포맷터 — Hyrule Toolbox',
-    siteName: 'Hyrule Toolbox',
-    home: '홈',
-    navJson: 'JSON',
-    pageTitle: '{ } JSON 포맷터 & 뷰어',
-    pageDesc: 'JSON 포맷팅, 검증, 시각화 — JSON5 지원 (주석, 후행 쉼표, 작은따옴표), 자동 수정.',
-    inputPlaceholder: '여기에 JSON을 붙여넣기... JSON5 지원 (주석, 후행 쉼표, 작은따옴표). 붙여넣기 자동 포맷.',
-    emptyState: 'JSON을 붙여넣고 <strong>포맷</strong>을 클릭하세요',
-    btnFormat: '▶ 포맷',
-    btnCopy: '📋 전체 복사',
-    btnCollapse: '📂 모두 접기',
-    btnExpand: '📂 모두 펼치기',
-    btnClear: '🗑 지우기',
-    btnSample: '📄 샘플',
-    inputLabel: '📝 입력',
-    treeLabel: '🌳 트리 뷰',
-    fullscreenTitle: '전체 화면',
-    exitFullscreenTitle: '전체 화면 종료',
-    copied: '✅ 복사됨!',
-    cleared: '지워짐',
-    sampleLoaded: '📄 샘플 로드됨',
-    formatted: '✅ 포맷 성공',
-    formattedFixed: '✅ 포맷 성공 (자동 수정됨)',
-    nothingCopy: '복사할 내용 없음',
-    copyFailed: '복사 실패',
-    emptyInput: '입력이 비어 있음',
-    chars: '자',
-    lines: '줄',
-    keys: '키',
-    items: '항목',
-  };
-  // French
-  LANG.fr = {
-    title: 'Formateur JSON — Hyrule Toolbox',
-    siteName: 'Hyrule Toolbox',
-    home: 'Accueil',
-    navJson: 'JSON',
-    pageTitle: '{ } Formateur & Visionneuse JSON',
-    pageDesc: 'Formatez, validez et visualisez du JSON — prend en charge JSON5 (commentaires, virgules finales, guillemets simples), correction automatique.',
-    inputPlaceholder: 'Collez votre JSON ici... Prend en charge JSON5 (commentaires, virgules finales, guillemets simples). Formatage automatique au collage.',
-    emptyState: 'Collez du JSON et cliquez sur <strong>Formater</strong>',
-    btnFormat: '▶ Formater',
-    btnCopy: '📋 Tout copier',
-    btnCollapse: '📂 Tout plier',
-    btnExpand: '📂 Tout déplier',
-    btnClear: '🗑 Effacer',
-    btnSample: '📄 Exemple',
-    inputLabel: '📝 Entrée',
-    treeLabel: '🌳 Arborescence',
-    fullscreenTitle: 'Plein écran',
-    exitFullscreenTitle: 'Quitter le plein écran',
-    copied: '✅ Copié!',
-    cleared: 'Effacé',
-    sampleLoaded: '📄 Exemple chargé',
-    formatted: '✅ Formaté',
-    formattedFixed: '✅ Formaté (correction automatique)',
-    nothingCopy: 'Rien à copier',
-    copyFailed: 'Échec de la copie',
-    emptyInput: 'Entrée vide',
-    chars: 'car.',
-    lines: 'lignes',
-    keys: 'clés',
-    items: 'éléments',
-  };
-  // German
-  LANG.de = {
-    title: 'JSON-Formatierer — Hyrule Toolbox',
-    siteName: 'Hyrule Toolbox',
-    home: 'Start',
-    navJson: 'JSON',
-    pageTitle: '{ } JSON-Formatierer & -Anzeige',
-    pageDesc: 'JSON formatieren, validieren und visualisieren — unterstützt JSON5 (Kommentare, nachgestellte Kommas, einfache Anführungszeichen), automatische Korrektur.',
-    inputPlaceholder: 'JSON hier einfügen... Unterstützt JSON5 (Kommentare, nachgestellte Kommas, einfache Anführungszeichen). Auto-Format beim Einfügen.',
-    emptyState: 'JSON einfügen und auf <strong>Formatieren</strong> klicken',
-    btnFormat: '▶ Formatieren',
-    btnCopy: '📋 Alles kopieren',
-    btnCollapse: '📂 Alle einklappen',
-    btnExpand: '📂 Alle ausklappen',
-    btnClear: '🗑 Löschen',
-    btnSample: '📄 Beispiel',
-    inputLabel: '📝 Eingabe',
-    treeLabel: '🌳 Baumansicht',
-    fullscreenTitle: 'Vollbild',
-    exitFullscreenTitle: 'Vollbild beenden',
-    copied: '✅ Kopiert!',
-    cleared: 'Gelöscht',
-    sampleLoaded: '📄 Beispiel geladen',
-    formatted: '✅ Formatiert',
-    formattedFixed: '✅ Formatiert (automatisch korrigiert)',
-    nothingCopy: 'Nichts zu kopieren',
-    copyFailed: 'Kopieren fehlgeschlagen',
-    emptyInput: 'Keine Eingabe',
-    chars: 'Zch.',
-    lines: 'Zeilen',
-    keys: 'Schlüssel',
-    items: 'Elemente',
-  };
-
-  var currentLang = 'en';
-  var langBtn = $('langBtn');
-  var langDropdown = $('langDropdown');
-
-  function setLang(lang) {
-    if (!LANG[lang]) lang = 'en';
-    currentLang = lang;
-    var t = LANG[lang];
-    document.title = t.title || t.pageTitle;
-    langBtn.textContent = '🌐 ' + lang.toUpperCase();
-    var opts = langDropdown.querySelectorAll('button');
-    for (var i = 0; i < opts.length; i++) opts[i].classList.toggle('active', opts[i].getAttribute('data-lang') === lang);
-    // Update UI elements
-    if (document.querySelector('h1')) document.querySelector('h1').textContent = t.pageTitle;
-    var desc = document.querySelector('.tool-header p');
-    if (desc) desc.textContent = t.pageDesc;
-    var ph = jsonInput.getAttribute('data-placeholder');
-    jsonInput.placeholder = t.inputPlaceholder;
-    if (formatBtn) formatBtn.innerHTML = t.btnFormat;
-    if (copyBtn) copyBtn.innerHTML = t.btnCopy;
-    if (collapseBtn) collapseBtn.innerHTML = t.btnCollapse;
-    if (expandBtn) expandBtn.innerHTML = t.btnExpand;
-    if (clearBtn) clearBtn.innerHTML = t.btnClear;
-    if (sampleBtn) sampleBtn.innerHTML = t.btnSample;
-    // Input panel header
-    var inputLabel = document.querySelector('.json-panel:first-child .json-panel-header span:first-child');
-    if (inputLabel) inputLabel.textContent = t.inputLabel;
-    var treeLabel = document.querySelector('.json-panel:last-child .json-panel-header span:first-child');
-    if (treeLabel) treeLabel.textContent = t.treeLabel;
+  window.__onLanguageChange = function() {
     if (fullscreenBtn) {
-      fullscreenBtn.title = _isFullscreen ? t.exitFullscreenTitle : t.fullscreenTitle;
+      fullscreenBtn.title = _isFullscreen ? t('json.exitFullscreen') : t('json.fullscreen');
     }
-    // Update empty state
     var emptyEl = treeWrap.querySelector('.empty-state');
-    if (emptyEl) emptyEl.innerHTML = t.emptyState;
-    try { localStorage.setItem('json-lang', lang); } catch(e) {}
-  }
-
-  // Load saved lang
-  try { var sl = localStorage.getItem('json-lang'); if (sl && LANG[sl]) currentLang = sl; } catch(e) {}
-  setLang(currentLang);
-
-  langBtn.addEventListener('click', function(e) { e.stopPropagation(); langDropdown.classList.toggle('open'); });
-  document.addEventListener('click', function() { langDropdown.classList.remove('open'); });
-  var langOpts = langDropdown.querySelectorAll('button');
-  for (var i = 0; i < langOpts.length; i++) {
-    (function(btn) { btn.addEventListener('click', function() { setLang(btn.getAttribute('data-lang')); langDropdown.classList.remove('open'); }); })(langOpts[i]);
-  }
-
-  // ===== THEME =====
-  var tt = $('themeToggle');
-  var isDark = (function() {
-    var s = localStorage.getItem('json-theme');
-    return s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-  })();
-  function applyTheme(d) {
-    isDark = d; document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
-    tt.textContent = d ? '☀️' : '🌙';
-    try { localStorage.setItem('json-theme', d ? 'dark' : 'light'); } catch(e) {}
-  }
-  applyTheme(isDark);
-  tt.addEventListener('click', function() { applyTheme(!isDark); });
+    if (emptyEl) {
+      emptyEl.innerHTML = t('json.emptyState');
+    }
+    if (jsonInput.value) {
+      inputStats.textContent = formatInputStats(jsonInput.value.split('\n').length, jsonInput.value.length);
+    }
+    if (_lastData) {
+      doFormat();
+    }
+  };
 })();
 </script>
 </body>

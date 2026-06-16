@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta property="og:title" content="QR Code Generator — Free Online QR Code Maker">
+<meta property="og:description" content="Generate QR codes from any text or URL. Customize size, error correction level. Download as PNG. Client-side, no data uploaded.">
+<meta name="twitter:title" content="QR Code Generator — Free Online QR Code Maker">
+<meta name="twitter:description" content="Generate QR codes from any text or URL. Customize size, error correction level. Download as PNG. Client-side, no data uploaded.">
+<meta name="description" content="Generate QR codes from any text or URL. Customize size, error correction level. Download as PNG. Client-side, no data uploaded.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hyrule Toolbox">
+<meta property="og:image" content="https://tools.zhczlx.com/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zhczlx">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8130430107774403" crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-8130430107774403">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator — Hyrule Toolbox</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
+<link rel="stylesheet" href="css/tools.css">
+<style>
+.qr-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .qr-layout { grid-template-columns: 1fr; }
+}
+
+.qr-input-panel, .qr-output-panel {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+}
+
+.qr-input-panel textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-sizing: border-box;
+}
+.qr-input-panel textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.char-counter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+.char-counter .over-limit { color: var(--error); font-weight: 600; }
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.options-grid .input-group { margin-bottom: 0; }
+.options-grid label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  display: block;
+}
+.options-grid select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  outline: none;
+  cursor: pointer;
+}
+.options-grid select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+.color-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.color-row .input-group { margin-bottom: 0; }
+.color-row label {
+  font-size: 13px; font-weight: 600; color: var(--text-secondary);
+  margin-bottom: 4px; display: block;
+}
+.color-input-wrap {
+  display: flex; align-items: center; gap: 8px;
+}
+.color-input-wrap input[type="color"] {
+  width: 36px; height: 36px; border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm); cursor: pointer; padding: 2px;
+  background: var(--bg-input);
+}
+.color-input-wrap input[type="text"] {
+  flex: 1; padding: 8px 10px; border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-md); background: var(--bg-input); color: var(--text-primary);
+  font-size: 13px; font-family: var(--font-mono); outline: none;
+}
+.color-input-wrap input[type="text"]:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+.qr-output-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.qr-canvas-wrap {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  min-width: 220px;
+  border: 1px solid var(--border-color);
+}
+
+.qr-empty {
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.qr-empty .qr-empty-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+.qr-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.qr-actions button {
+  padding: 10px 20px;
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.qr-actions button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+.qr-actions button.primary {
+  background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+}
+.qr-actions button.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59,130,246,0.35);
+}
+
+.qr-info {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+.qr-info .privacy-note { display: flex; align-items: center; gap: 4px; justify-content: center; }
+
+@media (max-width: 480px) {
+  .options-grid { grid-template-columns: 1fr; }
+  .color-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="header-logo">
+      <span class="logo-icon">T</span>
+      <span data-i18n="header.logo">Hyrule Toolbox</span>
+    </a>
+    <nav class="header-nav">
+      <a href="password-generator.html" data-i18n-title="nav.password" title="Password Generator">🔑</a>
+      <a href="unit-converter.html" data-i18n-title="nav.unit" title="Unit Converter">📐</a>
+      <a href="text-counter.html" data-i18n-title="nav.counter" title="Text Counter">📊</a>
+      <a href="text-case.html" data-i18n-title="nav.case" title="Case Converter">🔤</a>
+      <a href="uuid-generator.html" data-i18n-title="nav.uuid" title="UUID Generator">🆔</a>
+      <a href="color-converter.html" data-i18n-title="nav.color" title="Color Converter">🎨</a>
+      <a href="json-formatter.html" data-i18n-title="nav.json" title="JSON Formatter">{ }</a>
+      <a href="qr-generator.html" class="active" data-i18n-title="nav.qr" title="QR Code Generator">📱</a>
+    </nav>
+    <div class="header-controls">
+      <div class="lang-switcher">
+        <select id="langSelect" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="breadcrumb">
+          <a href="/" data-i18n="footer.home">Home</a>
+          <span>›</span>
+          <span data-i18n="nav.qr">QR Code Generator</span>
+        </div>
+        <h1>📱 <span data-i18n="page.heading">QR Code Generator</span></h1>
+        <p data-i18n="page.desc">Generate QR codes from any text or URL. Customize size and error correction. All processing runs locally in your browser.</p>
+      </div>
+
+      <div class="tool-card-container">
+        <div class="qr-layout">
+
+          <div class="qr-input-panel">
+            <div class="input-group">
+              <label for="qrInput" data-i18n="field.input">Text or URL</label>
+              <textarea id="qrInput" maxlength="2953" data-i18n-placeholder="field.placeholder" placeholder="Enter text, URL, email, phone number...">https://tools.zhczlx.com</textarea>
+              <div class="char-counter">
+                <span id="charCount">25 / 2953</span>
+                <span id="charWarning"></span>
+              </div>
+            </div>
+
+            <div class="options-grid">
+              <div class="input-group">
+                <label data-i18n="field.size">Size</label>
+                <select id="sizeSelect">
+                  <option value="200">200 × 200</option>
+                  <option value="300" selected>300 × 300</option>
+                  <option value="400">400 × 400</option>
+                  <option value="600">600 × 600</option>
+                  <option value="800">800 × 800</option>
+                  <option value="1024">1024 × 1024</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label data-i18n="field.ecLevel">Error Correction</label>
+                <select id="ecSelect">
+                  <option value="L">L — 7%</option>
+                  <option value="M" selected>M — 15%</option>
+                  <option value="Q">Q — 25%</option>
+                  <option value="H">H — 30%</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="color-row">
+              <div class="input-group">
+                <label data-i18n="field.fgColor">Foreground</label>
+                <div class="color-input-wrap">
+                  <input type="color" id="fgColorPicker" value="#000000">
+                  <input type="text" id="fgColorText" value="#000000" maxlength="7">
+                </div>
+              </div>
+              <div class="input-group">
+                <label data-i18n="field.bgColor">Background</label>
+                <div class="color-input-wrap">
+                  <input type="color" id="bgColorPicker" value="#FFFFFF">
+                  <input type="text" id="bgColorText" value="#FFFFFF" maxlength="7">
+                </div>
+              </div>
+            </div>
+
+            <button class="btn-generate" id="generateBtn">
+              <span class="generate-icon">⚡</span>
+              <span data-i18n="btn.generate">Generate QR Code</span>
+            </button>
+          </div>
+
+          <div class="qr-output-panel">
+            <div class="qr-canvas-wrap" id="qrCanvasWrap">
+              <div class="qr-empty" id="qrEmpty">
+                <div class="qr-empty-icon">📱</div>
+                <div data-i18n="output.empty">Enter text and click Generate</div>
+              </div>
+              <canvas id="qrCanvas" style="display:none;"></canvas>
+            </div>
+
+            <div class="qr-actions" id="qrActions" style="display:none;">
+              <button class="primary" id="downloadBtn">
+                <span>⬇</span>
+                <span data-i18n="btn.download">Download PNG</span>
+              </button>
+              <button id="copyImgBtn">
+                <span>📋</span>
+                <span data-i18n="btn.copyImage">Copy Image</span>
+              </button>
+            </div>
+
+            <div class="qr-info">
+              <div class="privacy-note">🔒 <span data-i18n="info.privacy">All data processed locally — nothing uploaded</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; 2026 <a href="https://zhczlx.com">Hyrule Toolbox</a></span>
+    <nav>
+      <a href="/" data-i18n="footer.home">Home</a>
+      <a href="https://zhczlx.com/about" data-i18n="footer.about">About</a>
+      <a href="mailto:hi@zhczlx.com" data-i18n="footer.contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+window.__pageTranslations = {
+  'en': {
+    'page.title': 'QR Code Generator — Hyrule Toolbox',
+    'page.description': 'Generate QR codes from any text or URL. Customize size, error correction level. Download as PNG. Client-side, no data uploaded.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Password Generator', 'nav.unit': 'Unit Converter', 'nav.counter': 'Text Counter',
+    'nav.case': 'Case Converter', 'nav.uuid': 'UUID Generator', 'nav.color': 'Color Converter',
+    'nav.json': 'JSON Formatter', 'nav.qr': 'QR Code Generator',
+    'page.heading': 'QR Code Generator',
+    'page.desc': 'Generate QR codes from any text or URL. Customize size and error correction. All processing runs locally in your browser.',
+    'field.input': 'Text or URL',
+    'field.placeholder': 'Enter text, URL, email, phone number...',
+    'field.size': 'Size',
+    'field.ecLevel': 'Error Correction',
+    'field.fgColor': 'Foreground',
+    'field.bgColor': 'Background',
+    'btn.generate': 'Generate QR Code',
+    'btn.download': 'Download PNG',
+    'btn.copyImage': 'Copy Image',
+    'output.empty': 'Enter text and click Generate',
+    'info.privacy': 'All data processed locally — nothing uploaded',
+    'toast.copied': '✅ Copied to clipboard',
+    'toast.failed': '❌ Copy failed',
+    'toast.generated': '✅ QR code generated',
+    'toast.tooLong': '⚠️ Text exceeds maximum length',
+    'toast.empty': '⚠️ Please enter some text',
+    'toast.imgCopied': '✅ Image copied to clipboard',
+    'toast.imgCopyFail': '❌ Image copy not supported in this browser',
+    'footer.home': 'Home', 'footer.about': 'About', 'footer.contact': 'Contact'
+  },
+  'zh': {
+    'page.title': '二维码生成器 — Hyrule Toolbox',
+    'page.description': '在线二维码生成器，支持文本、URL、邮箱、电话等。自定义大小和容错级别。纯客户端处理，无需上传数据。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '密码生成器', 'nav.unit': '单位换算', 'nav.counter': '文本统计',
+    'nav.case': '大小写转换', 'nav.uuid': 'UUID生成', 'nav.color': '颜色转换',
+    'nav.json': 'JSON格式化', 'nav.qr': '二维码生成',
+    'page.heading': '二维码生成器',
+    'page.desc': '将任意文本或 URL 生成二维码图片，支持自定义大小和容错级别。所有处理均在浏览器本地完成。',
+    'field.input': '文本或 URL',
+    'field.placeholder': '输入文本、网址、邮箱、电话号码...',
+    'field.size': '尺寸',
+    'field.ecLevel': '容错级别',
+    'field.fgColor': '前景色',
+    'field.bgColor': '背景色',
+    'btn.generate': '生成二维码',
+    'btn.download': '下载 PNG',
+    'btn.copyImage': '复制图片',
+    'output.empty': '输入文本后点击生成',
+    'info.privacy': '所有数据在本地处理 — 无需上传',
+    'toast.copied': '✅ 已复制到剪贴板',
+    'toast.failed': '❌ 复制失败',
+    'toast.generated': '✅ 二维码已生成',
+    'toast.tooLong': '⚠️ 文本超出最大长度',
+    'toast.empty': '⚠️ 请输入文本内容',
+    'toast.imgCopied': '✅ 图片已复制到剪贴板',
+    'toast.imgCopyFail': '❌ 当前浏览器不支持复制图片',
+    'footer.home': '首页', 'footer.about': '关于', 'footer.contact': '联系'
+  },
+  'ja': {
+    'page.title': 'QRコード生成器 — Hyrule Toolbox',
+    'page.description': 'テキストやURLからQRコードを生成。サイズ・誤り訂正レベルのカスタマイズ対応。クライアント側処理、データアップロードなし。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'パスワード生成', 'nav.unit': '単位変換', 'nav.counter': 'テキスト統計',
+    'nav.case': '大文字小文字変換', 'nav.uuid': 'UUID生成', 'nav.color': 'カラー変換',
+    'nav.json': 'JSONフォーマッター', 'nav.qr': 'QRコード生成',
+    'page.heading': 'QRコード生成器',
+    'page.desc': 'テキストやURLからQRコードを生成。サイズ・誤り訂正レベルのカスタマイズ対応。すべてブラウザ上で処理されます。',
+    'field.input': 'テキストまたはURL', 'field.placeholder': 'テキスト、URL、メール、電話番号を入力...',
+    'field.size': 'サイズ', 'field.ecLevel': '誤り訂正', 'field.fgColor': '前景色', 'field.bgColor': '背景色',
+    'btn.generate': 'QRコード生成', 'btn.download': 'PNGダウンロード', 'btn.copyImage': '画像をコピー',
+    'output.empty': 'テキストを入力して生成をクリック',
+    'info.privacy': 'すべてのデータはローカルで処理 — アップロードなし',
+    'toast.copied': '✅ クリップボードにコピーしました', 'toast.failed': '❌ コピーに失敗しました',
+    'toast.generated': '✅ QRコードを生成しました', 'toast.tooLong': '⚠️ テキストが長すぎます',
+    'toast.empty': '⚠️ テキストを入力してください',
+    'toast.imgCopied': '✅ 画像をクリップボードにコピーしました', 'toast.imgCopyFail': '❌ このブラウザでは画像コピーに対応していません',
+    'footer.home': 'ホーム', 'footer.about': '概要', 'footer.contact': 'お問い合わせ'
+  },
+  'ko': {
+    'page.title': 'QR코드 생성기 — Hyrule Toolbox',
+    'page.description': '텍스트나 URL로 QR코드 생성. 크기, 오류 정정 레벨 커스터마이즈. 클라이언트 측 처리, 데이터 업로드 없음.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '비밀번호 생성기', 'nav.unit': '단위 변환', 'nav.counter': '텍스트 통계',
+    'nav.case': '대소문자 변환', 'nav.uuid': 'UUID 생성', 'nav.color': '색상 변환',
+    'nav.json': 'JSON 포맷터', 'nav.qr': 'QR코드 생성',
+    'page.heading': 'QR코드 생성기',
+    'page.desc': '텍스트나 URL로 QR코드를 생성합니다. 크기와 오류 정정 레벨을 커스터마이즈할 수 있습니다.',
+    'field.input': '텍스트 또는 URL', 'field.placeholder': '텍스트, URL, 이메일, 전화번호 입력...',
+    'field.size': '크기', 'field.ecLevel': '오류 정정', 'field.fgColor': '전경색', 'field.bgColor': '배경색',
+    'btn.generate': 'QR코드 생성', 'btn.download': 'PNG 다운로드', 'btn.copyImage': '이미지 복사',
+    'output.empty': '텍스트를 입력하고 생성을 클릭하세요',
+    'info.privacy': '모든 데이터는 로컬에서 처리 — 업로드 없음',
+    'toast.copied': '✅ 클립보드에 복사되었습니다', 'toast.failed': '❌ 복사 실패',
+    'toast.generated': '✅ QR코드가 생성되었습니다', 'toast.tooLong': '⚠️ 텍스트가 너무 깁니다',
+    'toast.empty': '⚠️ 텍스트를 입력해주세요',
+    'toast.imgCopied': '✅ 이미지가 클립보드에 복사되었습니다', 'toast.imgCopyFail': '❌ 이 브라우저에서는 이미지 복사를 지원하지 않습니다',
+    'footer.home': '홈', 'footer.about': '소개', 'footer.contact': '문의'
+  },
+  'fr': {
+    'page.title': 'Générateur de QR Code — Hyrule Toolbox',
+    'page.description': "Générez des QR codes à partir de texte ou d'URL. Taille et correction d'erreur personnalisables. Côté client, aucune donnée envoyée.",
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Générateur de mots de passe', 'nav.unit': "Convertisseur d'unités", 'nav.counter': 'Compteur de texte',
+    'nav.case': 'Convertisseur de casse', 'nav.uuid': 'Générateur UUID', 'nav.color': 'Convertisseur de couleurs',
+    'nav.json': 'Formateur JSON', 'nav.qr': 'Générateur de QR Code',
+    'page.heading': 'Générateur de QR Code',
+    'page.desc': "Générez des QR codes à partir de texte ou d'URL. Personnalisez la taille et la correction d'erreur. Tout est traité localement.",
+    'field.input': 'Texte ou URL', 'field.placeholder': 'Entrez du texte, une URL, un e-mail, un numéro de téléphone...',
+    'field.size': 'Taille', 'field.ecLevel': "Correction d'erreur", 'field.fgColor': 'Couleur avant', 'field.bgColor': 'Couleur fond',
+    'btn.generate': 'Générer le QR Code', 'btn.download': 'Télécharger PNG', 'btn.copyImage': "Copier l'image",
+    'output.empty': 'Entrez du texte et cliquez sur Générer',
+    'info.privacy': 'Toutes les données sont traitées localement — rien envoyé',
+    'toast.copied': '✅ Copié dans le presse-papiers', 'toast.failed': '❌ Échec de la copie',
+    'toast.generated': '✅ QR code généré', 'toast.tooLong': '⚠️ Le texte dépasse la longueur maximale',
+    'toast.empty': '⚠️ Veuillez entrer du texte',
+    'toast.imgCopied': '✅ Image copiée dans le presse-papiers', 'toast.imgCopyFail': "❌ La copie d'image n'est pas prise en charge",
+    'footer.home': 'Accueil', 'footer.about': 'À propos', 'footer.contact': 'Contact'
+  },
+  'de': {
+    'page.title': 'QR-Code-Generator — Hyrule Toolbox',
+    'page.description': 'QR-Codes aus Text oder URL generieren. Größe und Fehlerkorrektur anpassbar. Clientseitig, keine Daten hochgeladen.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Passwortgenerator', 'nav.unit': 'Einheitenumrechner', 'nav.counter': 'Textzähler',
+    'nav.case': 'Fallumwandler', 'nav.uuid': 'UUID-Generator', 'nav.color': 'Farbkonverter',
+    'nav.json': 'JSON-Formatierer', 'nav.qr': 'QR-Code-Generator',
+    'page.heading': 'QR-Code-Generator',
+    'page.desc': 'Generieren Sie QR-Codes aus Text oder URL. Größe und Fehlerkorrektur anpassbar. Alles wird lokal verarbeitet.',
+    'field.input': 'Text oder URL', 'field.placeholder': 'Text, URL, E-Mail, Telefonnummer eingeben...',
+    'field.size': 'Größe', 'field.ecLevel': 'Fehlerkorrektur', 'field.fgColor': 'Vordergrund', 'field.bgColor': 'Hintergrund',
+    'btn.generate': 'QR-Code generieren', 'btn.download': 'PNG herunterladen', 'btn.copyImage': 'Bild kopieren',
+    'output.empty': 'Text eingeben und Generieren klicken',
+    'info.privacy': 'Alle Daten werden lokal verarbeitet — nichts hochgeladen',
+    'toast.copied': '✅ In die Zwischenablage kopiert', 'toast.failed': '❌ Kopieren fehlgeschlagen',
+    'toast.generated': '✅ QR-Code generiert', 'toast.tooLong': '⚠️ Text überschreitet die maximale Länge',
+    'toast.empty': '⚠️ Bitte geben Sie Text ein',
+    'toast.imgCopied': '✅ Bild in die Zwischenablage kopiert', 'toast.imgCopyFail': '❌ Bildkopie in diesem Browser nicht unterstützt',
+    'footer.home': 'Startseite', 'footer.about': 'Über uns', 'footer.contact': 'Kontakt'
+  }
+};
+</script>
+<script src="js/theme.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
+
+<!-- QR code generation library (lightweight, no dependencies) -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  var MAX_LEN = 2953;
+  var qrInput = document.getElementById('qrInput');
+  var charCount = document.getElementById('charCount');
+  var charWarning = document.getElementById('charWarning');
+  var sizeSelect = document.getElementById('sizeSelect');
+  var ecSelect = document.getElementById('ecSelect');
+  var fgColorPicker = document.getElementById('fgColorPicker');
+  var fgColorText = document.getElementById('fgColorText');
+  var bgColorPicker = document.getElementById('bgColorPicker');
+  var bgColorText = document.getElementById('bgColorText');
+  var generateBtn = document.getElementById('generateBtn');
+  var qrCanvas = document.getElementById('qrCanvas');
+  var qrEmpty = document.getElementById('qrEmpty');
+  var qrActions = document.getElementById('qrActions');
+  var downloadBtn = document.getElementById('downloadBtn');
+  var copyImgBtn = document.getElementById('copyImgBtn');
+
+  function t(key) {
+    return window.HyruleI18n ? window.HyruleI18n.t(key) : key;
+  }
+
+  function updateCharCount() {
+    var len = qrInput.value.length;
+    charCount.textContent = len + ' / ' + MAX_LEN;
+    if (len > MAX_LEN) {
+      charCount.classList.add('over-limit');
+      charWarning.textContent = t('toast.tooLong');
+      charWarning.classList.add('over-limit');
+    } else {
+      charCount.classList.remove('over-limit');
+      charWarning.textContent = '';
+      charWarning.classList.remove('over-limit');
+    }
+  }
+
+  function syncColor(picker, text, direction) {
+    if (direction === 'from-picker') {
+      text.value = picker.value.toUpperCase();
+    } else {
+      var val = text.value.trim();
+      if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+        picker.value = val;
+      }
+    }
+  }
+
+  fgColorPicker.addEventListener('input', function () { syncColor(fgColorPicker, fgColorText, 'from-picker'); });
+  fgColorText.addEventListener('input', function () { syncColor(fgColorPicker, fgColorText, 'from-text'); });
+  bgColorPicker.addEventListener('input', function () { syncColor(bgColorPicker, bgColorText, 'from-picker'); });
+  bgColorText.addEventListener('input', function () { syncColor(bgColorPicker, bgColorText, 'from-text'); });
+
+  function generateQR() {
+    var text = qrInput.value;
+    if (!text.trim()) {
+      showToast(t('toast.empty'));
+      return;
+    }
+    if (text.length > MAX_LEN) {
+      showToast(t('toast.tooLong'));
+      return;
+    }
+
+    var ecLevelMap = { L: 0, M: 0, Q: 0, H: 0 };
+    // qrcode-generator error correction: 'L'=1, 'M'=0, 'Q'=3, 'H'=2
+    var ecLevel = ecSelect.value;
+    var typeNumber = 0; // auto-detect
+
+    try {
+      var qr = qrcode(typeNumber, ecLevel);
+      qr.addData(text);
+      qr.make();
+    } catch (e) {
+      showToast(t('toast.tooLong'));
+      return;
+    }
+
+    var size = parseInt(sizeSelect.value, 10);
+    var moduleCount = qr.getModuleCount();
+    var cellSize = size / moduleCount;
+
+    qrCanvas.width = size;
+    qrCanvas.height = size;
+    var ctx = qrCanvas.getContext('2d');
+
+    var fgColor = fgColorPicker.value;
+    var bgColor = bgColorPicker.value;
+
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, size, size);
+
+    ctx.fillStyle = fgColor;
+    for (var row = 0; row < moduleCount; row++) {
+      for (var col = 0; col < moduleCount; col++) {
+        if (qr.isDark(row, col)) {
+          ctx.fillRect(
+            Math.round(col * cellSize),
+            Math.round(row * cellSize),
+            Math.ceil(cellSize),
+            Math.ceil(cellSize)
+          );
+        }
+      }
+    }
+
+    qrCanvas.style.display = 'block';
+    qrEmpty.style.display = 'none';
+    qrActions.style.display = 'flex';
+
+    showToast(t('toast.generated'));
+  }
+
+  function downloadPNG() {
+    var link = document.createElement('a');
+    link.download = 'qrcode-' + Date.now() + '.png';
+    link.href = qrCanvas.toDataURL('image/png');
+    link.click();
+  }
+
+  function copyImage() {
+    if (!navigator.clipboard || !navigator.clipboard.write) {
+      showToast(t('toast.imgCopyFail'));
+      return;
+    }
+    qrCanvas.toBlob(function (blob) {
+      if (!blob) {
+        showToast(t('toast.imgCopyFail'));
+        return;
+      }
+      navigator.clipboard.write([
+        new ClipboardItem({ 'image/png': blob })
+      ]).then(function () {
+        showToast(t('toast.imgCopied'));
+      }).catch(function () {
+        showToast(t('toast.imgCopyFail'));
+      });
+    }, 'image/png');
+  }
+
+  qrInput.addEventListener('input', updateCharCount);
+  generateBtn.addEventListener('click', generateQR);
+  downloadBtn.addEventListener('click', downloadPNG);
+  copyImgBtn.addEventListener('click', copyImage);
+
+  qrInput.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      generateQR();
+    }
+  });
+
+  updateCharCount();
+
+  // Auto-generate on page load if there's default text
+  if (qrInput.value.trim()) {
+    setTimeout(generateQR, 100);
+  }
+
+})();
+</script>
+</body>
+</html>

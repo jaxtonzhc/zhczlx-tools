@@ -17,11 +17,11 @@
 <meta name="google-adsense-account" content="ca-pub-8130430107774403">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Counter — Hyrule Toolbox</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
     <link rel="stylesheet" href="css/tools.css">
     <style>
         /* ===== TEXT COUNTER SPECIFIC ===== */
 
-        /* Large textarea */
         .counter-textarea {
             width: 100%;
             min-height: 280px;
@@ -46,7 +46,6 @@
             color: var(--text-placeholder);
         }
 
-        /* Textarea wrapper with char count overlay */
         .textarea-wrap {
             position: relative;
             margin-bottom: 4px;
@@ -65,7 +64,6 @@
             opacity: 0.8;
         }
 
-        /* Stats grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -101,7 +99,6 @@
             margin-top: 1px;
         }
 
-        /* Reading time row */
         .reading-time {
             display: flex;
             align-items: center;
@@ -131,7 +128,6 @@
             flex-shrink: 0;
         }
 
-        /* Action buttons */
         .action-bar {
             display: flex;
             flex-wrap: wrap;
@@ -176,7 +172,6 @@
             border-color: var(--accent-hover);
         }
 
-        /* Section divider */
         .section-divider {
             display: flex;
             align-items: center;
@@ -193,7 +188,6 @@
             background: var(--border-color);
         }
 
-        /* Word frequency */
         .freq-list {
             display: flex;
             flex-wrap: wrap;
@@ -235,7 +229,6 @@
             text-align: center;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -287,7 +280,6 @@
             }
         }
 
-        /* Animation for stat changes */
         .stat-card.flash .stat-value {
             animation: stat-pulse 0.3s ease;
         }
@@ -295,49 +287,6 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
-        }
-
-        /* Header actions */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-left: auto;
-        }
-        .lang-select {
-            padding: 4px 8px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            background: var(--bg-card);
-            color: var(--text-secondary);
-            font-family: var(--font-sans);
-            font-size: 12px;
-            cursor: pointer;
-            outline: none;
-            transition: border-color var(--transition-fast);
-        }
-        .lang-select:hover,
-        .lang-select:focus {
-            border-color: var(--accent);
-        }
-        .btn-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            padding: 0;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            background: var(--bg-card);
-            color: var(--text-secondary);
-            font-size: 16px;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-        .btn-icon:hover {
-            background: var(--bg-hover);
-            border-color: var(--text-tertiary);
         }
     </style>
 <script type="application/ld+json">
@@ -356,120 +305,117 @@
 </head>
 <body>
 
-<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
-<!-- ===== HEADER ===== -->
 <header class="site-header">
-    <div class="header-inner">
-        <a href="/" class="header-logo">
-            <span class="logo-icon">🔧</span>
-            <span id="siteName">Hyrule Toolbox</span>
-        </a>
-        <nav class="header-nav">
-            <a href="/" id="navHome">Home</a>
-            <a href="text-counter.html" class="active" id="navCounter">Text Counter</a>
-        </nav>
-        <div class="header-actions">
-            <select id="langSwitcher" class="lang-select" aria-label="Language">
-                <option value="en">EN</option>
-                <option value="zh">中文</option>
-                <option value="ja">日本語</option>
-                <option value="ko">한국어</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-            </select>
-            <button id="themeToggle" class="btn-icon" title="Toggle theme">🌙</button>
-        </div>
+  <div class="header-inner">
+    <a href="/" class="header-logo">
+      <span class="logo-icon">T</span>
+      <span data-i18n="header.logo">Hyrule Toolbox</span>
+    </a>
+    <nav class="header-nav">
+      <a href="password-generator.html" data-i18n-title="nav.password" title="Password Generator">🔑</a>
+      <a href="unit-converter.html" data-i18n-title="nav.unit" title="Unit Converter">📐</a>
+      <a href="text-counter.html" class="active" data-i18n-title="nav.counter" title="Text Counter">📊</a>
+      <a href="text-case.html" data-i18n-title="nav.case" title="Case Converter">🔤</a>
+      <a href="uuid-generator.html" data-i18n-title="nav.uuid" title="UUID Generator">🆔</a>
+      <a href="color-converter.html" data-i18n-title="nav.color" title="Color Converter">🎨</a>
+      <a href="json-formatter.html" data-i18n-title="nav.json" title="JSON Formatter">{ }</a>
+      <a href="qr-generator.html" data-i18n-title="nav.qr" title="QR Code Generator">📱</a>
+    </nav>
+    <div class="header-controls">
+      <div class="lang-switcher">
+        <select id="langSelect" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌓</button>
     </div>
+  </div>
 </header>
 
-<!-- ===== MAIN ===== -->
 <main>
     <div class="container">
         <div class="tool-section">
 
-            <!-- Breadcrumb -->
             <div class="tool-header">
                 <div class="breadcrumb">
-                    <a href="/" id="breadHome">Home</a>
+                    <a href="/" data-i18n="footer.home">Home</a>
                     <span>›</span>
-                    <span id="breadCounter">Text Counter</span>
+                    <span data-i18n="tool.title">Text Counter</span>
                 </div>
-                <h1>📊 <span id="pageTitle">Text Counter</span></h1>
-                <p id="toolDesc">Count characters, words, sentences, paragraphs, and lines in real time. Supports mixed Chinese/English text.</p>
+                <h1>📊 <span data-i18n="tool.title">Text Counter</span></h1>
+                <p data-i18n="tool.desc">Count characters, words, sentences, paragraphs, and lines in real time. Supports mixed Chinese/English text.</p>
             </div>
 
-            <!-- Tool Card -->
             <div class="tool-card-container">
                 <div class="tool-body">
 
-                    <!-- Textarea -->
                     <div class="textarea-wrap">
-                        <textarea class="counter-textarea" id="textInput" placeholder="Type or paste text here, stats update in real time…" spellcheck="false"></textarea>
+                        <textarea class="counter-textarea" id="textInput" data-i18n-placeholder="counter.placeholder" placeholder="Type or paste text here, stats update in real time…" spellcheck="false"></textarea>
                         <span class="char-count" id="charCountLabel">0 characters</span>
                     </div>
 
-                    <!-- Action Bar -->
                     <div class="action-bar">
-                        <button class="btn-action btn-danger" id="clearBtn" title="Clear">🗑️ <span id="btnClear">Clear</span></button>
-                        <button class="btn-action" id="copyBtn" title="Copy">📋 <span id="btnCopy">Copy</span></button>
-                        <button class="btn-action btn-primary" id="pasteBtn" title="Paste">📥 <span id="btnPaste">Paste</span></button>
+                        <button class="btn-action btn-danger" id="clearBtn" data-i18n-title="counter.btn.clear" title="Clear">🗑️ <span data-i18n="counter.btn.clear">Clear</span></button>
+                        <button class="btn-action" id="copyBtn" data-i18n-title="counter.btn.copy" title="Copy">📋 <span data-i18n="counter.btn.copy">Copy</span></button>
+                        <button class="btn-action btn-primary" id="pasteBtn" data-i18n-title="counter.btn.paste" title="Paste">📥 <span data-i18n="counter.btn.paste">Paste</span></button>
                     </div>
 
-                    <!-- Stats Grid -->
                     <div class="stats-grid" id="statsGrid">
                         <div class="stat-card">
                             <div class="stat-value" id="statChars">0</div>
-                            <div class="stat-label" id="labelChars">Characters</div>
-                            <div class="stat-sub" id="labelCharsWith">with spaces</div>
+                            <div class="stat-label" data-i18n="counter.stats.chars">Characters</div>
+                            <div class="stat-sub" data-i18n="counter.stats.charsWith">with spaces</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value" id="statCharsNoSpace">0</div>
-                            <div class="stat-label" id="labelCharsNoSpace">Characters</div>
-                            <div class="stat-sub" id="labelCharsWithout">without spaces</div>
+                            <div class="stat-label" data-i18n="counter.stats.chars">Characters</div>
+                            <div class="stat-sub" data-i18n="counter.stats.charsWithout">without spaces</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value" id="statWords">0</div>
-                            <div class="stat-label" id="labelWords">Words</div>
-                            <div class="stat-sub" id="labelWordsSub">words</div>
+                            <div class="stat-label" data-i18n="counter.stats.words">Words</div>
+                            <div class="stat-sub" data-i18n="counter.stats.wordsSub">words</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value" id="statSentences">0</div>
-                            <div class="stat-label" id="labelSentences">Sentences</div>
-                            <div class="stat-sub" id="labelSentencesSub">sentences</div>
+                            <div class="stat-label" data-i18n="counter.stats.sentences">Sentences</div>
+                            <div class="stat-sub" data-i18n="counter.stats.sentencesSub">sentences</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value" id="statParagraphs">0</div>
-                            <div class="stat-label" id="labelParagraphs">Paragraphs</div>
-                            <div class="stat-sub" id="labelParagraphsSub">paragraphs</div>
+                            <div class="stat-label" data-i18n="counter.stats.paragraphs">Paragraphs</div>
+                            <div class="stat-sub" data-i18n="counter.stats.paragraphsSub">paragraphs</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value" id="statLines">0</div>
-                            <div class="stat-label" id="labelLines">Lines</div>
-                            <div class="stat-sub" id="labelLinesSub">lines</div>
+                            <div class="stat-label" data-i18n="counter.stats.lines">Lines</div>
+                            <div class="stat-sub" data-i18n="counter.stats.linesSub">lines</div>
                         </div>
                     </div>
 
-                    <!-- Reading Time -->
                     <div class="reading-time" id="readingTimeBox">
                         <span class="rt-icon">⏱️</span>
                         <span class="rt-text" id="readingTimeLabel">About <strong id="readingTime">0 sec</strong> reading time</span>
                         <span class="rt-detail" id="readingDetail">Based on 200 words/min</span>
                     </div>
 
-                    <!-- Word Frequency -->
-                    <div class="section-divider"><span id="freqHeading">🏆 Top Frequent Words</span></div>
+                    <div class="section-divider"><span data-i18n="counter.freq.heading">🏆 Top Frequent Words</span></div>
                     <div class="freq-list" id="freqList">
-                        <span class="freq-empty" id="freqEmpty">Enter text to see frequent words</span>
+                        <span class="freq-empty" id="freqEmpty" data-i18n="counter.freq.empty">Enter text to see frequent words</span>
                     </div>
 
                 </div>
 
-                <!-- Footer hint -->
                 <div class="tool-footer">
-                    <span class="hint" id="hintPrivacy">🔒 All stats computed locally, text never leaves your device</span>
-                    <span class="hint" id="hintLang">Supports mixed Chinese/English analysis</span>
+                    <span class="hint" data-i18n="counter.hint.privacy">🔒 All stats computed locally, text never leaves your device</span>
+                    <span class="hint" data-i18n="counter.hint.lang">Supports mixed Chinese/English analysis</span>
                 </div>
             </div>
 
@@ -477,336 +423,309 @@
     </div>
 </main>
 
-<!-- ===== FOOTER ===== -->
 <footer class="site-footer">
-    <div class="footer-inner">
-        <span id="footerCopyright">© 2026 Hyrule Toolbox · Local Tools</span>
-        <span>
-            <a href="/" id="footerHome">Home</a>
-            <span style="margin:0 6px;opacity:0.3;">·</span>
-            <span id="footerCounter">Text Counter</span>
-        </span>
-    </div>
+  <div class="footer-inner">
+    <span>&copy; 2026 <a href="https://zhczlx.com">Hyrule Toolbox</a></span>
+    <nav>
+      <a href="/" data-i18n="footer.home">Home</a>
+      <a href="https://zhczlx.com/about" data-i18n="footer.about">About</a>
+      <a href="mailto:hi@zhczlx.com" data-i18n="footer.contact">Contact</a>
+    </nav>
+  </div>
 </footer>
 
 <script>
-// ===== I18N DICTIONARY =====
-var I18N = {
-    en: {
-        pageTitle: 'Text Counter',
-        siteName: 'Hyrule Toolbox',
-        navHome: 'Home',
-        navCounter: 'Text Counter',
-        breadHome: 'Home',
-        breadCounter: 'Text Counter',
-        toolDesc: 'Count characters, words, sentences, paragraphs, and lines in real time. Supports mixed Chinese/English text.',
-        labelChars: 'Characters',
-        labelCharsWith: 'with spaces',
-        labelCharsNoSpace: 'Characters',
-        labelCharsWithout: 'without spaces',
-        labelWords: 'Words',
-        labelWordsSub: 'words',
-        labelSentences: 'Sentences',
-        labelSentencesSub: 'sentences',
-        labelParagraphs: 'Paragraphs',
-        labelParagraphsSub: 'paragraphs',
-        labelLines: 'Lines',
-        labelLinesSub: 'lines',
-        readingTimeLabel: 'About {time} reading time',
-        readingDetail: 'Based on {wpm} words/min',
-        btnClear: 'Clear',
-        btnCopy: 'Copy',
-        btnPaste: 'Paste',
-        freqHeading: '🏆 Top Frequent Words',
-        freqEmpty: 'Enter text to see frequent words',
-        hintPrivacy: '🔒 All stats computed locally, text never leaves your device',
-        hintLang: 'Supports mixed Chinese/English analysis',
-        footerCopyright: '© 2026 Hyrule Toolbox · Local Tools',
-        footerHome: 'Home',
-        footerCounter: 'Text Counter',
-        placeholder: 'Type or paste text here, stats update in real time\u2026',
-        charCount: '{n} characters',
-        reading0: '0 sec',
-        readingSec: '{n} sec',
-        readingMin: '{n} min',
-        readingMinSec: '{m} min {s} sec',
-        readingDetail0: 'Based on 200 words/min',
-        readingDetailSec: 'About {n} sec (based on 200 words/min)',
-        readingDetailMin: 'About {m} min{s} (based on 200 words/min)',
-        toastCleared: '\uD83D\uDDD1\uFE0F Cleared',
-        toastNoContent: 'Nothing to copy',
-        toastCopied: '\uD83D\uDCCB Copied to clipboard',
-        toastCopyFailed: '\u274C Copy failed, please copy manually',
-        toastPasted: '\uD83D\uDCE5 Pasted {n} characters',
-        toastClipboardEmpty: 'Clipboard is empty',
-        toastClipboardDenied: '\u274C Cannot read clipboard, use Ctrl+V',
-        toastClipboardFallback: 'Use Ctrl+V to paste',
-    },
-    zh: {
-        pageTitle: '\u5B57\u6570\u7EDF\u8BA1',
-        siteName: '\u6D77\u62C9\u9C81\u5DE5\u5177\u7BB1',
-        navHome: '\u9996\u9875',
-        navCounter: '\u5B57\u6570\u7EDF\u8BA1',
-        breadHome: '\u9996\u9875',
-        breadCounter: '\u5B57\u6570\u7EDF\u8BA1',
-        toolDesc: '\u5B9E\u65F6\u7EDF\u8BA1\u5B57\u7B26\u6570\u3001\u5355\u8BCD\u6570\u3001\u884C\u6570\u3001\u6BB5\u843D\u6570\uFF0C\u652F\u6301\u4E2D\u6587/\u82F1\u6587\u6DF7\u5408\u6587\u672C\u5206\u6790\u3002',
-        labelChars: '\u5B57\u7B26\u6570',
-        labelCharsWith: '\u542B\u7A7A\u683C',
-        labelCharsNoSpace: '\u5B57\u7B26\u6570',
-        labelCharsWithout: '\u4E0D\u542B\u7A7A\u683C',
-        labelWords: '\u5355\u8BCD\u6570',
-        labelWordsSub: '\u8BCD',
-        labelSentences: '\u53E5\u5B50\u6570',
-        labelSentencesSub: '\u53E5',
-        labelParagraphs: '\u6BB5\u843D\u6570',
-        labelParagraphsSub: '\u6BB5',
-        labelLines: '\u884C\u6570',
-        labelLinesSub: '\u884C',
-        readingTimeLabel: '\u5927\u7EA6 {time} \u9605\u8BFB\u65F6\u95F4',
-        readingDetail: '\u57FA\u4E8E {wpm} \u8BCD/\u5206\u949F',
-        btnClear: '\u6E05\u7A7A',
-        btnCopy: '\u590D\u5236',
-        btnPaste: '\u7C98\u8D34',
-        freqHeading: '\uD83C\uDFC6 \u9AD8\u9891\u8BCD\u6C47 Top 10',
-        freqEmpty: '\u8F93\u5165\u6587\u672C\u540E\u5C06\u663E\u793A\u9AD8\u9891\u8BCD\u6C47',
-        hintPrivacy: '\uD83D\uDD12 \u6240\u6709\u7EDF\u8BA1\u5747\u5728\u672C\u5730\u5B8C\u6210\uFF0C\u6587\u672C\u4E0D\u4F1A\u4E0A\u4F20\u5230\u670D\u52A1\u5668',
-        hintLang: '\u652F\u6301\u4E2D\u82F1\u6587\u6DF7\u5408\u5206\u6790',
-        footerCopyright: '\u00A9 2026 \u6D77\u62C9\u9C81\u5DE5\u5177\u7BB1 \u00B7 \u672C\u5730\u5DE5\u5177\u96C6',
-        footerHome: '\u9996\u9875',
-        footerCounter: '\u5B57\u6570\u7EDF\u8BA1',
-        placeholder: '\u5728\u6B64\u8F93\u5165\u6216\u7C98\u8D34\u6587\u672C\uFF0C\u5B9E\u65F6\u7EDF\u8BA1\u5C06\u81EA\u52A8\u5F00\u59CB\u2026',
-        charCount: '{n} \u5B57\u7B26',
-        reading0: '0 \u79D2',
-        readingSec: '{n} \u79D2',
-        readingMin: '{n} \u5206\u949F',
-        readingMinSec: '{m} \u5206 {s} \u79D2',
-        readingDetail0: '\u57FA\u4E8E 200 \u8BCD/\u5206\u949F',
-        readingDetailSec: '\u7EA6 {n} \u79D2\uFF08\u57FA\u4E8E 200 \u8BCD/\u5206\u949F\uFF09',
-        readingDetailMin: '\u7EA6 {m} \u5206{s}\uFF08\u57FA\u4E8E 200 \u8BCD/\u5206\u949F\uFF09',
-        toastCleared: '\uD83D\uDDD1\uFE0F \u5DF2\u6E05\u7A7A',
-        toastNoContent: '\u6CA1\u6709\u53EF\u590D\u5236\u7684\u5185\u5BB9',
-        toastCopied: '\uD83D\uDCCB \u5DF2\u590D\u5236\u5230\u526A\u8D34\u677F',
-        toastCopyFailed: '\u274C \u590D\u5236\u5931\u8D25\uFF0C\u8BF7\u624B\u52A8\u590D\u5236',
-        toastPasted: '\uD83D\uDCE5 \u5DF2\u7C98\u8D34 {n} \u4E2A\u5B57\u7B26',
-        toastClipboardEmpty: '\u526A\u8D34\u677F\u4E3A\u7A7A',
-        toastClipboardDenied: '\u274C \u65E0\u6CD5\u8BFB\u53D6\u526A\u8D34\u677F\uFF0C\u8BF7\u4F7F\u7528 Ctrl+V \u7C98\u8D34',
-        toastClipboardFallback: '\u8BF7\u4F7F\u7528 Ctrl+V \u7C98\u8D34',
-    },
-    ja: {
-        pageTitle: '\u6587\u5B57\u30AB\u30A6\u30F3\u30BF\u30FC',
-        siteName: '\u30CF\u30A4\u30E9\u30EB\u30C4\u30FC\u30EB\u30DC\u30C3\u30AF\u30B9',
-        navHome: '\u30DB\u30FC\u30E0',
-        navCounter: '\u6587\u5B57\u30AB\u30A6\u30F3\u30BF\u30FC',
-        breadHome: '\u30DB\u30FC\u30E0',
-        breadCounter: '\u6587\u5B57\u30AB\u30A6\u30F3\u30BF\u30FC',
-        toolDesc: '\u6587\u5B57\u6570\u3001\u5358\u8A9E\u6570\u3001\u6587\u6570\u3001\u6BB5\u843D\u6570\u3001\u884C\u6570\u3092\u30EA\u30A2\u30EB\u30BF\u30A4\u30E0\u306B\u30AB\u30A6\u30F3\u30C8\u3002\u4E2D\u6587\u30FB\u82F1\u6587\u6DF7\u5408\u30C6\u30AD\u30B9\u30C8\u306B\u5BFE\u5FDC\u3002',
-        labelChars: '\u6587\u5B57\u6570',
-        labelCharsWith: '\u30B9\u30DA\u30FC\u30B9\u542B\u3080',
-        labelCharsNoSpace: '\u6587\u5B57\u6570',
-        labelCharsWithout: '\u30B9\u30DA\u30FC\u30B9\u9664\u304F',
-        labelWords: '\u5358\u8A9E\u6570',
-        labelWordsSub: '\u5358\u8A9E',
-        labelSentences: '\u6587\u6570',
-        labelSentencesSub: '\u6587',
-        labelParagraphs: '\u6BB5\u843D\u6570',
-        labelParagraphsSub: '\u6BB5\u843D',
-        labelLines: '\u884C\u6570',
-        labelLinesSub: '\u884C',
-        readingTimeLabel: '\u7D04 {time} \u306E\u8AAD\u66F8\u6642\u9593',
-        readingDetail: '{wpm} \u8A9E/\u5206 \u57FA\u6E96',
-        btnClear: '\u30AF\u30EA\u30A2',
-        btnCopy: '\u30B3\u30D4\u30FC',
-        btnPaste: '\u30DA\u30FC\u30B9\u30C8',
-        freqHeading: '\uD83C\uDFC6 \u983B\u51FA\u5358\u8A9E\u30C8\u30C3\u30D7',
-        freqEmpty: '\u30C6\u30AD\u30B9\u30C8\u3092\u5165\u529B\u3059\u308B\u3068\u983B\u51FA\u5358\u8A9E\u304C\u8868\u793A\u3055\u308C\u307E\u3059',
-        hintPrivacy: '\uD83D\uDD12 \u3059\u3079\u3066\u306E\u7D71\u8A08\u306F\u30ED\u30FC\u30AB\u30EB\u3067\u51E6\u7406\u3055\u308C\u3001\u30C6\u30AD\u30B9\u30C8\u304C\u30B5\u30FC\u30D0\u30FC\u306B\u9001\u4FE1\u3055\u308C\u308B\u3053\u3068\u306F\u3042\u308A\u307E\u305B\u3093',
-        hintLang: '\u4E2D\u6587\u30FB\u82F1\u6587\u6DF7\u5408\u5206\u6790\u306B\u5BFE\u5FDC',
-        footerCopyright: '\u00A9 2026 \u30CF\u30A4\u30E9\u30EB\u30C4\u30FC\u30EB\u30DC\u30C3\u30AF\u30B9 \u00B7 \u30ED\u30FC\u30AB\u30EB\u30C4\u30FC\u30EB',
-        footerHome: '\u30DB\u30FC\u30E0',
-        footerCounter: '\u6587\u5B57\u30AB\u30A6\u30F3\u30BF\u30FC',
-        placeholder: '\u3053\u3053\u306B\u30C6\u30AD\u30B9\u30C8\u3092\u5165\u529B\u307E\u305F\u306F\u8CBC\u308A\u4ED8\u3051\u3001\u30EA\u30A2\u30EB\u30BF\u30A4\u30E0\u3067\u7D71\u8A08\u304C\u66F4\u65B0\u3055\u308C\u307E\u3059\u2026',
-        charCount: '{n} \u6587\u5B57',
-        reading0: '0 \u79D2',
-        readingSec: '{n} \u79D2',
-        readingMin: '{n} \u5206',
-        readingMinSec: '{m} \u5206 {s} \u79D2',
-        readingDetail0: '200 \u8A9E/\u5206 \u57FA\u6E96',
-        readingDetailSec: '\u7D04 {n} \u79D2\uFF08200 \u8A9E/\u5206 \u57FA\u6E96\uFF09',
-        readingDetailMin: '\u7D04 {m} \u5206{s}\uFF08200 \u8A9E/\u5206 \u57FA\u6E96\uFF09',
-        toastCleared: '\uD83D\uDDD1\uFE0F \u30AF\u30EA\u30A2\u3057\u307E\u3057\u305F',
-        toastNoContent: '\u30B3\u30D4\u30FC\u3059\u308B\u5185\u5BB9\u304C\u3042\u308A\u307E\u305B\u3093',
-        toastCopied: '\uD83D\uDCCB \u30AF\u30EA\u30C3\u30D7\u30DC\u30FC\u30C9\u306B\u30B3\u30D4\u30FC\u3057\u307E\u3057\u305F',
-        toastCopyFailed: '\u274C \u30B3\u30D4\u30FC\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002\u624B\u52D5\u3067\u30B3\u30D4\u30FC\u3057\u3066\u304F\u3060\u3055\u3044',
-        toastPasted: '\uD83D\uDCE5 {n} \u6587\u5B57\u3092\u8CBC\u308A\u4ED8\u3051\u307E\u3057\u305F',
-        toastClipboardEmpty: '\u30AF\u30EA\u30C3\u30D7\u30DC\u30FC\u30C9\u306F\u7A7A\u3067\u3059',
-        toastClipboardDenied: '\u274C \u30AF\u30EA\u30C3\u30D7\u30DC\u30FC\u30C9\u3092\u8AAD\u307F\u53D6\u308C\u307E\u305B\u3093\u3002Ctrl+V \u3092\u4F7F\u7528\u3057\u3066\u304F\u3060\u3055\u3044',
-        toastClipboardFallback: 'Ctrl+V \u3067\u8CBC\u308A\u4ED8\u3051\u3066\u304F\u3060\u3055\u3044',
-    },
-    ko: {
-        pageTitle: '\uAE00\uC790 \uC218 \uC138\uAE30',
-        siteName: '\uD558\uC774\uB8E8 \uB3C4\uAD6C\uC0C1\uC790',
-        navHome: '\uD648',
-        navCounter: '\uAE00\uC790 \uC218 \uC138\uAE30',
-        breadHome: '\uD648',
-        breadCounter: '\uAE00\uC790 \uC218 \uC138\uAE30',
-        toolDesc: '\uAE00\uC790, \uB2E8\uC5B4, \uBB38\uC7A5, \uBB38\uB2E8, \uC904 \uC218\uB97C \uC2E4\uC2DC\uAC04\uC73C\uB85C \uACC4\uC0B0\uD569\uB2C8\uB2E4. \uC911\uBB38/\uC601\uBB38 \uD63C\uD569 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC6D0\uD569\uB2C8\uB2E4.',
-        labelChars: '\uAE00\uC790 \uC218',
-        labelCharsWith: '\uACF5\uBC31 \uD3EC\uD568',
-        labelCharsNoSpace: '\uAE00\uC790 \uC218',
-        labelCharsWithout: '\uACF5\uBC31 \uC81C\uC678',
-        labelWords: '\uB2E8\uC5B4 \uC218',
-        labelWordsSub: '\uB2E8\uC5B4',
-        labelSentences: '\uBB38\uC7A5 \uC218',
-        labelSentencesSub: '\uBB38\uC7A5',
-        labelParagraphs: '\uBB38\uB2E8 \uC218',
-        labelParagraphsSub: '\uBB38\uB2E8',
-        labelLines: '\uC904 \uC218',
-        labelLinesSub: '\uC904',
-        readingTimeLabel: '\uC57D {time} \uC77D\uAE30 \uC2DC\uAC04',
-        readingDetail: '{wpm} \uB2E8\uC5B4/\uBD84 \uAE30\uC900',
-        btnClear: '\uC9C0\uC6B0\uAE30',
-        btnCopy: '\uBCF5\uC0AC',
-        btnPaste: '\uBD99\uC5EC\uB123\uAE30',
-        freqHeading: '\uD83C\uDFC6 \uC790\uC8FC \uC0AC\uC6A9\uB41C \uB2E8\uC5B4',
-        freqEmpty: '\uD14D\uC2A4\uD2B8\uB97C \uC785\uB825\uD558\uBA74 \uC790\uC8FC \uC0AC\uC6A9\uB41C \uB2E8\uC5B4\uAC00 \uD45C\uC2DC\uB429\uB2C8\uB2E4',
-        hintPrivacy: '\uD83D\uDD12 \uBAA8\uB4E0 \uD1B5\uACC4\uB294 \uB85C\uCEEC\uC5D0\uC11C \uACC4\uC0B0\uB418\uBA70 \uD14D\uC2A4\uD2B8\uAC00 \uC11C\uBC84\uB85C \uC804\uC1A1\uB418\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4',
-        hintLang: '\uC911\uBB38/\uC601\uBB38 \uD63C\uD569 \uBD84\uC11D \uC9C0\uC6D0',
-        footerCopyright: '\u00A9 2026 \uD558\uC774\uB8E8 \uB3C4\uAD6C\uC0C1\uC790 \u00B7 \uB85C\uCEEC \uB3C4\uAD6C',
-        footerHome: '\uD648',
-        footerCounter: '\uAE00\uC790 \uC218 \uC138\uAE30',
-        placeholder: '\uC5EC\uAE30\uC5D0 \uD14D\uC2A4\uD2B8\uB97C \uC785\uB825\uD558\uAC70\uB098 \uBD99\uC5EC\uB123\uC73C\uBA74 \uC2E4\uC2DC\uAC04\uC73C\uB85C \uD1B5\uACC4\uAC00 \uC5C5\uB370\uC774\uD2B8\uB429\uB2C8\uB2E4\u2026',
-        charCount: '{n} \uAE00\uC790',
-        reading0: '0\uCD08',
-        readingSec: '{n}\uCD08',
-        readingMin: '{n}\uBD84',
-        readingMinSec: '{m}\uBD84 {s}\uCD08',
-        readingDetail0: '200\uB2E8\uC5B4/\uBD84 \uAE30\uC900',
-        readingDetailSec: '\uC57D {n}\uCD08 (200\uB2E8\uC5B4/\uBD84 \uAE30\uC900)',
-        readingDetailMin: '\uC57D {m}\uBD84{s} (200\uB2E8\uC5B4/\uBD84 \uAE30\uC900)',
-        toastCleared: '\uD83D\uDDD1\uFE0F \uC9C0\uC6CC\uC9D0',
-        toastNoContent: '\uBCF5\uC0AC\uD560 \uB0B4\uC6A9\uC774 \uC5C6\uC2B5\uB2C8\uB2E4',
-        toastCopied: '\uD83D\uDCCB \uD074\uB9BD\uBCF4\uB4DC\uC5D0 \uBCF5\uC0AC\uB428',
-        toastCopyFailed: '\u274C \uBCF5\uC0AC \uC2E4\uD328, \uC218\uB3D9\uC73C\uB85C \uBCF5\uC0AC\uD574\uC8FC\uC138\uC694',
-        toastPasted: '\uD83D\uDCE5 {n}\uAE00\uC790 \uBD99\uC5EC\uB123\uC74C',
-        toastClipboardEmpty: '\uD074\uB9BD\uBCF4\uB4DC\uAC00 \uBE44\uC5B4 \uC788\uC2B5\uB2C8\uB2E4',
-        toastClipboardDenied: '\u274C \uD074\uB9BD\uBCF4\uB4DC\uB97C \uC77D\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4. Ctrl+V\uB97C \uC0AC\uC6A9\uD558\uC138\uC694',
-        toastClipboardFallback: 'Ctrl+V\uB97C \uC0AC\uC6A9\uD558\uC5EC \uBD99\uC5EC\uB123\uC73C\uC138\uC694',
-    },
-    fr: {
-        pageTitle: 'Compteur de texte',
-        siteName: 'Bo\u00EEte \u00E0 outils Hyrule',
-        navHome: 'Accueil',
-        navCounter: 'Compteur de texte',
-        breadHome: 'Accueil',
-        breadCounter: 'Compteur de texte',
-        toolDesc: 'Comptez caract\u00E8res, mots, phrases, paragraphes et lignes en temps r\u00E9el. Prend en charge les textes mixtes chinois/anglais.',
-        labelChars: 'Caract\u00E8res',
-        labelCharsWith: 'avec espaces',
-        labelCharsNoSpace: 'Caract\u00E8res',
-        labelCharsWithout: 'sans espaces',
-        labelWords: 'Mots',
-        labelWordsSub: 'mots',
-        labelSentences: 'Phrases',
-        labelSentencesSub: 'phrases',
-        labelParagraphs: 'Paragraphes',
-        labelParagraphsSub: 'paragraphes',
-        labelLines: 'Lignes',
-        labelLinesSub: 'lignes',
-        readingTimeLabel: 'Environ {time} de lecture',
-        readingDetail: 'Bas\u00E9 sur {wpm} mots/min',
-        btnClear: 'Effacer',
-        btnCopy: 'Copier',
-        btnPaste: 'Coller',
-        freqHeading: '\uD83C\uDFC6 Mots fr\u00E9quents',
-        freqEmpty: 'Saisissez du texte pour voir les mots fr\u00E9quents',
-        hintPrivacy: '\uD83D\uDD12 Toutes les statistiques sont calcul\u00E9es localement, le texte ne quitte jamais votre appareil',
-        hintLang: 'Prend en charge l\'analyse mixte chinois/anglais',
-        footerCopyright: '\u00A9 2026 Bo\u00EEte \u00E0 outils Hyrule \u00B7 Outils locaux',
-        footerHome: 'Accueil',
-        footerCounter: 'Compteur de texte',
-        placeholder: 'Tapez ou collez du texte ici, les statistiques se mettent \u00E0 jour en temps r\u00E9el\u2026',
-        charCount: '{n} caract\u00E8res',
-        reading0: '0 s',
-        readingSec: '{n} s',
-        readingMin: '{n} min',
-        readingMinSec: '{m} min {s} s',
-        readingDetail0: 'Bas\u00E9 sur 200 mots/min',
-        readingDetailSec: 'Environ {n} s (bas\u00E9 sur 200 mots/min)',
-        readingDetailMin: 'Environ {m} min{s} (bas\u00E9 sur 200 mots/min)',
-        toastCleared: '\uD83D\uDDD1\uFE0F Effac\u00E9',
-        toastNoContent: 'Rien \u00E0 copier',
-        toastCopied: '\uD83D\uDCCB Copi\u00E9 dans le presse-papiers',
-        toastCopyFailed: '\u274C \u00C9chec de la copie, veuillez copier manuellement',
-        toastPasted: '\uD83D\uDCE5 {n} caract\u00E8res coll\u00E9s',
-        toastClipboardEmpty: 'Le presse-papiers est vide',
-        toastClipboardDenied: '\u274C Impossible de lire le presse-papiers, utilisez Ctrl+V',
-        toastClipboardFallback: 'Utilisez Ctrl+V pour coller',
-    },
-    de: {
-        pageTitle: 'Textz\u00E4hler',
-        siteName: 'Hyrule-Werkzeugkasten',
-        navHome: 'Startseite',
-        navCounter: 'Textz\u00E4hler',
-        breadHome: 'Startseite',
-        breadCounter: 'Textz\u00E4hler',
-        toolDesc: 'Z\u00E4hlen Sie Zeichen, W\u00F6rter, S\u00E4tze, Abs\u00E4tze und Zeilen in Echtzeit. Unterst\u00FCtzt gemischte chinesische/englische Texte.',
-        labelChars: 'Zeichen',
-        labelCharsWith: 'mit Leerzeichen',
-        labelCharsNoSpace: 'Zeichen',
-        labelCharsWithout: 'ohne Leerzeichen',
-        labelWords: 'W\u00F6rter',
-        labelWordsSub: 'W\u00F6rter',
-        labelSentences: 'S\u00E4tze',
-        labelSentencesSub: 'S\u00E4tze',
-        labelParagraphs: 'Abs\u00E4tze',
-        labelParagraphsSub: 'Abs\u00E4tze',
-        labelLines: 'Zeilen',
-        labelLinesSub: 'Zeilen',
-        readingTimeLabel: 'Ca. {time} Lesezeit',
-        readingDetail: 'Basiert auf {wpm} W\u00F6rtern/min',
-        btnClear: 'L\u00F6schen',
-        btnCopy: 'Kopieren',
-        btnPaste: 'Einf\u00FCgen',
-        freqHeading: '\uD83C\uDFC6 H\u00E4ufige W\u00F6rter',
-        freqEmpty: 'Geben Sie Text ein, um h\u00E4ufige W\u00F6rter zu sehen',
-        hintPrivacy: '\uD83D\uDD12 Alle Statistiken werden lokal berechnet, Text verl\u00E4sst nie Ihr Ger\u00E4t',
-        hintLang: 'Unterst\u00FCtzt gemischte chinesische/englische Analyse',
-        footerCopyright: '\u00A9 2026 Hyrule-Werkzeugkasten \u00B7 Lokale Werkzeuge',
-        footerHome: 'Startseite',
-        footerCounter: 'Textz\u00E4hler',
-        placeholder: 'Geben Sie hier Text ein oder f\u00FCgen Sie ihn ein, die Statistiken werden in Echtzeit aktualisiert\u2026',
-        charCount: '{n} Zeichen',
-        reading0: '0 Sek.',
-        readingSec: '{n} Sek.',
-        readingMin: '{n} Min.',
-        readingMinSec: '{m} Min. {s} Sek.',
-        readingDetail0: 'Basiert auf 200 W\u00F6rtern/min',
-        readingDetailSec: 'Ca. {n} Sek. (basiert auf 200 W\u00F6rtern/min)',
-        readingDetailMin: 'Ca. {m} Min.{s} (basiert auf 200 W\u00F6rtern/min)',
-        toastCleared: '\uD83D\uDDD1\uFE0F Gel\u00F6scht',
-        toastNoContent: 'Nichts zu kopieren',
-        toastCopied: '\uD83D\uDCCB In die Zwischenablage kopiert',
-        toastCopyFailed: '\u274C Kopieren fehlgeschlagen, bitte manuell kopieren',
-        toastPasted: '\uD83D\uDCE5 {n} Zeichen eingef\u00FCgt',
-        toastClipboardEmpty: 'Zwischenablage ist leer',
-        toastClipboardDenied: '\u274C Kann Zwischenablage nicht lesen, verwenden Sie Strg+V',
-        toastClipboardFallback: 'Verwenden Sie Strg+V zum Einf\u00FCgen',
-    }
+window.__pageTranslations = {
+  en: {
+    'page.title': 'Text Counter — Hyrule Toolbox',
+    'page.description': 'Real-time character, word, sentence, paragraph, and line count. Reading time estimation. Supports Chinese and English.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Password Generator', 'nav.unit': 'Unit Converter', 'nav.counter': 'Text Counter',
+    'nav.case': 'Case Converter', 'nav.uuid': 'UUID Generator', 'nav.color': 'Color Converter', 'nav.json': 'JSON Formatter', 'nav.qr': 'QR Code Generator',
+    'footer.home': 'Home', 'footer.about': 'About', 'footer.contact': 'Contact',
+    'toast.copied': '📋 Copied to clipboard', 'toast.failed': '❌ Copy failed, please copy manually',
+    'tool.title': 'Text Counter',
+    'tool.desc': 'Count characters, words, sentences, paragraphs, and lines in real time. Supports mixed Chinese/English text.',
+    'counter.placeholder': 'Type or paste text here, stats update in real time…',
+    'counter.btn.clear': 'Clear',
+    'counter.btn.copy': 'Copy',
+    'counter.btn.paste': 'Paste',
+    'counter.stats.chars': 'Characters',
+    'counter.stats.charsWith': 'with spaces',
+    'counter.stats.charsWithout': 'without spaces',
+    'counter.stats.words': 'Words',
+    'counter.stats.wordsSub': 'words',
+    'counter.stats.sentences': 'Sentences',
+    'counter.stats.sentencesSub': 'sentences',
+    'counter.stats.paragraphs': 'Paragraphs',
+    'counter.stats.paragraphsSub': 'paragraphs',
+    'counter.stats.lines': 'Lines',
+    'counter.stats.linesSub': 'lines',
+    'counter.reading.label': 'About {time} reading time',
+    'counter.reading.detail': 'Based on {wpm} words/min',
+    'counter.freq.heading': '🏆 Top Frequent Words',
+    'counter.freq.empty': 'Enter text to see frequent words',
+    'counter.hint.privacy': '🔒 All stats computed locally, text never leaves your device',
+    'counter.hint.lang': 'Supports mixed Chinese/English analysis',
+    'counter.charCount': '{n} characters',
+    'counter.reading.0': '0 sec',
+    'counter.reading.sec': '{n} sec',
+    'counter.reading.min': '{n} min',
+    'counter.reading.minSec': '{m} min {s} sec',
+    'counter.reading.detail0': 'Based on 200 words/min',
+    'counter.reading.detailSec': 'About {n} sec (based on 200 words/min)',
+    'counter.reading.detailMin': 'About {m} min{s} (based on 200 words/min)',
+    'counter.toast.cleared': '🗑️ Cleared',
+    'counter.toast.noContent': 'Nothing to copy',
+    'counter.toast.pasted': '📥 Pasted {n} characters',
+    'counter.toast.clipboardEmpty': 'Clipboard is empty',
+    'counter.toast.clipboardDenied': '❌ Cannot read clipboard, use Ctrl+V',
+    'counter.toast.clipboardFallback': 'Use Ctrl+V to paste'
+  },
+  zh: {
+    'page.title': '字数统计 — Hyrule Toolbox',
+    'page.description': '实时统计字符数、单词数、行数、段落数，支持中文/英文混合文本分析。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '密码生成器', 'nav.unit': '单位换算', 'nav.counter': '文本统计',
+    'nav.case': '大小写转换', 'nav.uuid': 'UUID生成', 'nav.color': '颜色转换', 'nav.json': 'JSON格式化', 'nav.qr': '二维码生成',
+    'footer.home': '首页', 'footer.about': '关于', 'footer.contact': '联系',
+    'toast.copied': '📋 已复制到剪贴板', 'toast.failed': '❌ 复制失败，请手动复制',
+    'tool.title': '字数统计',
+    'tool.desc': '实时统计字符数、单词数、行数、段落数，支持中文/英文混合文本分析。',
+    'counter.placeholder': '在此输入或粘贴文本，实时统计将自动开始…',
+    'counter.btn.clear': '清空',
+    'counter.btn.copy': '复制',
+    'counter.btn.paste': '粘贴',
+    'counter.stats.chars': '字符数',
+    'counter.stats.charsWith': '含空格',
+    'counter.stats.charsWithout': '不含空格',
+    'counter.stats.words': '单词数',
+    'counter.stats.wordsSub': '词',
+    'counter.stats.sentences': '句子数',
+    'counter.stats.sentencesSub': '句',
+    'counter.stats.paragraphs': '段落数',
+    'counter.stats.paragraphsSub': '段',
+    'counter.stats.lines': '行数',
+    'counter.stats.linesSub': '行',
+    'counter.reading.label': '大约 {time} 阅读时间',
+    'counter.reading.detail': '基于 {wpm} 词/分钟',
+    'counter.freq.heading': '🏆 高频词汇 Top 10',
+    'counter.freq.empty': '输入文本后将显示高频词汇',
+    'counter.hint.privacy': '🔒 所有统计均在本地完成，文本不会上传到服务器',
+    'counter.hint.lang': '支持中英文混合分析',
+    'counter.charCount': '{n} 字符',
+    'counter.reading.0': '0 秒',
+    'counter.reading.sec': '{n} 秒',
+    'counter.reading.min': '{n} 分钟',
+    'counter.reading.minSec': '{m} 分 {s} 秒',
+    'counter.reading.detail0': '基于 200 词/分钟',
+    'counter.reading.detailSec': '约 {n} 秒（基于 200 词/分钟）',
+    'counter.reading.detailMin': '约 {m} 分{s}（基于 200 词/分钟）',
+    'counter.toast.cleared': '🗑️ 已清空',
+    'counter.toast.noContent': '没有可复制的内容',
+    'counter.toast.pasted': '📥 已粘贴 {n} 个字符',
+    'counter.toast.clipboardEmpty': '剪贴板为空',
+    'counter.toast.clipboardDenied': '❌ 无法读取剪贴板，请使用 Ctrl+V 粘贴',
+    'counter.toast.clipboardFallback': '请使用 Ctrl+V 粘贴'
+  },
+  ja: {
+    'page.title': '文字カウンター — Hyrule Toolbox',
+    'page.description': '文字数、単語数、文数、段落数、行数をリアルタイムにカウント。中文・英文混合テキストに対応。',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'パスワード生成', 'nav.unit': '単位変換', 'nav.counter': 'テキスト統計',
+    'nav.case': '大文字小文字変換', 'nav.uuid': 'UUID生成', 'nav.color': 'カラー変換', 'nav.json': 'JSONフォーマッター', 'nav.qr': 'QRコード生成',
+    'footer.home': 'ホーム', 'footer.about': '概要', 'footer.contact': 'お問い合わせ',
+    'toast.copied': '📋 クリップボードにコピーしました', 'toast.failed': '❌ コピーに失敗しました。手動でコピーしてください',
+    'tool.title': '文字カウンター',
+    'tool.desc': '文字数、単語数、文数、段落数、行数をリアルタイムにカウント。中文・英文混合テキストに対応。',
+    'counter.placeholder': 'ここにテキストを入力または貼り付け、リアルタイムで統計が更新されます…',
+    'counter.btn.clear': 'クリア',
+    'counter.btn.copy': 'コピー',
+    'counter.btn.paste': 'ペースト',
+    'counter.stats.chars': '文字数',
+    'counter.stats.charsWith': 'スペース含む',
+    'counter.stats.charsWithout': 'スペース除く',
+    'counter.stats.words': '単語数',
+    'counter.stats.wordsSub': '単語',
+    'counter.stats.sentences': '文数',
+    'counter.stats.sentencesSub': '文',
+    'counter.stats.paragraphs': '段落数',
+    'counter.stats.paragraphsSub': '段落',
+    'counter.stats.lines': '行数',
+    'counter.stats.linesSub': '行',
+    'counter.reading.label': '約 {time} の読書時間',
+    'counter.reading.detail': '{wpm} 語/分 基準',
+    'counter.freq.heading': '🏆 頻出単語トップ',
+    'counter.freq.empty': 'テキストを入力すると頻出単語が表示されます',
+    'counter.hint.privacy': '🔒 すべての統計はローカルで処理され、テキストがサーバーに送信されることはありません',
+    'counter.hint.lang': '中文・英文混合分析に対応',
+    'counter.charCount': '{n} 文字',
+    'counter.reading.0': '0 秒',
+    'counter.reading.sec': '{n} 秒',
+    'counter.reading.min': '{n} 分',
+    'counter.reading.minSec': '{m} 分 {s} 秒',
+    'counter.reading.detail0': '200 語/分 基準',
+    'counter.reading.detailSec': '約 {n} 秒（200 語/分 基準）',
+    'counter.reading.detailMin': '約 {m} 分{s}（200 語/分 基準）',
+    'counter.toast.cleared': '🗑️ クリアしました',
+    'counter.toast.noContent': 'コピーする内容がありません',
+    'counter.toast.pasted': '📥 {n} 文字を貼り付けました',
+    'counter.toast.clipboardEmpty': 'クリップボードは空です',
+    'counter.toast.clipboardDenied': '❌ クリップボードを読み取れません。Ctrl+V を使用してください',
+    'counter.toast.clipboardFallback': 'Ctrl+V で貼り付けてください'
+  },
+  ko: {
+    'page.title': '글자 수 세기 — Hyrule Toolbox',
+    'page.description': '글자, 단어, 문장, 문단, 줄 수를 실시간으로 계산합니다. 중문/영문 혼합 텍스트를 지원합니다.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': '비밀번호 생성기', 'nav.unit': '단위 변환', 'nav.counter': '텍스트 통계',
+    'nav.case': '대소문자 변환', 'nav.uuid': 'UUID 생성', 'nav.color': '색상 변환', 'nav.json': 'JSON 포맷터', 'nav.qr': 'QR코드 생성',
+    'footer.home': '홈', 'footer.about': '소개', 'footer.contact': '문의',
+    'toast.copied': '📋 클립보드에 복사됨', 'toast.failed': '❌ 복사 실패, 수동으로 복사해주세요',
+    'tool.title': '글자 수 세기',
+    'tool.desc': '글자, 단어, 문장, 문단, 줄 수를 실시간으로 계산합니다. 중문/영문 혼합 텍스트를 지원합니다.',
+    'counter.placeholder': '여기에 텍스트를 입력하거나 붙여넣으면 실시간으로 통계가 업데이트됩니다…',
+    'counter.btn.clear': '지우기',
+    'counter.btn.copy': '복사',
+    'counter.btn.paste': '붙여넣기',
+    'counter.stats.chars': '글자 수',
+    'counter.stats.charsWith': '공백 포함',
+    'counter.stats.charsWithout': '공백 제외',
+    'counter.stats.words': '단어 수',
+    'counter.stats.wordsSub': '단어',
+    'counter.stats.sentences': '문장 수',
+    'counter.stats.sentencesSub': '문장',
+    'counter.stats.paragraphs': '문단 수',
+    'counter.stats.paragraphsSub': '문단',
+    'counter.stats.lines': '줄 수',
+    'counter.stats.linesSub': '줄',
+    'counter.reading.label': '약 {time} 읽기 시간',
+    'counter.reading.detail': '{wpm} 단어/분 기준',
+    'counter.freq.heading': '🏆 자주 사용된 단어',
+    'counter.freq.empty': '텍스트를 입력하면 자주 사용된 단어가 표시됩니다',
+    'counter.hint.privacy': '🔒 모든 통계는 로컬에서 계산되며 텍스트가 서버로 전송되지 않습니다',
+    'counter.hint.lang': '중문/영문 혼합 분석 지원',
+    'counter.charCount': '{n} 글자',
+    'counter.reading.0': '0초',
+    'counter.reading.sec': '{n}초',
+    'counter.reading.min': '{n}분',
+    'counter.reading.minSec': '{m}분 {s}초',
+    'counter.reading.detail0': '200단어/분 기준',
+    'counter.reading.detailSec': '약 {n}초 (200단어/분 기준)',
+    'counter.reading.detailMin': '약 {m}분{s} (200단어/분 기준)',
+    'counter.toast.cleared': '🗑️ 지워짐',
+    'counter.toast.noContent': '복사할 내용이 없습니다',
+    'counter.toast.pasted': '📥 {n}글자 붙여넣음',
+    'counter.toast.clipboardEmpty': '클립보드가 비어 있습니다',
+    'counter.toast.clipboardDenied': '❌ 클립보드를 읽을 수 없습니다. Ctrl+V를 사용하세요',
+    'counter.toast.clipboardFallback': 'Ctrl+V를 사용하여 붙여넣으세요'
+  },
+  fr: {
+    'page.title': 'Compteur de texte — Hyrule Toolbox',
+    'page.description': 'Comptez caractères, mots, phrases, paragraphes et lignes en temps réel. Prend en charge les textes mixtes chinois/anglais.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Générateur de mots de passe', 'nav.unit': "Convertisseur d'unités", 'nav.counter': 'Compteur de texte',
+    'nav.case': 'Convertisseur de casse', 'nav.uuid': 'Générateur UUID', 'nav.color': 'Convertisseur de couleurs', 'nav.json': 'Formateur JSON', 'nav.qr': 'Générateur de QR Code',
+    'footer.home': 'Accueil', 'footer.about': 'À propos', 'footer.contact': 'Contact',
+    'toast.copied': '📋 Copié dans le presse-papiers', 'toast.failed': '❌ Échec de la copie, veuillez copier manuellement',
+    'tool.title': 'Compteur de texte',
+    'tool.desc': 'Comptez caractères, mots, phrases, paragraphes et lignes en temps réel. Prend en charge les textes mixtes chinois/anglais.',
+    'counter.placeholder': 'Tapez ou collez du texte ici, les statistiques se mettent à jour en temps réel…',
+    'counter.btn.clear': 'Effacer',
+    'counter.btn.copy': 'Copier',
+    'counter.btn.paste': 'Coller',
+    'counter.stats.chars': 'Caractères',
+    'counter.stats.charsWith': 'avec espaces',
+    'counter.stats.charsWithout': 'sans espaces',
+    'counter.stats.words': 'Mots',
+    'counter.stats.wordsSub': 'mots',
+    'counter.stats.sentences': 'Phrases',
+    'counter.stats.sentencesSub': 'phrases',
+    'counter.stats.paragraphs': 'Paragraphes',
+    'counter.stats.paragraphsSub': 'paragraphes',
+    'counter.stats.lines': 'Lignes',
+    'counter.stats.linesSub': 'lignes',
+    'counter.reading.label': 'Environ {time} de lecture',
+    'counter.reading.detail': 'Basé sur {wpm} mots/min',
+    'counter.freq.heading': '🏆 Mots fréquents',
+    'counter.freq.empty': 'Saisissez du texte pour voir les mots fréquents',
+    'counter.hint.privacy': '🔒 Toutes les statistiques sont calculées localement, le texte ne quitte jamais votre appareil',
+    'counter.hint.lang': "Prend en charge l'analyse mixte chinois/anglais",
+    'counter.charCount': '{n} caractères',
+    'counter.reading.0': '0 s',
+    'counter.reading.sec': '{n} s',
+    'counter.reading.min': '{n} min',
+    'counter.reading.minSec': '{m} min {s} s',
+    'counter.reading.detail0': 'Basé sur 200 mots/min',
+    'counter.reading.detailSec': 'Environ {n} s (basé sur 200 mots/min)',
+    'counter.reading.detailMin': 'Environ {m} min{s} (basé sur 200 mots/min)',
+    'counter.toast.cleared': '🗑️ Effacé',
+    'counter.toast.noContent': 'Rien à copier',
+    'counter.toast.pasted': '📥 {n} caractères collés',
+    'counter.toast.clipboardEmpty': 'Le presse-papiers est vide',
+    'counter.toast.clipboardDenied': '❌ Impossible de lire le presse-papiers, utilisez Ctrl+V',
+    'counter.toast.clipboardFallback': 'Utilisez Ctrl+V pour coller'
+  },
+  de: {
+    'page.title': 'Textzähler — Hyrule Toolbox',
+    'page.description': 'Zählen Sie Zeichen, Wörter, Sätze, Absätze und Zeilen in Echtzeit. Unterstützt gemischte chinesische/englische Texte.',
+    'header.logo': 'Hyrule Toolbox',
+    'nav.password': 'Passwortgenerator', 'nav.unit': 'Einheitenumrechner', 'nav.counter': 'Textzähler',
+    'nav.case': 'Fallumwandler', 'nav.uuid': 'UUID-Generator', 'nav.color': 'Farbkonverter', 'nav.json': 'JSON-Formatierer', 'nav.qr': 'QR-Code-Generator',
+    'footer.home': 'Startseite', 'footer.about': 'Über uns', 'footer.contact': 'Kontakt',
+    'toast.copied': '📋 In die Zwischenablage kopiert', 'toast.failed': '❌ Kopieren fehlgeschlagen, bitte manuell kopieren',
+    'tool.title': 'Textzähler',
+    'tool.desc': 'Zählen Sie Zeichen, Wörter, Sätze, Absätze und Zeilen in Echtzeit. Unterstützt gemischte chinesische/englische Texte.',
+    'counter.placeholder': 'Geben Sie hier Text ein oder fügen Sie ihn ein, die Statistiken werden in Echtzeit aktualisiert…',
+    'counter.btn.clear': 'Löschen',
+    'counter.btn.copy': 'Kopieren',
+    'counter.btn.paste': 'Einfügen',
+    'counter.stats.chars': 'Zeichen',
+    'counter.stats.charsWith': 'mit Leerzeichen',
+    'counter.stats.charsWithout': 'ohne Leerzeichen',
+    'counter.stats.words': 'Wörter',
+    'counter.stats.wordsSub': 'Wörter',
+    'counter.stats.sentences': 'Sätze',
+    'counter.stats.sentencesSub': 'Sätze',
+    'counter.stats.paragraphs': 'Absätze',
+    'counter.stats.paragraphsSub': 'Absätze',
+    'counter.stats.lines': 'Zeilen',
+    'counter.stats.linesSub': 'Zeilen',
+    'counter.reading.label': 'Ca. {time} Lesezeit',
+    'counter.reading.detail': 'Basiert auf {wpm} Wörtern/min',
+    'counter.freq.heading': '🏆 Häufige Wörter',
+    'counter.freq.empty': 'Geben Sie Text ein, um häufige Wörter zu sehen',
+    'counter.hint.privacy': '🔒 Alle Statistiken werden lokal berechnet, Text verlässt nie Ihr Gerät',
+    'counter.hint.lang': 'Unterstützt gemischte chinesische/englische Analyse',
+    'counter.charCount': '{n} Zeichen',
+    'counter.reading.0': '0 Sek.',
+    'counter.reading.sec': '{n} Sek.',
+    'counter.reading.min': '{n} Min.',
+    'counter.reading.minSec': '{m} Min. {s} Sek.',
+    'counter.reading.detail0': 'Basiert auf 200 Wörtern/min',
+    'counter.reading.detailSec': 'Ca. {n} Sek. (basiert auf 200 Wörtern/min)',
+    'counter.reading.detailMin': 'Ca. {m} Min.{s} (basiert auf 200 Wörtern/min)',
+    'counter.toast.cleared': '🗑️ Gelöscht',
+    'counter.toast.noContent': 'Nichts zu kopieren',
+    'counter.toast.pasted': '📥 {n} Zeichen eingefügt',
+    'counter.toast.clipboardEmpty': 'Zwischenablage ist leer',
+    'counter.toast.clipboardDenied': '❌ Kann Zwischenablage nicht lesen, verwenden Sie Strg+V',
+    'counter.toast.clipboardFallback': 'Verwenden Sie Strg+V zum Einfügen'
+  }
 };
-
-(function() {
+</script>
+<script src="js/theme.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/common.js"></script>
+<script>
+(function () {
     'use strict';
 
-    // ===== CURRENT LANGUAGE =====
-    var currentLang = localStorage.getItem('textCounterLang') || 'en';
-
-    // ===== I18N HELPERS =====
     function t(key, params) {
-        var dict = I18N[currentLang] || I18N['en'];
-        var val = dict[key] || I18N['en'][key] || key;
+        var val = window.HyruleI18n.t(key);
         if (params) {
             for (var k in params) {
-                if (params.hasOwnProperty(k)) {
+                if (Object.prototype.hasOwnProperty.call(params, k)) {
                     val = val.replace('{' + k + '}', params[k]);
                 }
             }
@@ -814,126 +733,31 @@ var I18N = {
         return val;
     }
 
-    function _s(key) {
-        return (I18N[currentLang] || I18N['en'])[key] || (I18N['en'][key] || '');
-    }
+    var textInput = document.getElementById('textInput');
+    var charCountLabel = document.getElementById('charCountLabel');
+    var clearBtn = document.getElementById('clearBtn');
+    var copyBtn = document.getElementById('copyBtn');
+    var pasteBtn = document.getElementById('pasteBtn');
 
-    // ===== DOM REFS =====
-    const textInput       = document.getElementById('textInput');
-    const charCountLabel  = document.getElementById('charCountLabel');
-    const clearBtn        = document.getElementById('clearBtn');
-    const copyBtn         = document.getElementById('copyBtn');
-    const pasteBtn        = document.getElementById('pasteBtn');
-    const toast           = document.getElementById('toast');
-    const langSwitcher    = document.getElementById('langSwitcher');
-    const themeToggle     = document.getElementById('themeToggle');
+    var statChars = document.getElementById('statChars');
+    var statCharsNoSpace = document.getElementById('statCharsNoSpace');
+    var statWords = document.getElementById('statWords');
+    var statSentences = document.getElementById('statSentences');
+    var statParagraphs = document.getElementById('statParagraphs');
+    var statLines = document.getElementById('statLines');
 
-    const statChars       = document.getElementById('statChars');
-    const statCharsNoSpace= document.getElementById('statCharsNoSpace');
-    const statWords       = document.getElementById('statWords');
-    const statSentences   = document.getElementById('statSentences');
-    const statParagraphs  = document.getElementById('statParagraphs');
-    const statLines       = document.getElementById('statLines');
+    var readingTimeLabel = document.getElementById('readingTimeLabel');
+    var readingDetail = document.getElementById('readingDetail');
+    var freqList = document.getElementById('freqList');
 
-    const readingTime     = document.getElementById('readingTime');
-    const readingDetail   = document.getElementById('readingDetail');
-    const freqList        = document.getElementById('freqList');
+    var debounceTimer = null;
 
-    // ===== STATE =====
-    let debounceTimer = null;
-
-    // ===== THEME =====
-    var currentTheme = localStorage.getItem('textCounterTheme') || 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-    }
-
-    // ===== APPLY LANGUAGE =====
-    function applyLanguage() {
-        var lang = currentLang;
-        var dict = I18N[lang] || I18N['en'];
-
-        // Set lang attribute
-        var htmlLang = 'en';
-        if (lang === 'zh') htmlLang = 'zh-CN';
-        else if (lang === 'ja') htmlLang = 'ja';
-        else if (lang === 'ko') htmlLang = 'ko';
-        else if (lang === 'fr') htmlLang = 'fr';
-        else if (lang === 'de') htmlLang = 'de';
-        document.documentElement.lang = htmlLang;
-
-        // Update page title
-        document.title = dict.pageTitle + ' \u2014 ' + dict.siteName;
-
-        // Helper to set text content by id
-        function setText(id, val) {
-            var el = document.getElementById(id);
-            if (el) el.textContent = val;
-        }
-
-        // Header / Nav
-        setText('siteName', dict.siteName);
-        setText('navHome', dict.navHome);
-        setText('navCounter', dict.navCounter);
-
-        // Breadcrumb
-        setText('breadHome', dict.breadHome);
-        setText('breadCounter', dict.breadCounter);
-
-        // Page title & description
-        setText('pageTitle', dict.pageTitle);
-        setText('toolDesc', dict.toolDesc);
-
-        // Textarea placeholder
-        textInput.placeholder = dict.placeholder;
-
-        // Stats labels
-        setText('labelChars', dict.labelChars);
-        setText('labelCharsWith', dict.labelCharsWith);
-        setText('labelCharsNoSpace', dict.labelCharsNoSpace);
-        setText('labelCharsWithout', dict.labelCharsWithout);
-        setText('labelWords', dict.labelWords);
-        setText('labelWordsSub', dict.labelWordsSub);
-        setText('labelSentences', dict.labelSentences);
-        setText('labelSentencesSub', dict.labelSentencesSub);
-        setText('labelParagraphs', dict.labelParagraphs);
-        setText('labelParagraphsSub', dict.labelParagraphsSub);
-        setText('labelLines', dict.labelLines);
-        setText('labelLinesSub', dict.labelLinesSub);
-
-        // Action buttons
-        setText('btnClear', dict.btnClear);
-        setText('btnCopy', dict.btnCopy);
-        setText('btnPaste', dict.btnPaste);
-
-        // Word frequency
-        setText('freqHeading', dict.freqHeading);
-        // Don't reset freqEmpty if frequency list is already populated
-        var fe = document.getElementById('freqEmpty');
-        if (fe) fe.textContent = dict.freqEmpty;
-
-        // Hints
-        setText('hintPrivacy', dict.hintPrivacy);
-        setText('hintLang', dict.hintLang);
-
-        // Footer
-        setText('footerCopyright', dict.footerCopyright);
-        setText('footerHome', dict.footerHome);
-        setText('footerCounter', dict.footerCounter);
-
-        // Re-render dynamic content
-        updateStats(textInput.value);
-    }
-
-    // ===== STOP WORDS (common English + Chinese) =====
-    const STOP_WORDS = new Set([
-        // English
+    var STOP_WORDS = new Set([
         'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
         'of', 'by', 'with', 'from', 'as', 'is', 'was', 'are', 'were', 'be',
         'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will',
         'would', 'could', 'should', 'may', 'might', 'shall', 'can', 'need',
-        'dare', 'ought', 'used', 'it', 'its', 'it\'s', 'i', 'me', 'my', 'we',
+        'dare', 'ought', 'used', 'it', 'its', "it's", 'i', 'me', 'my', 'we',
         'us', 'our', 'you', 'your', 'he', 'him', 'his', 'she', 'her', 'they',
         'them', 'their', 'this', 'that', 'these', 'those', 'what', 'which',
         'who', 'whom', 'when', 'where', 'why', 'how', 'all', 'each', 'every',
@@ -946,149 +770,110 @@ var I18N = {
         'outside', 'upon', 'into', 'onto', 'like', 'ago', 'well', 'back',
         'still', 'even', 'much', 'really', 'also', 'yet', 'already', 'now',
         'always', 'never', 'often', 'sometimes', 'usually', 'thus', 'hence',
-        'almost', 'enough', 'quite', 'rather', 'quite', 'am', 'got', 'get',
+        'almost', 'enough', 'quite', 'rather', 'am', 'got', 'get',
         'one', 'two', 'three', 'first', 'second', 'last', 'next', 'let',
         'say', 'make', 'go', 'take', 'come', 'see', 'know', 'think', 'give',
         'find', 'tell', 'ask', 'try', 'leave', 'call', 'set', 'put', 'keep',
-        'look', 'seem', 'need', 'want', 'use', 'show', 'mean', 'become',
+        'look', 'seem', 'want', 'use', 'show', 'mean', 'become',
         'begin', 'bring', 'change', 'create', 'help', 'hold', 'move', 'run',
         'start', 'stop', 'turn', 'work', 'write', 'read', 'allow', 'open',
         'close', 'end', 'follow', 'live', 'plan', 'play', 'provide', 'stand',
         'include', 'continue', 'consider', 'expect', 'remember', 'believe',
-        'understand', 'bring', 'cause', 'force', 'lead', 'let', 'offer',
+        'understand', 'cause', 'force', 'lead', 'offer',
         'produce', 'require', 'support', 'wait', 'watch', 'wonder',
-        // Most common short words
         'oh', 'ok', 'okay', 'uh', 'um', 'ah', 'ha', 'hi', 'hey', 'hello',
         'yes', 'no', 'yeah', 'nope', 'yep',
-        // Chinese common stop words / particles
         '的', '了', '在', '是', '我', '有', '和', '就', '不', '人', '都', '一',
         '一个', '上', '也', '很', '到', '说', '要', '去', '你', '会', '着',
         '没有', '看', '好', '自己', '这', '他', '她', '它', '们', '那', '什么',
         '吗', '啊', '吧', '呢', '哦', '嗯', '哈', '呀', '哇', '么', '得',
         '地', '过', '来', '里', '为', '与', '及', '而', '或', '但', '被',
         '把', '对', '从', '向', '以', '于', '之', '所', '比', '因为', '所以',
-        '如果', '虽然', '但是', '而且', '然后', '可以', '因为', '所以', '虽然',
-        '但是', '以及', '除了', '关于', '对于', '按照', '根据', '并且', '或者',
-        '还是', '不是', '就是', '只是', '但是', '可是', '不过', '只是', '不仅',
-        '而且', '因为', '由于', '既然', '如果', '假使', '要是', '虽然', '尽管',
-        '即使', '哪怕', '无论', '不管', '然而', '但是', '因而', '因此', '所以',
-        '于是', '从而', '不然', '否则', '要不', '要么', '或者',
-        // More very common Chinese
-        '中', '大', '小', '多', '少', '真', '太', '很', '更', '最', '越',
-        '能', '让', '将', '把', '被', '给', '向', '与', '让', '叫', '使',
+        '如果', '虽然', '但是', '而且', '然后', '可以', '以及', '除了', '关于', '对于', '按照', '根据', '并且', '或者',
+        '还是', '不是', '就是', '只是', '可是', '不过', '不仅',
+        '由于', '既然', '假使', '要是', '尽管',
+        '即使', '哪怕', '无论', '不管', '然而', '因而', '因此',
+        '于是', '从而', '不然', '否则', '要不', '要么',
+        '中', '大', '小', '多', '少', '真', '太', '更', '最', '越',
+        '能', '让', '将', '给', '叫', '使',
         '用', '做', '吃', '喝', '玩', '买', '卖', '开', '关', '走', '跑',
-        '坐', '站', '住', '想', '知', '觉',
+        '坐', '站', '住', '想', '知', '觉'
     ]);
-
-    // ===== HELPERS =====
-
-    function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add('show');
-        clearTimeout(toast._timer);
-        toast._timer = setTimeout(function() {
-            toast.classList.remove('show');
-        }, 2000);
-    }
 
     function getTextStats(text) {
         if (!text) {
-            return {
-                chars: 0,
-                charsNoSpace: 0,
-                words: 0,
-                sentences: 0,
-                paragraphs: 0,
-                lines: 0
-            };
+            return { chars: 0, charsNoSpace: 0, words: 0, sentences: 0, paragraphs: 0, lines: 0 };
         }
 
-        const chars = text.length;
-        const charsNoSpace = text.replace(/\s/g, '').length;
-        const lines = text.split('\n').length;
+        var chars = text.length;
+        var charsNoSpace = text.replace(/\s/g, '').length;
+        var lines = text.split('\n').length;
+        var wordMatches = text.match(/[\w\u4e00-\u9fff\u3400-\u4dbf\uff00-\uffef]+/g) || [];
+        var words = wordMatches.length;
+        var sentenceMatches = text.match(/[。！？!?…]+|[.!?]+(?=\s|$)/g) || [];
+        var sentences = sentenceMatches.length > 0 ? sentenceMatches.length : 0;
 
-        // Words: split by whitespace and filter empty
-        const wordMatches = text.match(/[\w\u4e00-\u9fff\u3400-\u4dbf\uff00-\uffef]+/g) || [];
-        const words = wordMatches.length;
-
-        // Sentences: count sentence-ending punctuation
-        const sentenceMatches = text.match(/[。！？!?…]+|[.!?]+(?=\s|$)/g) || [];
-        const sentences = sentenceMatches.length > 0 ? sentenceMatches.length : 0;
-
-        // Paragraphs: split by blank lines
-        const trimmed = text.trim();
+        var trimmed = text.trim();
         if (!trimmed) {
-            return { chars, charsNoSpace, words, sentences, paragraphs: 0, lines };
+            return { chars: chars, charsNoSpace: charsNoSpace, words: words, sentences: sentences, paragraphs: 0, lines: lines };
         }
-        const paraMatches = trimmed.split(/\n\s*\n/);
-        const paragraphs = paraMatches.filter(function(p) { return p.trim().length > 0; }).length;
+        var paraMatches = trimmed.split(/\n\s*\n/);
+        var paragraphs = paraMatches.filter(function (p) { return p.trim().length > 0; }).length;
 
-        return { chars, charsNoSpace, words, sentences, paragraphs, lines };
+        return { chars: chars, charsNoSpace: charsNoSpace, words: words, sentences: sentences, paragraphs: paragraphs, lines: lines };
     }
 
     function getReadingTime(words) {
         if (words === 0) {
-            return { text: t('reading0'), detail: t('readingDetail', { wpm: 200 }) };
+            return {
+                text: t('counter.reading.0'),
+                detail: t('counter.reading.detail', { wpm: 200 })
+            };
         }
-        const minutes = words / 200;
+        var minutes = words / 200;
         if (minutes < 1) {
-            const seconds = Math.ceil(minutes * 60);
-            return { text: t('readingSec', { n: seconds }), detail: t('readingDetailSec', { n: seconds }) };
+            var seconds = Math.ceil(minutes * 60);
+            return {
+                text: t('counter.reading.sec', { n: seconds }),
+                detail: t('counter.reading.detailSec', { n: seconds })
+            };
         }
-        const mins = Math.floor(minutes);
-        const secs = Math.round((minutes - mins) * 60);
-        var text, detail;
+        var mins = Math.floor(minutes);
+        var secs = Math.round((minutes - mins) * 60);
+        var textVal;
+        var detailVal;
         if (secs > 0) {
-            text = t('readingMinSec', { m: mins, s: secs });
-            detail = t('readingDetailMin', { m: mins, s: ' ' + secs + '\u79D2' });
+            textVal = t('counter.reading.minSec', { m: mins, s: secs });
+            detailVal = t('counter.reading.detailMin', { m: mins, s: ' ' + t('counter.reading.sec', { n: secs }) });
         } else {
-            text = t('readingMin', { n: mins });
-            detail = t('readingDetailMin', { m: mins, s: '' });
+            textVal = t('counter.reading.min', { n: mins });
+            detailVal = t('counter.reading.detailMin', { m: mins, s: '' });
         }
-        return { text: text, detail: detail };
+        return { text: textVal, detail: detailVal };
     }
 
     function getTopWords(text, count) {
         if (!text || !text.trim()) return [];
 
-        // Extract words: alphanumeric, CJK, fullwidth
-        const words = text.match(/[\w\u4e00-\u9fff\u3400-\u4dbf\uff00-\uffef]+/g);
+        var words = text.match(/[\w\u4e00-\u9fff\u3400-\u4dbf\uff00-\uffef]+/g);
         if (!words) return [];
 
-        const freq = {};
-        words.forEach(function(w) {
+        var freq = {};
+        words.forEach(function (w) {
             var lower = w.toLowerCase();
-            // Skip stop words
             if (STOP_WORDS.has(lower)) return;
-            // Skip single characters that are not CJK (likely punctuation remnants)
             if (lower.length === 1 && !/[\u4e00-\u9fff\u3400-\u4dbf]/.test(lower)) return;
             freq[lower] = (freq[lower] || 0) + 1;
         });
 
-        // Sort by frequency desc, then alphabetically
-        var sorted = Object.keys(freq).sort(function(a, b) {
+        var sorted = Object.keys(freq).sort(function (a, b) {
             if (freq[b] !== freq[a]) return freq[b] - freq[a];
             return a.localeCompare(b);
         });
 
-        return sorted.slice(0, count || 10).map(function(word) {
+        return sorted.slice(0, count || 10).map(function (word) {
             return { word: word, count: freq[word] };
         });
-    }
-
-    function renderFreq(words) {
-        if (words.length === 0) {
-            freqList.innerHTML = '<span class="freq-empty" id="freqEmpty">' + _s('freqEmpty') + '</span>';
-            return;
-        }
-        var html = '';
-        words.forEach(function(item, idx) {
-            html += '<span class="freq-tag" style="animation-delay:' + (idx * 0.05) + 's">'
-                 + escapeHtml(item.word)
-                 + ' <span class="freq-count">' + item.count + '</span>'
-                 + '</span>';
-        });
-        freqList.innerHTML = html;
     }
 
     function escapeHtml(str) {
@@ -1097,154 +882,103 @@ var I18N = {
         return div.innerHTML;
     }
 
-    function flashStat(el) {
-        if (!el) return;
-        var card = el.closest('.stat-card');
-        if (!card) return;
-        card.classList.remove('flash');
-        // Force reflow
-        void card.offsetWidth;
-        card.classList.add('flash');
+    function renderFreq(words) {
+        if (words.length === 0) {
+            freqList.innerHTML = '<span class="freq-empty" id="freqEmpty">' + escapeHtml(t('counter.freq.empty')) + '</span>';
+            return;
+        }
+        var html = '';
+        words.forEach(function (item, idx) {
+            html += '<span class="freq-tag" style="animation-delay:' + (idx * 0.05) + 's">'
+                + escapeHtml(item.word)
+                + ' <span class="freq-count">' + item.count + '</span>'
+                + '</span>';
+        });
+        freqList.innerHTML = html;
+    }
+
+    function updateReadingTimeDisplay(rt) {
+        readingTimeLabel.innerHTML = t('counter.reading.label', { time: '<strong>' + escapeHtml(rt.text) + '</strong>' });
+        readingDetail.textContent = rt.detail;
     }
 
     function updateStats(text) {
         var stats = getTextStats(text);
 
-        if (statChars.textContent !== String(stats.chars)) { statChars.textContent = stats.chars; }
-        if (statCharsNoSpace.textContent !== String(stats.charsNoSpace)) { statCharsNoSpace.textContent = stats.charsNoSpace; }
-        if (statWords.textContent !== String(stats.words)) { statWords.textContent = stats.words; }
-        if (statSentences.textContent !== String(stats.sentences)) { statSentences.textContent = stats.sentences; }
-        if (statParagraphs.textContent !== String(stats.paragraphs)) { statParagraphs.textContent = stats.paragraphs; }
-        if (statLines.textContent !== String(stats.lines)) { statLines.textContent = stats.lines; }
+        statChars.textContent = stats.chars;
+        statCharsNoSpace.textContent = stats.charsNoSpace;
+        statWords.textContent = stats.words;
+        statSentences.textContent = stats.sentences;
+        statParagraphs.textContent = stats.paragraphs;
+        statLines.textContent = stats.lines;
 
-        // Char count label
-        charCountLabel.textContent = t('charCount', { n: stats.chars });
+        charCountLabel.textContent = t('counter.charCount', { n: stats.chars });
 
-        // Reading time
-        var rt = getReadingTime(stats.words);
-        readingTime.textContent = rt.text;
-        readingDetail.textContent = rt.detail;
+        updateReadingTimeDisplay(getReadingTime(stats.words));
 
-        // Word frequency (debounced)
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(function() {
-            var topWords = getTopWords(text, 10);
-            renderFreq(topWords);
+        debounceTimer = setTimeout(function () {
+            renderFreq(getTopWords(text, 10));
         }, 300);
     }
 
-    // ===== LANGUAGE SWITCHER =====
-    if (langSwitcher) {
-        langSwitcher.value = currentLang;
-        langSwitcher.addEventListener('change', function() {
-            currentLang = langSwitcher.value;
-            localStorage.setItem('textCounterLang', currentLang);
-            applyLanguage();
-        });
-    }
+    window.__onLanguageChange = function () {
+        updateStats(textInput.value);
+    };
 
-    // ===== THEME TOGGLE =====
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            var newTheme = isDark ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('textCounterTheme', newTheme);
-            themeToggle.textContent = newTheme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
-        });
-    }
-
-    // ===== EVENT BINDING =====
-
-    // Input event with debounce for stats
     var inputTimer = null;
-    textInput.addEventListener('input', function() {
+    textInput.addEventListener('input', function () {
         clearTimeout(inputTimer);
-        inputTimer = setTimeout(function() {
+        inputTimer = setTimeout(function () {
             updateStats(textInput.value);
         }, 50);
-        // Immediate char count label update
-        charCountLabel.textContent = t('charCount', { n: textInput.value.length });
+        charCountLabel.textContent = t('counter.charCount', { n: textInput.value.length });
     });
 
-    // Initial stats update
-    updateStats(textInput.value);
-
-    // Clear button
-    clearBtn.addEventListener('click', function() {
+    clearBtn.addEventListener('click', function () {
         textInput.value = '';
         textInput.focus();
         updateStats('');
-        showToast(t('toastCleared'));
+        showToast(HyruleI18n.t('counter.toast.cleared'));
     });
 
-    // Copy button
-    copyBtn.addEventListener('click', function() {
+    copyBtn.addEventListener('click', function () {
         var text = textInput.value;
         if (!text) {
-            showToast(t('toastNoContent'));
+            showToast(HyruleI18n.t('counter.toast.noContent'));
             return;
         }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(function() {
-                showToast(t('toastCopied'));
-            }).catch(function() {
-                fallbackCopy(text);
-            });
-        } else {
-            fallbackCopy(text);
-        }
+        copyToClipboard(text, HyruleI18n.t('toast.copied'));
     });
 
-    function fallbackCopy(text) {
-        var textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-            document.execCommand('copy');
-            showToast(t('toastCopied'));
-        } catch (e) {
-            showToast(t('toastCopyFailed'));
-        }
-        document.body.removeChild(textarea);
-    }
-
-    // Paste button
-    pasteBtn.addEventListener('click', function() {
+    pasteBtn.addEventListener('click', function () {
         if (navigator.clipboard && navigator.clipboard.readText) {
-            navigator.clipboard.readText().then(function(text) {
+            navigator.clipboard.readText().then(function (text) {
                 if (text) {
                     textInput.value = text;
                     updateStats(text);
-                    showToast(t('toastPasted', { n: text.length }));
+                    showToast(t('counter.toast.pasted', { n: text.length }));
                 } else {
-                    showToast(t('toastClipboardEmpty'));
+                    showToast(HyruleI18n.t('counter.toast.clipboardEmpty'));
                 }
-            }).catch(function() {
-                showToast(t('toastClipboardDenied'));
+            }).catch(function () {
+                showToast(HyruleI18n.t('counter.toast.clipboardDenied'));
             });
         } else {
-            showToast(t('toastClipboardFallback'));
+            showToast(HyruleI18n.t('counter.toast.clipboardFallback'));
         }
     });
 
-    // ===== KEYBOARD SHORTCUTS =====
-    document.addEventListener('keydown', function(e) {
-        // Ctrl+Shift+C to clear
+    document.addEventListener('keydown', function (e) {
         if (e.ctrlKey && e.shiftKey && (e.key === 'c' || e.key === 'C')) {
             e.preventDefault();
             textInput.value = '';
             updateStats('');
-            showToast(t('toastCleared'));
+            showToast(HyruleI18n.t('counter.toast.cleared'));
         }
     });
 
-    // Apply initial language
-    applyLanguage();
-
+    updateStats(textInput.value);
 })();
 </script>
 
